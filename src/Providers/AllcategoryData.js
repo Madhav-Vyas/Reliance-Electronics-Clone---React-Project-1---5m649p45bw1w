@@ -17,7 +17,7 @@ export const DataProvider = ({ children }) => {
     const [getTelevison, setTelevison] = useState([]);
     const [getTravel, setTravel] = useState([]);
     const [getWashingMachine, setWashingMachine] = useState([]);
-    const [searchTerm, setSearchTerm] = useState("led");
+    const [searchTerm, setSearchTerm] = useState("");
 
     const searchTermHandler = (data) => {
         setSearchTerm(data);
