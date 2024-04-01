@@ -5,10 +5,10 @@ import axios from 'axios';
 
 const Register = () => {
     const [getData, setData] = useState({
-        name: "test",
-        email: "test6@gmail.com",
-        password: "12345",
-        appType: "ecommerce"
+        name: "",
+        email: "",
+        password: "",
+        appType: ""
     })
     const [getError, setError] = useState(null);
     const navigate = useNavigate();
@@ -38,6 +38,7 @@ const Register = () => {
         }).then((result) => {
             console.log(result);
             navigate('/login');
+            alert("You Have Been SucessFully Registerd Please login");
         }).catch((error) => {
             console.log(error);
             setError("internal server error please try after sometime");
