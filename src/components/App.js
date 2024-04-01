@@ -24,6 +24,13 @@ import SearchPage from "../pages/SearchPage";
 import Footer from "../components/Footer";
 import BuynowPaymentPage from "../pages/BuynowPaymentPage";
 import { useData } from "../Providers/AllcategoryData";
+import Subnavbar from "./Subnavbar";
+import EasyReturn from "../pages/PagesAtTop/EasyReturn";
+import Servicepage from "../pages/PagesAtTop/Servicepage";
+import CustomerService from "../pages/PagesAtTop/CustomerService";
+import WishlistPage from "../pages/WishlistPage";
+import ShippingPage from "../pages/ShippingPage";
+
 function App() {
   const { getToken } = useData();
   function ProtectedRoute({ Children }) {
@@ -41,6 +48,7 @@ function App() {
 
     <BrowserRouter>
       <TopNavbar />
+      <Subnavbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -63,6 +71,11 @@ function App() {
         <Route path="checkoutpageb" element={<BuynowCheckoutPage />} />
         <Route path="/searchpage" element={<SearchPage />} />
         <Route path='/buynowpayment' element={<BuynowPaymentPage />} />
+        <Route path="/returnpolicy" element={<EasyReturn />} />
+        <Route path="/service" element={<Servicepage />} />
+        <Route path="/customercare" element={<CustomerService />} />
+        <Route path="/wishlist" element={<WishlistPage />} />
+        <Route path="/shipping" element={<ShippingPage />} />
 
       </Routes>
       <Footer />

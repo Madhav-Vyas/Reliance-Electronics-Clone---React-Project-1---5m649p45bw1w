@@ -7,10 +7,11 @@ import MyCartCard from '../../components/MyCartCard';
 import { useNavigate } from "react-router-dom"
 const MyCart = () => {
     const { getToken } = useData();
-    const [getData, setData] = useState([]);
+    const [data, setData] = useState([]);
     const [totalQty, setTotalQty] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
     const navigate = useNavigate();
+    const [delivery, setDelivery] = useState("");
     useEffect(() => {
         fetchCart();
     }, [])
@@ -60,23 +61,34 @@ const MyCart = () => {
     const checkout = () => {
         navigate("/checkoutpage", {
             state: {
-                getData, totalPrice
+                data, totalPrice
             }
         })
         console.log({
-            getData, totalPrice
+            data, totalPrice
         });
     }
+    const deliveryCharges = () => {
+        if (totalPrice > 500) {
+            setDelivery("0");
+        }
+        else {
+            setDelivery("100")
+        }
+    }
+    return (<div className='flex justify-between mr-4 mb-6'>
 
-    return (
 
-
-        <>
+        <div className='w-3/5'>
+            <div className='w-4/4 h-12 mt-6 bg-slate-100  shadow-lg rounded-md p-3 flex justify-between'>
+                <div>My Cart({totalQty} items)</div>
+                <div>Items Total : <span className='text-red-600'>{totalPrice}</span></div>
+            </div>
             {/* <button onClick={clearCartHandler} className="bg-blue-500 text-2xl hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute top-0 right-0 mt-40 mr-4">
                 Clear the Cart
             </button> */}
 
-            {Array.isArray(getData) && getData.map((obj) => {
+            {Array.isArray(data) && data.map((obj) => {
                 return <MyCartCard
                     brand={obj.product.brand}
                     category={obj.product.category}
@@ -91,17 +103,43 @@ const MyCart = () => {
 
                 />
             })}
-            <div className='flex justify-center'> <h1 className='text-2xl m-5'>Total Price:<span className='text-4xl text-red-500 text-bold'>{totalPrice}</span></h1></div>
 
 
+
+
+
+        </div>
+        <div className='mt-6'>
             <div className="flex justify-center">
-                <button onClick={checkout} className="p-5 mb-96 bg-red-600 w-96 hover:bg-blue-700 text-4xl text-slate-100 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                <button onClick={checkout} className="p-5 mb-6 bg-red-600 w-96 hover:bg-blue-700 text-md text-slate-100 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                     Checkout
                 </button>
             </div>
 
+            <div className="card mt-3 w-full max-w-md bg-white shadow-md rounded-md overflow-hidden">
+                <div className="text-gray-800 border-x-0 border-y px-4 py-2">
+                    <h1 className="text-xl font-semibold">PRICE DETAILS</h1>
+                </div>
+                <div className="px-4 py-2">
+                    <div className='flex justify-between'>
+                        <p className="text-sm mt-2">Price ({totalQty} Items)</p>
+                        <p>{totalPrice} </p>
+                    </div>
+                    {/* Assuming totalQty and totalPrice are variables holding the quantity and total price */}
+                    <div className='flex justify-between'>
+                        <p className="text-sm mt-2">Delivery Charges: </p>
+                        <p className="text-green-600"><i class="fa-solid fa-truck-fast"></i> FREE</p>
+                    </div>
+                    <div className='flex justify-between border-y'>
+                        <p className="text-lg mt-2 font-semibold  py-4">AMOUNT PAYABLE:</p>
+                        <p className='text-lg mt-2 font-semibold py-4'> {totalPrice}</p>
+                    </div>
+                    <p className="text-xs text-gray-600 mt-2 py-4">Safe and Secure Payments. Easy returns. 100% Authentic products.</p>
+                </div>
+            </div>
 
-        </>
+        </div>
+    </div>
     )
 }
 

@@ -25,11 +25,11 @@ export const DataProvider = ({ children }) => {
 
     const onTokenHandler = (data) => {
         setToken(data);
-        sessionStorage.setItem('token', data);
+        localStorage.setItem('token', data);
     };
     const onNameHandler = (data) => {
         setName(data);
-        sessionStorage.setItem('name', data);
+        localStorage.setItem('name', data);
     };
 
     const audioDatahandler = (data) => {

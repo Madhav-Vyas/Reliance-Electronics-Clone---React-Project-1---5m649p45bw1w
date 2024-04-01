@@ -17,55 +17,55 @@ function TopNavbar() {
 
     const [ac, audio, health, kitchenappliances, laptop, mobile, refrigerator, tablet, travel, tv, washingMachine] = getList;
 
-    const handleSelectChange = (event) => {
-        const selectedCategory = event.target.value;
-        switch (selectedCategory) {
-            case 'ac':
-                navigate('/acpage');
-                break;
+    // const handleSelectChange = (event) => {
+    //     const selectedCategory = event.target.value;
+    //     switch (selectedCategory) {
+    //         case 'ac':
+    //             navigate('/acpage');
+    //             break;
 
-            case 'audio':
-                navigate('/audiopage');
-                break;
+    //         case 'audio':
+    //             navigate('/audiopage');
+    //             break;
 
-            case 'health':
-                navigate('/healthpage');
-                break;
+    //         case 'health':
+    //             navigate('/healthpage');
+    //             break;
 
-            case 'kitchenappliances':
-                navigate('/kitchenpage');
-                break;
+    //         case 'kitchenappliances':
+    //             navigate('/kitchenpage');
+    //             break;
 
-            case 'laptop':
-                navigate('/laptoppage');
-                break;
+    //         case 'laptop':
+    //             navigate('/laptoppage');
+    //             break;
 
-            case 'mobile':
-                navigate('/mobilepage');
-                break;
+    //         case 'mobile':
+    //             navigate('/mobilepage');
+    //             break;
 
-            case 'refrigerator':
-                navigate('/refregeratorpage');
-                break;
+    //         case 'refrigerator':
+    //             navigate('/refregeratorpage');
+    //             break;
 
-            case 'travel':
-                navigate('/travelpage');
-                break;
+    //         case 'travel':
+    //             navigate('/travelpage');
+    //             break;
 
-            case 'tv':
-                navigate('/televisonpage');
-                break;
+    //         case 'tv':
+    //             navigate('/televisonpage');
+    //             break;
 
-            case 'tablet':
-                navigate('/tabletpage');
-                break;
+    //         case 'tablet':
+    //             navigate('/tabletpage');
+    //             break;
 
-            case "washingMachine":
-                navigate("/washingmachinepage")
-            default:
-                break;
-        }
-    };
+    //         case "washingMachine":
+    //             navigate("/washingmachinepage")
+    //         default:
+    //             break;
+    //     }
+    // };
 
     const menuHandler = async () => {
         try {
@@ -104,31 +104,42 @@ function TopNavbar() {
     }
     return (
         <>
+            <div className="w-full bg-red-600 text-white border-b border-gray-300 flex justify-between p-1 text-sm font-bold">
+                <span className="border-gray-300 pl-3">OUR BRAND PROMISE</span>
+                <NavLink to="/returnpolicy" className=" border-gray-300 pl-3"><i class="fa-solid fa-arrow-right-arrow-left"></i> EASY RETURN</NavLink>
+                <span className="border-l border-gray-300 pl-3 pr-3"><i class="fa-solid fa-truck-fast"></i> NEXT DAY DELIVERY</span>
+                <NavLink to="/service" className="border-l border-gray-300 pl-3 pr-3"><i class="fa-solid fa-ribbon"></i> SERVICE GUARANTEE</NavLink>
+                <span className="border-l border-gray-300 pl-3 pr-3"><i class="fa-solid fa-network-wired"></i> UNMATCHED NETWORK</span>
+                <span className="border-l border-gray-300 pl-3 pr-3"><i class="fa-solid fa-location-dot"></i> FIND A STORE</span>
+                <NavLink to="/customercare" className="border-l border-gray-300 pl-3 pr-3"><i class="fa-solid fa-headset"></i> CONTACT US</NavLink>
+            </div>
+
+
             {/* Logo */}
-            <div className="flex justify-between items-end bg-red-600 p-6">
-                <div>
-                    <button onClick={navigateToHome}><img src="https://www.reliancedigital.in/build/client/images/loaders/rd_logo.svg" alt="logo" /></button>
+            <div className="flex justify-between items-end bg-red-600 p-2">
+                <div className="flex justify-end">
+                    <button onClick={navigateToHome}><img className="w-40 h-auto" src="https://www.reliancedigital.in/build/client/images/loaders/rd_logo.svg" alt="logo" /></button>
                 </div>
 
                 {/* Menu */}
                 <div className="flex justify-evenly flex-wrap md:flex-no-wrap ">
-                    <button className="text-2xl font-bold text-slate-100" onClick={dropDownHandler}> Menu
+                    {/* <button className="text-2xl font-bold text-slate-100" onClick={dropDownHandler}> Menu
                         <i className="fa-solid fa-bars"></i>
                     </button>
                     {/* Dropdown */}
-                    {showDropdown && (
+                    {/* {showDropdown && (
                         <select onChange={handleSelectChange} className="rounded-2xl pl-4 ">
                             {getList.map((item, index) => (
                                 <option className="bg-blue-950 text-gray-50" key={index} value={item}>{item}</option>
                             ))}
                         </select>
-                    )}
+                    )}  */}
 
 
                     {/* Search */}
                     <input
                         type="text"
-                        className="w-full md:w-64 h-10 rounded-full px-4 md:ml-9 border-none focus:outline-none focus:border-none "
+                        className="w-3/5 md:w-96 h-10 rounded-full px-4 md:ml-9 border-none focus:outline-none focus:border-none "
                         placeholder="Find your favorite product..."
                         onChange={handleSearchTerm}
                         value={searchTerm}
@@ -139,24 +150,31 @@ function TopNavbar() {
                 </div>
 
                 {/* Buttons */}
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1">
                     {!getToken ? (
                         <>
                             <NavLink to="/login">
-                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Login</button>
+                                <button className=" text-xs text-white font-bold py-2 px-4 rounded"><i class="fa-solid fa-user"></i> Login</button>
                             </NavLink>
                             <NavLink to="/register">
-                                <button className="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Register</button>
+                                <button className="text-xs text-white font-bold py-2 px-4 rounded"><i class="fa-regular fa-user"></i> Register</button>
                             </NavLink>
                         </>
                     ) : (
                         <>
-                            <NavLink to="/mycart">
-                                <button className="btn font-bold btn bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 rounded">My Cart</button>
+                            <NavLink to="/wishlist">
+                                <button className="text-xs btn font-bold btn text-white  py-2 px-2 rounded"><i style={{ color: 'white' }} class="fa-solid fa-heart"></i><span className="ml-1">My Wishlist</span> </button>
                             </NavLink>
-                            <button onClick={logoutHandler} className="btn font-bold btn bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 rounded">Log Out</button>
-                            <div className="ml-2 font-semibold text-white text-lg uppercase tracking-wide">
-                                {getName ? getName : "Profile"}
+                            <span className="text-white">|</span>
+                            <NavLink to="/mycart">
+                                <button className="text-xs btn font-bold btn text-white  py-2 px-2 rounded"><i class="fa-solid fa-cart-shopping"></i><span className="ml-1"> My Cart</span></button>
+                            </NavLink>
+
+                            <span className="text-white">|</span>
+                            <button onClick={logoutHandler} className="btn font-bold btn text-white  py-2 px-2 rounded text-xs">Log Out</button>
+                            <div className="mt-2 ml-2 font-semibold text-white text-xs uppercase tracking-wide">
+                                {getName ? <><i class="fa-solid fa-user fa-lg"></i> <span className="ml-1">{getName}</span></> : "Profile"}
+
                             </div>
                         </>
                     )}

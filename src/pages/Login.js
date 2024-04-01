@@ -44,69 +44,71 @@ const Login = () => {
     }
 
     return (
-        <div className="container mx-auto mb-96 mt-24">
-            <div className="flex justify-center">
-                <div className="w-full md:w-1/3">
-                    {getError && (
-                        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                            <strong className="font-bold">Error:</strong>
-                            <span className="block sm:inline">{getError}</span>
-                        </div>
-                    )}
-                    <form onSubmit={onSubmitHandler} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                        <div className="mb-4">
-                            <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
-                                Email address
-                            </label>
-                            <input
-                                type="email"
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                value={getData.email}
-                                onChange={onChangeHandler}
-                                name="email"
-                                id="email"
-                            />
-                        </div>
-                        <div className="mb-6">
-                            <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
-                                Password
-                            </label>
-                            <input
-                                type="password"
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                value={getData.password}
-                                onChange={onChangeHandler}
-                                name="password"
-                                id="password"
-                            />
-                        </div>
-                        <div className="mb-6">
-                            <label htmlFor="appType" className="block text-gray-700 text-sm font-bold mb-2">
-                                App Type
-                            </label>
-                            <select
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                value={getData.appType}
-                                onChange={onChangeHandler}
-                                name="appType"
-                                id="appType"
-                            >
-                                <option value="music">Ecommerce</option>
-                            </select>
-                        </div>
-                        <div className="flex items-center justify-between">
-                            <button
-                                type="submit"
-                                className=" bg-orange-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                            >
-                                Sign In
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+        <>
 
+
+            <div className='flex gap-5'>
+
+                <div className='w-3/5'>
+                    <img className=' mt-32 h-auto' src="https://www.reliancedigital.in/akamai/images/web/LoginWebBanner.jpeg"></img>
+                </div>
+                <div className='mb-8 mt-4'>
+
+                    <div className="container w-96">
+                        <div>
+                            <div className="w-full">
+                                {getError && (
+                                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                                        <strong className="font-bold">Error:</strong>
+                                        <span className="block sm:inline">{getError}</span>
+                                    </div>
+                                )}
+                                <form onSubmit={onSubmitHandler} className="bg-white shadow-md p-12 rounded-lg">
+
+
+                                    <div className="mb-4">
+                                        <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
+                                            Email address
+                                        </label>
+                                        <input
+                                            type="email"
+                                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            value={getData.email}
+                                            onChange={onChangeHandler}
+                                            name="email"
+                                            id="email"
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
+                                            Password
+                                        </label>
+                                        <input
+                                            type="password"
+                                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            value={getData.password}
+                                            onChange={onChangeHandler}
+                                            name="password"
+                                            id="password"
+                                        />
+                                    </div>
+
+                                    <div className="flex items-center justify-center">
+                                        <button
+                                            type="submit"
+                                            className=" bg-red-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                        >
+                                            Proceed
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </>
     )
 }
 

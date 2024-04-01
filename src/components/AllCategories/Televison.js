@@ -5,7 +5,9 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import { useData } from "../../Providers/AllcategoryData";
 import { NavLink } from "react-router-dom";
-
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 const Televison = () => {
     const [getCategory, setCategory] = useState([]);
     const [selectedsubCataegory, setSelectedSubCataegory] = useState('tv');
@@ -30,31 +32,67 @@ const Televison = () => {
 
 
     }
-    return (<>
-        <h2 className="text-lg font-semibold inline-block">TV 📺</h2> <NavLink to="/televisonpage"><button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300 ease-in-out">View All</button></NavLink>
+    const settings = {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 6,
+        slidesToScroll: 2,
+        nextArrow: <SampleNextArrow />,
+        prevArrow: <SamplePrevArrow />
+    };
+    function SampleNextArrow(props) {
+        const { className, style, onClick } = props;
+        return (
+            <div
+                className={className}
+                style={{ ...style, display: "block", background: "blue", opacity: 0.3 }}
+                onClick={onClick}
+            />
+        );
+    }
 
-        <div className='scroll-container lowest-price-today flex overflow-x-auto overflow-y-hidden'>
-            {getCategory.map((obj) => {
-                return <ProductCard
-                    key={obj._id}
-                    description={obj.description}
-                    sellerTag={obj.sellerTag}
-                    subcategory={obj.subcategory}
-                    features={obj.features}
-                    videos={obj.videos}
+    function SamplePrevArrow(props) {
+        const { className, style, onClick } = props;
+        return (
+            <div
+                className={className}
+                style={{ ...style, display: "block", background: "blue", opacity: 0.3 }}
+                onClick={onClick}
+            />
+        );
+    }
+    return (<div className="bg-white my-1">
+        <h2 className="text-lg font-semibold inline-block ml-2 pt-6 pl-4">TV   </h2> <NavLink to="/televisonpage"><button className="px-2 py-1 bg-blue-800 ml-4 text-white rounded hover:bg-blue-600 transition duration-300 ease-in-out  text-sm">View All</button></NavLink>
 
-                    brand={obj.brand}
-                    name={obj.name}
-                    category={obj.category}
-                    displayImage={obj.displayImage}
-                    price={obj.price}
-                    rating={obj.ratings.toFixed(1)}
-                    id={obj._id}
-                />
-            })}
+        <div style={{ width: '95%', margin: '0 auto' }}>
+            <Slider {...settings}>
+                {/* <div className=' scroll-container lowest-price-today flex overflow-x-auto overflow-y-hidden w-full h-auto'> */}
 
-        </div>
-    </>)
+                {getCategory.map((obj, index) => {
+                    return <div key={obj._id}>
+                        <ProductCard
+                            key={obj._id}
+                            description={obj.description}
+                            sellerTag={obj.sellerTag}
+                            subcategory={obj.subcategory}
+                            features={obj.features}
+                            videos={obj.videos}
+
+                            brand={obj.brand}
+                            name={obj.name}
+                            category={obj.category}
+                            displayImage={obj.displayImage}
+                            price={obj.price}
+                            rating={obj.ratings.toFixed(1)}
+                            id={obj._id}
+                        />
+                    </div>
+                })}
+            </Slider>
+            {/* </div > */}
+        </div >
+    </div>)
 }
 
 export default Televison

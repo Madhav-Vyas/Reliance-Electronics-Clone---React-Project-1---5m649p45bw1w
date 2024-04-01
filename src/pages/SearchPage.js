@@ -5,13 +5,16 @@ import { useData } from "../Providers/AllcategoryData";
 import ProductCard from '../components/ProductCard';
 import { useNavigate } from 'react-router-dom';
 const SearchPage = () => {
-    const { searchTerm } = useData();//should be in context
+    const { searchTerm, searchTermHandler } = useData();//should be in context
     const [searchResults, setSearchResults] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
         initial();
     }, [searchTerm])
     const initial = async () => {
+        if (searchTerm == '') {
+            navigate("/")
+        }
         try {
             const response = await axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/electronics/products?search={"description":"${searchTerm}"}`, {
                 headers: {
@@ -27,11 +30,12 @@ const SearchPage = () => {
 
     }
     const goHome = () => {
+        searchTermHandler("");
         navigate("/")
     }
     return (<>
-        <button className="m-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={goHome}> &lt; Home</button>
-        <div>
+        <button className="m-8 bg-blue-800 hover:bg-blue-700 text-white text-sm font-bold py-2 px-2 rounded focus:outline-none focus:shadow-outline" onClick={goHome}> &lt; Home</button>
+        <div className='flex flex-wrap'>
             {searchResults.length > 0 ? ( // Check if searchResults has data
                 searchResults.map((obj) => (
                     <ProductCard

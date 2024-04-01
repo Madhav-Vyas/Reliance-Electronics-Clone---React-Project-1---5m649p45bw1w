@@ -84,10 +84,10 @@ const Acpage = () => {
 
     return (
         <>
-            <h1 className="inline-block font-semibold text-center text-5xl py-9 ">Air-Conditioners in All Categories ⛄❄</h1>
-            <button onClick={sortByRatingHtoL} className="bg-blue-500 text-2xl hover:bg-blue-700 ml-3 text-white font-bold py-2 px-4 rounded ">Rating(High to Low)</button>
-            <button onClick={sortByPriceLtoH} className="bg-blue-500 text-2xl hover:bg-blue-700 ml-3 text-white font-bold py-2 px-4 rounded ">Price(Low to High)</button>
-            <button onClick={sortByPriceHtoL} className="bg-blue-500 text-2xl hover:bg-blue-700 ml-3 text-white font-bold py-2 px-4 rounded ">Price(High to low)</button>
+            <h1 className="inline-block font-semibold text-center text-lg py-9 ">Air-Conditioners in All Categories ⛄❄</h1>
+            <button onClick={sortByRatingHtoL} className="bg-blue-500 text-sm hover:bg-blue-700 ml-3 text-white font-bold py-2 px-4 rounded ">Rating(High to Low)</button>
+            <button onClick={sortByPriceLtoH} className="bg-blue-500 text-sm hover:bg-blue-700 ml-3 text-white font-bold py-2 px-4 rounded ">Price(Low to High)</button>
+            <button onClick={sortByPriceHtoL} className="bg-blue-500 text-sm hover:bg-blue-700 ml-3 text-white font-bold py-2 px-4 rounded ">Price(High to low)</button>
             <div className='flex flex-wrap'>
                 {data.map((obj) => {
                     return <ProductCard
