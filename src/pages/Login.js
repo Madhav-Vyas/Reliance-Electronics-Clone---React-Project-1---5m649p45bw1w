@@ -7,7 +7,7 @@ const Login = () => {
     const [getData, setData] = useState({
         email: "",
         password: "",
-        appType: ""
+        appType: "ecommerce"
 
     })
     const [getError, setError] = useState(null);
