@@ -37,7 +37,7 @@ const Register = () => {
             }
         }).then((result) => {
             console.log(result);
-            alert("You Have Been SucessFully Registerd Please login");
+
             navigate('/login');
 
         }).catch((error) => {
