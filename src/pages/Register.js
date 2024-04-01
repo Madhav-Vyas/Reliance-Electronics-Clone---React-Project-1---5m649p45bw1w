@@ -37,8 +37,9 @@ const Register = () => {
             }
         }).then((result) => {
             console.log(result);
-            navigate('/login');
             alert("You Have Been SucessFully Registerd Please login");
+            navigate('/login');
+
         }).catch((error) => {
             console.log(error);
             setError("internal server error please try after sometime");
