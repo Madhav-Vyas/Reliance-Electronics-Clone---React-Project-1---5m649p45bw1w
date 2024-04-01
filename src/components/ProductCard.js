@@ -48,16 +48,16 @@ const ProductCard = ({ brand, category, displayImage, price, rating, name, id, d
 
     return (
         <>
-            <div className="mt-3 ml-1">
+            <div className="mt-3 ml-1 rounded-xl">
 
                 <div className='w-full flex justify-end pr-4 pt-4'>
                     {getToken && !fav && <button onClick={wishHandler}><i class="fa-regular fa-heart"></i></button>}
                     {getToken && fav && <button onClick={wishHandler}><i style={{ color: 'red' }} class="fa-solid fa-heart"></i></button>}
                 </div>
                 <button onClick={onClickHandler} className="mt-1 ml-1">
-                    <div className="w-56 h-auto bg-transparent rounded-lg p-2  cursor-pointer transform transition duration-300  text-ellipsis overflow-hidden max-h-[504px]">
+                    <div className="w-56 h-auto bg-transparent rounded-lg p-2 ml-2  cursor-pointer transform transition duration-300  text-ellipsis overflow-hidden max-h-[504px]">
                         <img className="w-full md:w-32 h-32 object-cover hover:scale-105 mx-auto mb-4" src={displayImage} alt="Product Image" />
-                        <div className="text-left p-6 md:p-8 font mb-4">
+                        <div className="text-left m-2 p-6 md:p-8 font mb-4">
 
                             <h4 className="text-xs hover:text-red-600 md:text-xs font-semibold text-blue-800 overflow-hidden" style={{ maxHeight: '2rem', textOverflow: 'ellipsis' }}>{name}</h4>
 

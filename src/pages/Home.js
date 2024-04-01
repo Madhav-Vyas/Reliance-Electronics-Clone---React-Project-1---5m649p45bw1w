@@ -158,8 +158,8 @@ const Home = () => {
             <>
 
 
-                <div className="bg-white my-1">
-                    <div className="text-lg font-semibold pt-6 pl-4">Lowest Price Of Today </div>
+                <div className="bg-white my-1 w-full">
+                    <div className="text-lg font-semibold pt-6 px-4">Lowest Price Of Today </div>
 
                     <div className="scroll-container lowest-price-today flex overflow-x-auto overflow-y-hidden">
 

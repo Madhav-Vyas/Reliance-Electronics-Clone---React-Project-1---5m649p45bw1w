@@ -5,9 +5,9 @@ import axios from 'axios';
 const Login = () => {
     const { onTokenHandler, onNameHandler } = useData();
     const [getData, setData] = useState({
-        email: "",
-        password: ""
-
+        email: "nath@gmail.com",
+        password: "123456",
+        appType: "ecommerce"
 
     })
     const [getError, setError] = useState(null);
