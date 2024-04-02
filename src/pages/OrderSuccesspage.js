@@ -16,7 +16,7 @@ const OrderSuccesspage = () => {
             <div className='global flex justify-between'>
                 <div className='left w-3/5'>
                     <div className=''>
-                        <img className='mt-8 mx-2' src={orderConfirmed}></img>
+                        <img className='mt-8 mx-8' src={orderConfirmed}></img>
 
 
                         <div className='text-slate-500 text-xs flex ml-10'>Order with id #{Math.floor(Math.random() * 900000) + 100000} is placed and will reach you in 3-5 Business Days </div>
