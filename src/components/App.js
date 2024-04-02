@@ -30,6 +30,8 @@ import Servicepage from "../pages/PagesAtTop/Servicepage";
 import CustomerService from "../pages/PagesAtTop/CustomerService";
 import WishlistPage from "../pages/WishlistPage";
 import ShippingPage from "../pages/ShippingPage";
+import OrderSuccesspage from "../pages/OrderSuccesspage";
+import OrderSuccessPageb from "../pages/OrderSuccessPageb";
 
 function App() {
   const { getToken } = useData();
@@ -76,6 +78,8 @@ function App() {
         <Route path="/customercare" element={<CustomerService />} />
         <Route path="/wishlist" element={<WishlistPage />} />
         <Route path="/shipping" element={<ShippingPage />} />
+        <Route path="/ordersuccess" element={<OrderSuccesspage />} />
+        <Route path="/ordersuccessB" element={<OrderSuccessPageb />} />
 
       </Routes>
       <Footer />

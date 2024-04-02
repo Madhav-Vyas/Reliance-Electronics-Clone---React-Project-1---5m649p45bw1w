@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import "../Providers/QR.jpg"
 
 const BuynowPaymentPage = () => {
     const navigate = useNavigate();
-    const location = useLocation();
+
     const [cod, setCod] = useState();
+    const location = useLocation();
+
     const { price, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline } = location.state;
+
 
     // State to store selected payment method
     const [selectedPayment, setSelectedPayment] = useState(null);
@@ -86,8 +89,20 @@ const BuynowPaymentPage = () => {
             console.log("Form submitted!");
             setForm(false)
             setText(true);
+            navigate("/ordersuccessB", {
+                state: {
+                    price, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline
+                }
+            })
         }
     };
+    const successhandler = () => {
+        navigate("/ordersuccessB", {
+            state: {
+                price, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline
+            }
+        })
+    }
 
 
     return (<>
@@ -131,16 +146,16 @@ const BuynowPaymentPage = () => {
                 {/* <button onClick={paymentHandler} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-12">
                 Make Payemt
             </button> */}
-                {cod && <><button onClick={paidHandler} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-12">
+                {cod && <><button onClick={successhandler} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-12">
                     Proceed
                 </button>
-                    <button className="bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-2 rounded" onClick={continueShopping}>Continue Shopping</button>
+                    {/* <button className="bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-2 rounded" onClick={continueShopping}>Continue Shopping</button> */}
                 </>}
 
                 {/* ..........................................................For GooglePay and Paytm..................................................................................................... */}
                 {qr && <> <img className='w-40 h-auto' src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/google-payment-qr-code-template-design-f00259ea89eb7cc0f6cc20bd8967a639_screen.jpg?ts=1702881345"></img>
                     <div className='text-sm text-green-600 mt-1'>Scan It To Make Payment </div>
-                    <button onClick={paidHandler} className="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300 ease-in-out  text-sm">paid</button>
+                    <button onClick={successhandler} className="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300 ease-in-out  text-sm">paid</button>
                     <div className='text-xs text-red-500'>*Click here if payment is made Sucessful</div>
 
 
@@ -211,10 +226,10 @@ const BuynowPaymentPage = () => {
                         <button type="submit" className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit</button>
                     </form>
                 }
-                {text && <>
+                {/* {text && <>
                     <div className='text-green-600 w-full text-nowrap mb-2'>Order Placed Sucessfully and will be deliverd to you in 3-4 business days✅</div>
-                    <button className="bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-2 rounded" onClick={continueShopping}>Continue Shopping</button>
-                </>}
+
+                </>} */}
 
                 {/* {order && <> */}
                 {/* <div className='text-green-600'>Order Placed Sucessfully and will be deliverd to you in 3-4 business days✅</div> */}
