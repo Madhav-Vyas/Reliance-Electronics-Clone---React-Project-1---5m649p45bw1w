@@ -70,10 +70,10 @@ const BuynowPaymentPage = () => {
         setForm(false)
     }
 
-    const [cardNumber, setCardNumber] = useState('');
-    const [cardHolder, setCardHolder] = useState('');
-    const [expiryDate, setExpiryDate] = useState('');
-    const [cvv, setCvv] = useState('');
+    const [cardNumber, setCardNumber] = useState(null);
+    const [cardHolder, setCardHolder] = useState(null);
+    const [expiryDate, setExpiryDate] = useState(null);
+    const [cvv, setCvv] = useState(null);
 
 
     const handleSubmit = (event) => {
