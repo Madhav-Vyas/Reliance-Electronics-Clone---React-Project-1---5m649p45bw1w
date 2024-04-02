@@ -163,8 +163,8 @@ const BuynowPaymentPage = () => {
                                 onChange={(e) => setCardNumber(e.target.value)}
                                 placeholder="Enter card number"
                                 className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                min={16}  // Minimum 16-digit card number
-                                max={16}  // Maximum 16-digit card number
+                                minLength={16}  // Minimum 16-digit card number
+                                maxLength={16}  // Maximum 16-digit card number
                             />
                         </div>
 
@@ -203,8 +203,8 @@ const BuynowPaymentPage = () => {
                                     onChange={(e) => setCvv(e.target.value)}
                                     placeholder="CVV"
                                     className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    min={4}  // Minimum 3-digit CVV
-                                    max={4}  // Maximum 3-digit CVV
+                                    minLength={4}  // Minimum 3-digit CVV
+                                    maxlength={4}  // Maximum 3-digit CVV
                                 />
                             </div>
                         </div>
