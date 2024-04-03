@@ -6,10 +6,12 @@ import { useData } from "../../Providers/AllcategoryData";
 import MyCartCard from '../../components/MyCartCard';
 import { useNavigate } from "react-router-dom"
 const MyCart = () => {
-    const { getToken } = useData();
+    const { getToken, totalCartItems,
+        totalCartItemsHandler } = useData();
     const [data, setData] = useState([]);
     const [totalQty, setTotalQty] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
+
     const navigate = useNavigate();
     const [delivery, setDelivery] = useState("");
     useEffect(() => {
@@ -44,13 +46,18 @@ const MyCart = () => {
 
 
             console.log("No of Data", response.data.results);//incluing all products with their respective qty total is this
+            ////////////////////////
             setTotalQty(response.data.results)
+            totalCartItemsHandler(response.data.data.items.length)
+            ///////////////////////////////
 
             console.log("Total Price", response.data.data.totalPrice);
             setTotalPrice(response.data.data.totalPrice)
 
-            console.log("Items", response.data.data.items);
+            console.log("Items length", response.data.data.items.length);
             setData(response.data.data.items);
+
+
 
         }
         catch (err) {
@@ -99,6 +106,7 @@ const MyCart = () => {
                     name={obj.product.name}
                     quantity={obj.quantity}
                     onDelete={() => fetchCart()}
+                    onUpdate={() => fetchCart()}
 
 
                 />

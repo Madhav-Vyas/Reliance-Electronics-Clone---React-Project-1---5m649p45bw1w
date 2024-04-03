@@ -18,6 +18,14 @@ export const DataProvider = ({ children }) => {
     const [getTravel, setTravel] = useState([]);
     const [getWashingMachine, setWashingMachine] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
+    const [orderHistory, setOrderHistory] = useState([]);
+    const [totalCartItems, setTotalCartItems] = useState(0);
+
+
+
+    const totalCartItemsHandler = (data) => {
+        setTotalCartItems(data);
+    }
 
     const searchTermHandler = (data) => {
         setSearchTerm(data);
@@ -116,8 +124,10 @@ export const DataProvider = ({ children }) => {
         washingMachineDatahandler,
 
         searchTerm,
-        searchTermHandler
+        searchTermHandler,
 
+        totalCartItems,
+        totalCartItemsHandler
 
     };
 

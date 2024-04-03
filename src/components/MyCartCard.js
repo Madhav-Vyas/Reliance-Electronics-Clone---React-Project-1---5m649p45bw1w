@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import { useData } from "../Providers/AllcategoryData";
 import axios from 'axios';
-const MyCartCard = ({ brand, category, displayImage, price, rating, id, name, quantity, onDelete }) => {
+const MyCartCard = ({ brand, category, displayImage, price, rating, id, name, quantity, onDelete, onUpdate }) => {
     const navigate = useNavigate();
-    const { getToken } = useData();
-
+    const { getToken, totalCartItemsHandler, totalCartItems } = useData();
+    const [qty, setQty] = useState(1);
     const onClickHandler = () => {
         navigate("/productDetail", {
             state: {
@@ -30,48 +30,76 @@ const MyCartCard = ({ brand, category, displayImage, price, rating, id, name, qu
             // navigate("/mycart");
             console.log(response);
             onDelete();
+
+
+
         }
         catch (err) {
             console.log(err);
         }
 
     }
+    const plusHandler = () => {
+        setQty(qty + 1);
+        addToCart();
+    }
+    const minusHandler = () => {
+        if (qty > 0) {
+            setQty(qty - 1);
+            addToCart();
+        }
+    }
+
+    const addToCart = async () => {
+        try {
+
+            await axios.patch(`https://academics.newtonschool.co/api/v1/ecommerce/cart/${id}`, {
+                quantity: qty // Assuming you want to add 1 quantity of the product
+            }, {
+                headers: {
+                    Authorization: `Bearer ${getToken}`,
+                    projectId: "5m649p45bw1w"
+                }
+            });
+
+            onUpdate();
+            // totalCartItemsHandler(totalCartItems + 1);
+        } catch (error) {
+            console.error("Error adding product to cart:", error);
+            alert("Failed to add product to cart. Please try again later.");
+        }
+    }
     return (<>
 
-
-        <button onClick={onClickHandler} className="focus:outline-none mt-12 block">
-            <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 w-full flex">
-                <div className="w-1/3 flex items-start"> {/* Align text at the start */}
-                    <img className="w-44 h-44 object-cover" src={displayImage} alt="Product Image" />
-                </div>
-                <div className="p-4 flex flex-col justify-start flex-grow"> {/* Align text at the start */}
-                    <h2 className="text-sm font-semibold text-gray-800">{brand}</h2>
-                    <h4 className="text-sm font-semibold text-gray-700 mb-2">{name}</h4>
-                    <p className="text-sm text-gray-600 mb-2">Price: &#8377;{price}</p>
-                    <p className="text-sm text-gray-600 mb-2">Category: {category}</p>
-                    <div className="flex items-center justify-between">
-                        <p className="text-sm text-gray-600">Quantity: {quantity}</p>
-                        <div className="flex items-center">
-                            <i className="fas fa-star text-yellow-500 mr-1"></i>
-                            <p className="text-sm text-gray-600">{rating}</p>
-                        </div>
-                    </div>
-                    {/* Buttons */}
-                    {/* {getToken && <button onClick={onClickBuyHandler} className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-full mt-4 focus:outline-none mr-2">
-            Buy Now
-        </button>}
-        {getToken && <button onClick={cartHandler} className="bg-gray-500 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-full mt-4 focus:outline-none">
-            Add to Cart
-        </button>} */}
+        <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 w-full flex focus:outline-none mt-12">
+            <div className="w-1/3 flex items-start"> {/* Align text at the start */}
+                <img className="w-44 h-44 object-cover" src={displayImage} alt="Product Image" />
+            </div>
+            <div className="p-4 flex flex-col justify-start flex-grow"> {/* Align text at the start */}
+                <h2 className="text-sm font-semibold text-gray-800">{brand}</h2>
+                <button onClick={onClickHandler} className="focus:outline-none block"><h4 className="text-sm font-semibold text-gray-700 mb-2">{name}</h4></button>
+                <p className="text-sm text-gray-600 ml-6 mb-2">Price: &#8377;{price}</p>
+                <p className="text-sm text-gray-600 ml-6 mb-2">Category: {category}</p>
+                <div className="flex items-center">
+                    <i className="fas fa-star text-yellow-500 mr-1 ml-6"></i>
+                    <p className="text-sm text-gray-600 ">{rating}</p>
                 </div>
             </div>
-        </button>
+            <div className='flex flex-col justify-between'>
+                <div className='flex items-center w-full'>
+                    <span className='pr-2 font-lg font-semibold text-center'>Qty:</span>
+                    <div className="text-sm text-gray-600 border border-gray-600 flex justify-between rounded-xl bg-white w-20">
+                        <button className='p-1' onClick={minusHandler}><i class="fa-solid fa-minus"></i></button>
+                        <span className='text-lg font-bold'>{qty}</span>
+                        <button className='p-1' onClick={plusHandler}><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+                <button onClick={onItemDeleteHandler} className="bg-red-500 text-xs ml-6 flex  hover:bg-red-700 text-white font-bold px-2 py-2 rounded me-auto w-28 justify-center"> <i class="fa-solid fa-trash-can"></i></button>
+            </div>
+        </div>
 
 
 
-
-
-        <button onClick={onItemDeleteHandler} className="bg-red-500 text-xs ml-6 flex  hover:bg-red-700 text-white font-bold px-2 py-2 rounded me-auto "> <i class="fa-solid fa-trash-can"></i></button>
     </>
 
     )

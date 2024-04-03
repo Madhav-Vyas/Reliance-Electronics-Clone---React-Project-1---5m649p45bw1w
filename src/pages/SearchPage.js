@@ -16,7 +16,7 @@ const SearchPage = () => {
             navigate("/")
         }
         try {
-            const response = await axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/electronics/products?search={"description":"${searchTerm}"}`, {
+            const response = await axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/electronics/products?search={"subCategory":"${searchTerm}"}`, {
                 headers: {
                     projectID: "5m649p45bw1w"
                 }

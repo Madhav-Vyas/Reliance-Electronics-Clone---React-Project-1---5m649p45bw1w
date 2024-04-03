@@ -33,6 +33,7 @@ import ShippingPage from "../pages/ShippingPage";
 import OrderSuccesspage from "../pages/OrderSuccesspage";
 import OrderSuccessPageb from "../pages/OrderSuccessPageb";
 
+
 function App() {
   const { getToken } = useData();
   function ProtectedRoute({ Children }) {
@@ -80,6 +81,8 @@ function App() {
         <Route path="/shipping" element={<ShippingPage />} />
         <Route path="/ordersuccess" element={<OrderSuccesspage />} />
         <Route path="/ordersuccessB" element={<OrderSuccessPageb />} />
+
+
 
       </Routes>
       <Footer />

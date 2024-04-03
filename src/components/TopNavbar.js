@@ -6,7 +6,8 @@ import { useData } from "../Providers/AllcategoryData";
 import { useNavigate } from "react-router-dom"
 
 function TopNavbar() {
-    const { getToken, getName, onTokenHandler, onNameHandler, searchTerm, searchTermHandler } = useData();
+    const { getToken, getName, onTokenHandler, onNameHandler, searchTerm, searchTermHandler, totalCartItems,
+        totalCartItemsHandler } = useData();
     const [getList, setList] = useState([]);
     const [showDropdown, setShowDropdown] = useState(false);
     const navigate = useNavigate();
@@ -102,6 +103,8 @@ function TopNavbar() {
         navigate("/searchpage")
 
     }
+    //code for cart items
+
     return (
         <>
             <div className="w-full bg-red-600 text-white border-b border-gray-300 flex justify-between p-1 text-sm font-bold">
@@ -167,7 +170,7 @@ function TopNavbar() {
                             </NavLink>
                             <span className="text-white">|</span>
                             <NavLink to="/mycart">
-                                <button className="text-xs btn font-bold btn text-white  py-2 px-2 rounded"><i class="fa-solid fa-cart-shopping"></i><span className="ml-1"> My Cart</span></button>
+                                <button className="text-xs btn font-bold btn text-white  py-2 px-2 rounded"><i class="fa-solid fa-cart-shopping"></i><span className="ml-1"> My Cart({totalCartItems})</span></button>
                             </NavLink>
 
                             <span className="text-white">|</span>

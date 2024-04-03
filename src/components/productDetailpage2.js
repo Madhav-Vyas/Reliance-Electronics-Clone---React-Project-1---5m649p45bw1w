@@ -25,7 +25,7 @@ const unescapeHTML = str => {
 }
 // unescapeHTML('&lt;a href=&quot;#&quot;&gt;Me &amp; you&lt;/a&gt;');
 const productDetailpage2 = () => {
-    const { getToken } = useData();
+    const { getToken, totalCartItemsHandler, totalCartItems } = useData();
     const navigate = useNavigate();
     const [pincode, setPincode] = useState('');
 
@@ -55,7 +55,21 @@ const productDetailpage2 = () => {
         navigate("/register");
     }
 
+    const fetchCart = async () => {
+        try {
+            const response = await axios.get("https://academics.newtonschool.co/api/v1/ecommerce/cart", {
+                headers: {
+                    projectId: "5m649p45bw1w",
+                    Authorization: `Bearer ${getToken}`,
+                }
+            })
+            totalCartItemsHandler(response.data.data.items.length)///////////////////////////////
+        }
+        catch (err) {
+            alert("someError occured");
+        }
 
+    }
 
     // Example usage
     const addToCart = async () => {
@@ -70,16 +84,13 @@ const productDetailpage2 = () => {
                 }
             });
             alert("Product added to cart successfully!");
+            fetchCart();
+
         } catch (error) {
             console.error("Error adding product to cart:", error);
             alert("Failed to add product to cart. Please try again later.");
         }
     }
-
-
-
-
-
 
 
     const fetchProductDetails = async () => {
