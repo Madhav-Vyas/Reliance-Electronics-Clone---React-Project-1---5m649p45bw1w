@@ -170,7 +170,7 @@ function TopNavbar() {
                             </NavLink>
                             <span className="text-white">|</span>
                             <NavLink to="/mycart">
-                                <button className="text-xs btn font-bold btn text-white  py-2 px-2 rounded"><i class="fa-solid fa-cart-shopping"></i><span className="ml-1"> My Cart({totalCartItems})</span></button>
+                                <button className="text-xs btn font-bold btn text-white  py-2 px-2 rounded"><i class="fa-solid fa-cart-shopping"></i><span className="ml-1"> My Cart<span className="ml-1">({totalCartItems})</span></span></button>
                             </NavLink>
 
                             <span className="text-white">|</span>
