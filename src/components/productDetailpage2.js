@@ -302,9 +302,9 @@ const productDetailpage2 = () => {
                     <div className='text-sm border mb-2 mt-2 p-2 border-gray-200'> <i class="fa-solid fa-star"></i> Delivery assurance is subject to our delivery locations staying open as per govt. regulations </div>
 
                     <div className='flex w-full justify-evenly mb-4'>
-                        {getToken && <button className=" bg-red-500 text-base hover:bg-red-700 mt-4 text-white font-bold py-2 px-6 rounded" onClick={addToCart}>Add to Cart</button>}
-                        {getToken && <button onClick={buyNowHandler} className="sm:mb-4 text-base bg-orange-500 hover:bg-blue-700 text-white font-bold py-2 px-6 mt-4 rounded">Buy Now</button>}
-                        {!getToken && <button onClick={onRedirectHandler} className="sm:mb-4 bg-blue-500 hover:bg-blue-700 text-white text-base font-bold py-2 px-6  rounded mt-4">Buy Now</button>}
+                        {getToken && <button className="bg-red-500 text-base hover:bg-red-700 mt-4 text-white font-bold py-2 px-6 rounded" onClick={addToCart}>Add to Cart</button>}
+                        {getToken && <button onClick={buyNowHandler} className="text-base bg-orange-500 hover:bg-blue-700 text-white font-bold py-2 px-6 mt-4 rounded">Buy Now</button>}
+                        {!getToken && <button onClick={onRedirectHandler} className="bg-blue-500 hover:bg-blue-700 text-white text-base font-bold py-2 px-6  rounded mt-4">Buy Now</button>}
 
                     </div>
 
