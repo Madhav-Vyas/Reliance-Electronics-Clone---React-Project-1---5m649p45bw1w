@@ -106,8 +106,8 @@ function TopNavbar() {
     //code for cart items
 
     return (
-        <>
-            <div className="w-full bg-red-600 text-white border-b border-gray-300 flex justify-between p-1 text-sm font-bold">
+        <div className="w-full">
+            <div className="w-full sm:w-auto bg-red-600 text-white border-b border-gray-300 flex justify-between p-1 text-sm font-bold">
                 <span className="border-gray-300 pl-3">OUR BRAND PROMISE</span>
                 <NavLink to="/returnpolicy" className=" border-gray-300 pl-3"><i class="fa-solid fa-arrow-right-arrow-left"></i> EASY RETURN</NavLink>
                 <span className="border-l border-gray-300 pl-3 pr-3"><i class="fa-solid fa-truck-fast"></i> NEXT DAY DELIVERY</span>
@@ -119,7 +119,7 @@ function TopNavbar() {
 
 
             {/* Logo */}
-            <div className="flex justify-between items-end bg-red-600 p-2">
+            <div className="flex justify-between items-end bg-red-600 sm:min-w-full p-2">
                 <div className="flex justify-end">
                     <button onClick={navigateToHome}><img className="w-40 h-auto" src="https://www.reliancedigital.in/build/client/images/loaders/rd_logo.svg" alt="logo" /></button>
                 </div>
@@ -183,7 +183,7 @@ function TopNavbar() {
                     )}
                 </div>
             </div>
-        </>
+        </div>
 
 
     );

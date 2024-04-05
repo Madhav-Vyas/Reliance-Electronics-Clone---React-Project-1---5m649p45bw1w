@@ -25,6 +25,32 @@ const Home = () => {
     const [lowest, setLowest] = useState([]);
     const { getName } = useData();
 
+    //slides to show based on screen size ------------------------------------------------------
+    const [slidesToShow, setSlidesToShow] = useState(6);
+    useEffect(() => {
+        const handleResize = () => {
+            // Adjust slidesToShow based on screen width
+            if (window.innerWidth < 768) {
+                setSlidesToShow(2);
+            } else {
+                setSlidesToShow(6);
+            }
+        };
+
+        // Initial call to set slidesToShow
+        handleResize();
+
+        // Listen to window resize event
+        window.addEventListener('resize', handleResize);
+
+        // Clean up on component unmount
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    //----------------------------------------------
+
 
 
     useEffect(() => {
@@ -72,7 +98,7 @@ const Home = () => {
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: 6,
+        slidesToShow: slidesToShow,
         slidesToScroll: 2,
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />
@@ -112,7 +138,7 @@ const Home = () => {
 
     return (<>
 
-        <div className="global-Container">
+        <div className="global-Container sm:w-full ">
 
             <h1 className='text-xl text-center mb-3 mt-3'>What Do You Want To Buy Today, <span className='text-orange-500'>{getName}</span>?</h1>
 

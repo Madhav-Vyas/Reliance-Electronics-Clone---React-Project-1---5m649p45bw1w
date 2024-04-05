@@ -15,6 +15,34 @@ const Televison = () => {
     useEffect(() => {
         onTelevisonHandeler();
     }, [])
+
+    //slides to show based on screen size ------------------------------------------------------
+    const [slidesToShow, setSlidesToShow] = useState(6);
+    useEffect(() => {
+        const handleResize = () => {
+            // Adjust slidesToShow based on screen width
+            if (window.innerWidth < 768) {
+                setSlidesToShow(2);
+            } else {
+                setSlidesToShow(6);
+            }
+        };
+
+        // Initial call to set slidesToShow
+        handleResize();
+
+        // Listen to window resize event
+        window.addEventListener('resize', handleResize);
+
+        // Clean up on component unmount
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    //----------------------------------------------
+
+
     const onTelevisonHandeler = async () => {
         try {
             const response = await axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/electronics/products?filter={"subCategory":"${selectedsubCataegory}"}`, {
@@ -36,7 +64,7 @@ const Televison = () => {
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: 6,
+        slidesToShow: slidesToShow,
         slidesToScroll: 2,
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />
