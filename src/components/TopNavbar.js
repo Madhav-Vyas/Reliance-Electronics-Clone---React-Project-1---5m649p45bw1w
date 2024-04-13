@@ -107,15 +107,38 @@ function TopNavbar() {
 
     return (
         <div className="w-full">
-            <div className="w-full sm:w-auto bg-red-600 text-white border-b border-gray-300 flex justify-between p-1 text-sm font-bold">
-                <span className="border-gray-300 pl-3">OUR BRAND PROMISE</span>
-                <NavLink to="/returnpolicy" className=" border-gray-300 pl-3"><i class="fa-solid fa-arrow-right-arrow-left"></i> EASY RETURN</NavLink>
-                <span className="border-l border-gray-300 pl-3 pr-3"><i class="fa-solid fa-truck-fast"></i> NEXT DAY DELIVERY</span>
-                <NavLink to="/service" className="border-l border-gray-300 pl-3 pr-3"><i class="fa-solid fa-ribbon"></i> SERVICE GUARANTEE</NavLink>
-                <span className="border-l border-gray-300 pl-3 pr-3"><i class="fa-solid fa-network-wired"></i> UNMATCHED NETWORK</span>
-                <span className="border-l border-gray-300 pl-3 pr-3"><i class="fa-solid fa-location-dot"></i> FIND A STORE</span>
-                <NavLink to="/customercare" className="border-l border-gray-300 pl-3 pr-3"><i class="fa-solid fa-headset"></i> CONTACT US</NavLink>
+            <div className="w-full overflow-x-auto">
+                <div className="bg-red-600 text-white border-b border-gray-300 flex justify-between p-1 text-xs font-bold">
+                    <div className="w-1/2 sm:w-auto flex items-center border-gray-300 pl-3">
+                        <span>OUR BRAND PROMISE</span>
+                    </div>
+                    <div className="w-1/2 sm:w-auto flex items-center border-l border-gray-300 pl-3">
+                        <NavLink to="/returnpolicy" className="flex items-center">
+                            <i className="fas fa-arrow-right-arrow-left mr-1"></i> EASY RETURN
+                        </NavLink>
+                    </div>
+                    <div className="w-1/2 sm:w-auto flex items-center border-l border-gray-300 pl-3">
+                        <span><i className="fas fa-truck-fast mr-1"></i> NEXT DAY DELIVERY</span>
+                    </div>
+                    <div className="w-1/2 sm:w-auto flex items-center border-l border-gray-300 pl-3">
+                        <NavLink to="/service" className="flex items-center">
+                            <i className="fas fa-ribbon mr-1"></i> SERVICE GUARANTEE
+                        </NavLink>
+                    </div>
+                    <div className="w-1/2 sm:w-auto flex items-center border-l border-gray-300 pl-3">
+                        <span><i className="fas fa-network-wired mr-1"></i> UNMATCHED NETWORK</span>
+                    </div>
+                    <div className="w-1/2 sm:w-auto flex items-center border-l border-gray-300 pl-3">
+                        <span><i className="fas fa-location-dot mr-1"></i> FIND A STORE</span>
+                    </div>
+                    <div className="w-1/2 sm:w-auto flex items-center border-l border-gray-300 pl-3">
+                        <NavLink to="/customercare" className="flex items-center">
+                            <i className="fas fa-headset mr-1"></i> CONTACT US
+                        </NavLink>
+                    </div>
+                </div>
             </div>
+
 
 
             {/* Logo */}

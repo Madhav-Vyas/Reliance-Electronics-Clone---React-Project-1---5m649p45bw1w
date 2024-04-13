@@ -159,7 +159,7 @@ const productDetailpage2 = () => {
                                     return <video key={index} src={video} controls autoPlay muted loop className="w-full"></video>;
                                 })
                             ) : (
-                                <p className="text-xl">No Videos Available</p>
+                                <p className="text-xl">No Videos Available </p>
                             )}
                         </div>
                     </div>
@@ -265,7 +265,7 @@ const productDetailpage2 = () => {
                                         </div>
                                     </>
                                 ) : (
-                                    <p className="italic text-lg">No Customer Reviews Yet</p>
+                                    <p className="italic text-lg">No Customer Reviews Yet. Be The first </p>
                                 )}
                             </div>
                         )}

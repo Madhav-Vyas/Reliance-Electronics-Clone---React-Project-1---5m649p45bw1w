@@ -83,17 +83,12 @@ const MyCart = () => {
             setDelivery("100")
         }
     }
-    return (<div className='flex justify-between mr-4 mb-6'>
-
-
-        <div className='w-3/5'>
-            <div className='w-4/4 h-12 mt-6 bg-slate-100  shadow-lg rounded-md p-3 flex justify-between'>
-                <div>My Cart({totalQty} items)</div>
+    return (<div className='flex flex-col md:flex-row justify-between mr-4 mb-6'>
+        <div className='w-full md:w-3/5 md:mr-4 mb-4 md:mb-0'>
+            <div className='w-full h-12 mt-6 bg-slate-100 shadow-lg rounded-md p-3 flex justify-between'>
+                <div>My Cart ({totalQty} items)</div>
                 <div>Items Total : <span className='text-red-600'>{totalPrice}</span></div>
             </div>
-            {/* <button onClick={clearCartHandler} className="bg-blue-500 text-2xl hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute top-0 right-0 mt-40 mr-4">
-                Clear the Cart
-            </button> */}
 
             {Array.isArray(data) && data.map((obj) => {
                 return <MyCartCard
@@ -107,19 +102,13 @@ const MyCart = () => {
                     quantity={obj.quantity}
                     onDelete={() => fetchCart()}
                     onUpdate={() => fetchCart()}
-
-
                 />
             })}
-
-
-
-
-
         </div>
-        <div className='mt-6'>
+
+        <div className='w-full md:w-2/5 mt-4 md:mt-0'>
             <div className="flex justify-center">
-                <button onClick={checkout} className="p-5 mb-6 bg-red-600 w-96 hover:bg-blue-700 text-md text-slate-100 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                <button onClick={checkout} className="p-5 mt-6 mb-6 bg-red-600 w-full md:w-96 hover:bg-blue-700 text-md text-slate-100 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                     Checkout
                 </button>
             </div>
@@ -136,18 +125,18 @@ const MyCart = () => {
                     {/* Assuming totalQty and totalPrice are variables holding the quantity and total price */}
                     <div className='flex justify-between'>
                         <p className="text-sm mt-2">Delivery Charges: </p>
-                        <p className="text-green-600"><i class="fa-solid fa-truck-fast"></i> FREE</p>
+                        <p className="text-green-600"><i className="fas fa-truck-fast"></i> FREE</p>
                     </div>
                     <div className='flex justify-between border-y'>
-                        <p className="text-lg mt-2 font-semibold  py-4">AMOUNT PAYABLE:</p>
+                        <p className="text-lg mt-2 font-semibold py-4">AMOUNT PAYABLE:</p>
                         <p className='text-lg mt-2 font-semibold py-4'> {totalPrice}</p>
                     </div>
                     <p className="text-xs text-gray-600 mt-2 py-4">Safe and Secure Payments. Easy returns. 100% Authentic products.</p>
                 </div>
             </div>
-
         </div>
     </div>
+
     )
 }
 

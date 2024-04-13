@@ -71,13 +71,17 @@ const MyCartCard = ({ brand, category, displayImage, price, rating, id, name, qu
     }
     return (<>
 
-        <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 w-full flex focus:outline-none mt-12">
-            <div className="w-1/3 flex items-start"> {/* Align text at the start */}
+        <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 w-full flex flex-col md:flex-row focus:outline-none ml-4 mt-12">
+            <div className="w-full md:w-1/3 flex items-start justify-center md:justify-start">
+                {/* Align text at the start */}
                 <img className="w-44 h-44 object-cover" src={displayImage} alt="Product Image" />
             </div>
-            <div className="p-4 flex flex-col justify-start flex-grow"> {/* Align text at the start */}
+            <div className="p-4 flex flex-col justify-start flex-grow">
+                {/* Align text at the start */}
                 <h2 className="text-sm font-semibold text-gray-800">{brand}</h2>
-                <button onClick={onClickHandler} className="focus:outline-none block"><h4 className="text-sm font-semibold text-gray-700 mb-2">{name}</h4></button>
+                <button onClick={onClickHandler} className="focus:outline-none block">
+                    <h4 className="text-sm font-semibold text-gray-700 mb-2">{name}</h4>
+                </button>
                 <p className="text-sm text-gray-600 ml-6 mb-2">Price: &#8377;{price}</p>
                 <p className="text-sm text-gray-600 ml-6 mb-2">Category: {category}</p>
                 <div className="flex items-center">
@@ -85,18 +89,21 @@ const MyCartCard = ({ brand, category, displayImage, price, rating, id, name, qu
                     <p className="text-sm text-gray-600 ">{rating}</p>
                 </div>
             </div>
-            <div className='flex flex-col justify-between'>
+            <div className='flex flex-col justify-between items-center md:items-start mt-4 md:mt-0'>
                 <div className='flex items-center w-full'>
                     <span className='pr-2 font-lg font-semibold text-center'>Qty:</span>
                     <div className="text-sm text-gray-600 border border-gray-600 flex justify-between rounded-xl bg-white w-20">
-                        <button className='p-1' onClick={minusHandler}><i class="fa-solid fa-minus"></i></button>
+                        <button className='p-1' onClick={minusHandler}><i className="fas fa-minus"></i></button>
                         <span className='text-lg font-bold'>{qty}</span>
-                        <button className='p-1' onClick={plusHandler}><i class="fa-solid fa-plus"></i></button>
+                        <button className='p-1' onClick={plusHandler}><i className="fas fa-plus"></i></button>
                     </div>
                 </div>
-                <button onClick={onItemDeleteHandler} className="bg-red-500 text-xs ml-6 flex  hover:bg-red-700 text-white font-bold px-2 py-2 rounded me-auto w-28 justify-center"> <i class="fa-solid fa-trash-can"></i></button>
+                <button onClick={onItemDeleteHandler} className="bg-red-500 text-xs mt-2 md:mt-0 ml-6 flex hover:bg-red-700 text-white font-bold px-2 py-2 rounded w-full md:w-28 justify-center">
+                    <i className="fas fa-trash-alt"></i>
+                </button>
             </div>
         </div>
+
 
 
 
