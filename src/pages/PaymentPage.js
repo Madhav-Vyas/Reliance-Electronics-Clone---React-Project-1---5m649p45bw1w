@@ -83,6 +83,15 @@ const PaymentPage = () => {
         if (!cardNumber || !cardHolder || !expiryDate || !cvv) {
             setError("* Fill all the Fields")
         }
+        else if (cardNumber.length < 16 || cardNumber.length > 16) {
+            setError("Enter a Valid Card Number");
+        }
+        else if (expiryDate.length < 4 || expiryDate.length > 4) {
+            setError("Please Check and Re-enter Valid  Expiry Date ")
+        }
+        else if (cvv.length < 3 || cvv.length > 3) {
+            setError("Enter Valid CVV");
+        }
         else {
             console.log("Form submitted!");
             setForm(false)

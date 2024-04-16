@@ -171,8 +171,8 @@ function TopNavbar() {
                         value={searchTerm}
 
                     />
-                    {/* <NavLink to="/searchpage"> <button className="text-center pt-2 pl-2" onClick={handleSearchTerm} > <i class="fa-solid fa-magnifying-glass fa-xl"></i></button></NavLink> */}
-                    {/* //add a onclick and set term to context */}
+                    {/* <button className="text-center pt-2 pl-2"  > <i class="fa-solid fa-magnifying-glass fa-xl"></i></button> */}
+
                 </div>
 
                 {/* Buttons */}

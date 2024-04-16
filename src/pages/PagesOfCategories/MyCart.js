@@ -113,7 +113,7 @@ const MyCart = () => {
                 </button>
             </div>
 
-            <div className="card mt-3 w-full max-w-md bg-white shadow-md rounded-md overflow-hidden">
+            <div className="card mt-3 ml-4 w-full max-w-md bg-white shadow-md rounded-md overflow-hidden">
                 <div className="text-gray-800 border-x-0 border-y px-4 py-2">
                     <h1 className="text-xl font-semibold">PRICE DETAILS</h1>
                 </div>

@@ -38,6 +38,7 @@ const ProductCard = ({ brand, category, displayImage, price, rating, name, id, d
             );
             console.log(response);
             setFav(true);
+            alert("Product is added to wishlist")
 
         } catch (err) {
             console.log(err);
