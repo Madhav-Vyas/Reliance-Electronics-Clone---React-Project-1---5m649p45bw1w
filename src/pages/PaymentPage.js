@@ -112,7 +112,7 @@ const PaymentPage = () => {
     }
 
     return (<>
-        <div className='bg-white w-4/5 flex-col justify-center mx-auto'>
+        <div className='bg-white w-4/5 flex-col justify-center mx-auto '>
             <div className='text-xl m-6 font-bold'>Shipping Address</div>
 
             <span> <div className='card p-4 bg-slate-300 w-96 m-4'>
@@ -133,10 +133,10 @@ const PaymentPage = () => {
                 </div>
                 <div className="mb-4">
                     <p className="font-semibold mb-2">Select Payment Method:</p>
-                    <select
+                    <div className="h-32">  <select
                         value={selectedPayment}
                         onChange={handlePaymentChange}
-                        className="block w-full p-2 border border-gray-300 rounded"
+                        className="block w-full p-2 border border-gray-300 rounded "
                     >
                         <option value="">Select Payment Method</option>
                         <option value="Credit-Card">Credit Card</option>
@@ -144,7 +144,7 @@ const PaymentPage = () => {
                         <option value="paytm">Paytm</option>
                         <option value="COD">Cash on Delivery</option>
                         {/* Add more options for other payment methods if needed */}
-                    </select>
+                    </select></div>
 
 
 

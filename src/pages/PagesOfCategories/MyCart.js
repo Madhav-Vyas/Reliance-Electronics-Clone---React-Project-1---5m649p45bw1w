@@ -47,7 +47,8 @@ const MyCart = () => {
 
             console.log("No of Data", response.data.results);//incluing all products with their respective qty total is this
             ////////////////////////
-            setTotalQty(response.data.results)
+            setTotalQty(response.data.data.items.length)
+            console.log("items length", response.data.data.items.length);
             totalCartItemsHandler(response.data.data.items.length)
             ///////////////////////////////
 

@@ -137,7 +137,7 @@ const BuynowPaymentPage = () => {
                 </div>
                 <div className="mb-4">
                     <p className="font-semibold mb-2">Select Payment Method:</p>
-                    <select
+                    <div className='h-32'> <select
                         value={selectedPayment}
                         onChange={handlePaymentChange}
                         className="block w-full p-2 border border-gray-300 rounded"
@@ -148,7 +148,7 @@ const BuynowPaymentPage = () => {
                         <option value="paytm">Paytm</option>
                         <option value="COD">Cash on Delivery</option>
                         {/* Add more options for other payment methods if needed */}
-                    </select>
+                    </select></div>
 
 
 
