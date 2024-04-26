@@ -51,6 +51,9 @@ const ShippingPage = () => {
         if (!getData.mobile) {
             setError("Enter Your Mobile Number")
         }
+        if (getData.mobile.length < 10) {
+            setError("Enter valid mobile number < Dont include 0 or +91 > ")
+        }
         console.log(getData);
         navigate("checkoutpageb", {
             state: {
@@ -117,7 +120,7 @@ const ShippingPage = () => {
                     {/* Mobile No. and Landline No. */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div className="col-span-2 sm:col-span-1">
-                            <input type="tel" name="mobile" id="mobile" placeholder="Mobile No." value={getData.mobile} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />
+                            <input type="tel" minLength={10} maxLength={10} name="mobile" id="mobile" placeholder="Mobile No." value={getData.mobile} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />
                         </div>
                         <div className="col-span-2 sm:col-span-1">
                             <input type="tel" name="landline" id="landline" placeholder="Landline No." value={getData.landline} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />

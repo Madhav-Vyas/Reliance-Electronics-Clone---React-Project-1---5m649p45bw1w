@@ -116,10 +116,10 @@ const BuynowPaymentPage = () => {
 
 
     return (<>
-        <div className='bg-white w-4/5 flex-col justify-center mx-auto'>
+        <div className='bg-white w-4/5 flex-col md:flex-row justify-center mx-auto'>
             <div className='text-xl m-6 font-bold'>Shipping Address</div>
 
-            <span> <div className='card p-4 bg-slate-300 w-96 m-4'>
+            <span> <div className='card p-4 bg-slate-300 w-64 md:w-72 m-4'>
                 <span> <input type="radio" checked /></span>
                 <span className='text-lg font-bold'>{firstname} {lastname}</span>
                 <p>{houseNo} , {colony} , {landmark}</p>
@@ -131,7 +131,7 @@ const BuynowPaymentPage = () => {
             </div></span>
 
 
-            <div className="max-w-lg ml-6 mt-24 mb-96">
+            <div className="max-w-lg ml-6 mr-6 mt-24 mb-40">
                 <div className="mb-4">
                     <div className='text-2xl'>Order Total : &#8377;{price}</div>
                 </div>

@@ -1,72 +1,21 @@
 import axios from "axios";
 import "../styles/App.css";
 import { useState, useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useData } from "../Providers/AllcategoryData";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import Hamburger from "hamburger-react";
 
 function TopNavbar() {
-    const { getToken, getName, onTokenHandler, onNameHandler, searchTerm, searchTermHandler, totalCartItems,
-        totalCartItemsHandler } = useData();
+    const { getToken, getName, onTokenHandler, onNameHandler, searchTerm, searchTermHandler, totalCartItems, totalCartItemsHandler } = useData();
     const [getList, setList] = useState([]);
-    const [showDropdown, setShowDropdown] = useState(false);
+    const [logout, setLogout] = useState(false);
+    const [logoutMob, setLogoutMob] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
         menuHandler();
     }, []);
-
-    const [ac, audio, health, kitchenappliances, laptop, mobile, refrigerator, tablet, travel, tv, washingMachine] = getList;
-
-    // const handleSelectChange = (event) => {
-    //     const selectedCategory = event.target.value;
-    //     switch (selectedCategory) {
-    //         case 'ac':
-    //             navigate('/acpage');
-    //             break;
-
-    //         case 'audio':
-    //             navigate('/audiopage');
-    //             break;
-
-    //         case 'health':
-    //             navigate('/healthpage');
-    //             break;
-
-    //         case 'kitchenappliances':
-    //             navigate('/kitchenpage');
-    //             break;
-
-    //         case 'laptop':
-    //             navigate('/laptoppage');
-    //             break;
-
-    //         case 'mobile':
-    //             navigate('/mobilepage');
-    //             break;
-
-    //         case 'refrigerator':
-    //             navigate('/refregeratorpage');
-    //             break;
-
-    //         case 'travel':
-    //             navigate('/travelpage');
-    //             break;
-
-    //         case 'tv':
-    //             navigate('/televisonpage');
-    //             break;
-
-    //         case 'tablet':
-    //             navigate('/tabletpage');
-    //             break;
-
-    //         case "washingMachine":
-    //             navigate("/washingmachinepage")
-    //         default:
-    //             break;
-    //     }
-    // };
 
     const menuHandler = async () => {
         try {
@@ -82,9 +31,14 @@ function TopNavbar() {
         }
     };
 
+    const navigateToHome = () => {
+        navigate("/");
+    };
 
-    const dropDownHandler = () => {
-        setShowDropdown(!showDropdown);
+    const handleSearchTerm = (e) => {
+        searchTermHandler(e.target.value);
+        console.log(e.target.value);
+        navigate("/searchpage");
     };
 
     const logoutHandler = () => {
@@ -94,122 +48,140 @@ function TopNavbar() {
         localStorage.removeItem('name');
         navigate("/login");
     };
-    const navigateToHome = () => {
-        navigate("/")
-    }
-    const handleSearchTerm = (e) => {
-        searchTermHandler(e.target.value)
-        console.log(e.target.value);
-        navigate("/searchpage")
 
-    }
-    //code for cart items
-
-    return (
-        <div className="w-full">
-            <div className="w-full overflow-x-auto">
-                <div className="bg-red-600 text-white border-b border-gray-300 flex justify-between p-1 text-xs font-bold">
-                    <div className="w-1/2 sm:w-auto flex items-center border-gray-300 pl-3">
-                        <span>OUR BRAND PROMISE</span>
-                    </div>
-                    <div className="w-1/2 sm:w-auto flex items-center border-l border-gray-300 pl-3">
-                        <NavLink to="/returnpolicy" className="flex items-center">
-                            <i className="fas fa-arrow-right-arrow-left mr-1"></i> EASY RETURN
-                        </NavLink>
-                    </div>
-                    <div className="w-1/2 sm:w-auto flex items-center border-l border-gray-300 pl-3">
-                        <span><i className="fas fa-truck-fast mr-1"></i> NEXT DAY DELIVERY</span>
-                    </div>
-                    <div className="w-1/2 sm:w-auto flex items-center border-l border-gray-300 pl-3">
-                        <NavLink to="/service" className="flex items-center">
-                            <i className="fas fa-ribbon mr-1"></i> SERVICE GUARANTEE
-                        </NavLink>
-                    </div>
-                    <div className="w-1/2 sm:w-auto flex items-center border-l border-gray-300 pl-3">
-                        <span><i className="fas fa-network-wired mr-1"></i> UNMATCHED NETWORK</span>
-                    </div>
-                    <div className="w-1/2 sm:w-auto flex items-center border-l border-gray-300 pl-3">
-                        <span><i className="fas fa-location-dot mr-1"></i> FIND A STORE</span>
-                    </div>
-                    <div className="w-1/2 sm:w-auto flex items-center border-l border-gray-300 pl-3">
-                        <NavLink to="/customercare" className="flex items-center">
-                            <i className="fas fa-headset mr-1"></i> CONTACT US
-                        </NavLink>
-                    </div>
+    return (<>
+        <div className="w-full overflow-x-auto">
+            <div className="bg-red-600 text-white border-b border-gray-300 flex justify-between p-1 text-xs font-bold">
+                <div className="w-24 sm:w-auto flex items-center border-gray-300 pl-3">
+                    <span>OUR BRAND PROMISE</span>
                 </div>
-            </div>
-
-
-
-            {/* Logo */}
-            <div className="flex justify-between items-end bg-red-600 sm:min-w-full p-2">
-                <div className="flex justify-end">
-                    <button onClick={navigateToHome}><img className="w-40 h-auto" src="https://www.reliancedigital.in/build/client/images/loaders/rd_logo.svg" alt="logo" /></button>
+                <div className=" w-24 sm:w-auto flex items-center border-l border-gray-300 p-1">
+                    <NavLink to="/returnpolicy" className="flex items-center">
+                        <i className="fas fa-arrow-right-arrow-left mr-1"></i> EASY RETURN
+                    </NavLink>
                 </div>
-
-                {/* Menu */}
-                <div className="flex justify-evenly flex-wrap md:flex-no-wrap ">
-                    {/* <button className="text-2xl font-bold text-slate-100" onClick={dropDownHandler}> Menu
-                        <i className="fa-solid fa-bars"></i>
-                    </button>
-                    {/* Dropdown */}
-                    {/* {showDropdown && (
-                        <select onChange={handleSelectChange} className="rounded-2xl pl-4 ">
-                            {getList.map((item, index) => (
-                                <option className="bg-blue-950 text-gray-50" key={index} value={item}>{item}</option>
-                            ))}
-                        </select>
-                    )}  */}
-
-
-                    {/* Search */}
-                    <input
-                        type="text"
-                        className="w-3/5 md:w-96 h-10 rounded-full px-4 md:ml-9 border-none focus:outline-none focus:border-none "
-                        placeholder="Find your favorite product..."
-                        onChange={handleSearchTerm}
-                        value={searchTerm}
-
-                    />
-                    {/* <button className="text-center pt-2 pl-2"  > <i class="fa-solid fa-magnifying-glass fa-xl"></i></button> */}
-
+                <div className="w-24 sm:w-auto flex items-center border-l border-gray-300 px-2">
+                    <span><i className="fas fa-truck-fast mr-1"></i> NEXT DAY DELIVERY</span>
                 </div>
-
-                {/* Buttons */}
-                <div className="flex flex-wrap gap-1">
-                    {!getToken ? (
-                        <>
-                            <NavLink to="/login">
-                                <button className=" text-xs text-white font-bold py-2 px-4 rounded"><i class="fa-solid fa-user"></i> Login</button>
-                            </NavLink>
-                            <NavLink to="/register">
-                                <button className="text-xs text-white font-bold py-2 px-4 rounded"><i class="fa-regular fa-user"></i> Register</button>
-                            </NavLink>
-                        </>
-                    ) : (
-                        <>
-                            <NavLink to="/wishlist">
-                                <button className="text-xs btn font-bold btn text-white  py-2 px-2 rounded"><i style={{ color: 'white' }} class="fa-solid fa-heart"></i><span className="ml-1">My Wishlist</span> </button>
-                            </NavLink>
-                            <span className="text-white">|</span>
-                            <NavLink to="/mycart">
-                                <button className="text-xs btn font-bold btn text-white  py-2 px-2 rounded"><i class="fa-solid fa-cart-shopping"></i><span className="ml-1"> My Cart<span className="ml-1">({totalCartItems})</span></span></button>
-                            </NavLink>
-
-                            <span className="text-white">|</span>
-                            <button onClick={logoutHandler} className="btn font-bold btn text-white  py-2 px-2 rounded text-xs">Log Out</button>
-                            <div className="mt-2 ml-2 font-semibold text-white text-xs uppercase tracking-wide">
-                                {getName ? <><i class="fa-solid fa-user fa-lg"></i> <span className="ml-1">{getName}</span></> : "Profile"}
-
-                            </div>
-                        </>
-                    )}
+                <div className="w-24 sm:w-auto flex items-center border-l border-gray-300 px-2">
+                    <NavLink to="/service" className="flex items-center">
+                        <i className="fas fa-ribbon mr-1"></i> SERVICE GUARANTEE
+                    </NavLink>
+                </div>
+                {/* <div className="w-24 sm:w-auto flex items-center border-l border-gray-300 px-2">
+                <span><i className="fas fa-network-wired mr-1"></i> UNMATCHED NETWORK</span>
+            </div> */}
+                {/* <div className="w-24 sm:w-auto flex items-center border-l border-gray-300 pl-3">
+                <span><i className="fas fa-location-dot mr-1"></i> FIND A STORE</span>
+            </div> */}
+                <div className="w-24 sm:w-auto  flex items-center border-l border-gray-300 px-2">
+                    <NavLink to="/customercare" className="flex items-center">
+                        <i className="fas fa-headset mr-1"></i> CONTACT US
+                    </NavLink>
                 </div>
             </div>
         </div>
+        <div className="flex justify-between h-16 items-end w-full bg-red-600 sm:min-w-full p-2">
+
+            <div className="flex justify-end w-20 md:w-32">
+                <button onClick={navigateToHome}>
+                    <img className="w-40 h-auto" src="https://www.reliancedigital.in/build/client/images/loaders/rd_logo.svg" alt="logo" />
+                </button>
+            </div>
+            <div className="flex justify-evenly flex-wrap md:flex-no-wrap">
+                <div className="rounded-full bg-white p-0 ml-2 md:ml-48 md:mr-20">
+                    <input
+                        type="text"
+                        className="w-4/5  md:w-96 h-6 md:h-10 rounded-full md:px-4 px-2 border-none focus:outline-none focus:border-none"
+                        placeholder="Find your favorite product..."
+                        onChange={handleSearchTerm}
+                        value={searchTerm}
+                    />
+                    <i className="fa-solid fa-magnifying-glass pr-1 md:pr-4"></i>
+                </div>
+            </div>
+            <div className="flex flex-wrap gap-1">
+                {!getToken ? (
+                    <>
+                        <div className="hidden md:inline md:ml-20">
+                            <NavLink to="/login">
+                                <button className="text-xs text-white font-bold py-2 px-4 rounded"><i className="fa-solid fa-user"></i> Login</button>
+                            </NavLink>
+                            <NavLink to="/register">
+                                <button className="text-xs text-white font-bold py-2 px-4 rounded"><i className="fa-regular fa-user"></i> Register</button>
+                            </NavLink>
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <div className="hidden md:inline ml-20 pl-32">
+                            <NavLink to="/mycart">
+                                <button onClick={() => setLogout(!logout)} className="text-xs btn font-bold btn text-white py-2 px-2 rounded"><i className="fa-solid fa-cart-shopping"></i><span className="ml-1"> My Cart<span className="ml-1">({totalCartItems})</span></span></button>
+                            </NavLink>
+                        </div>
+                        <span className="text-white hidden md:inline">|</span>
+                        <div className="mt-2 ml-2 font-semibold text-white text-xs uppercase tracking-wide hidden md:inline">
+                            {getName ? <button onClick={() => setLogout(!logout)}><i className="fa-solid fa-user fa-lg"></i> <span className="ml-1">{getName}</span></button> : "Profile"}
+                        </div>
+                        {logout &&
+                            <div className="h-20 w-28 rounded-md bg-blue-800 absolute right-0 hidden md:inline md:top-20 md:right-8  z-50">
+                                <div className="hidden md:block">
+                                    <NavLink onClick={() => setLogout(!logout)} to="/wishlist">
+                                        <button className="text-xs btn font-bold btn text-white py-2 px-2 ml-2 rounded"><i style={{ color: 'white' }} className="fa-solid fa-heart"></i><span className="ml-1">My Wishlist</span> </button>
+                                    </NavLink>
+                                </div>
+                                <button onClick={logoutHandler} className="btn font-bold btn text-white hidden md:inline ml-2 py-2 px-2 rounded text-xs"><i className="fa-solid fa-right-from-bracket mr-1"></i>Log Out</button>
+                            </div>}
+                    </>
+                )}
+            </div>
 
 
-    );
 
+
+
+
+
+
+
+            <div className="flex  gap-1 ">
+                {!getToken ? (
+                    <>
+                        <div className="inline md:hidden">
+                            <NavLink to="/login">
+                                <button className="text-xs text-white font-bold py-2 px-4 rounded"><i className="fa-solid fa-user"></i> Login</button>
+                            </NavLink>
+                            <NavLink to="/register">
+                                <button className="text-xs text-white font-bold py-2 px-4 rounded"><i className="fa-regular fa-user"></i> Register</button>
+                            </NavLink>
+                        </div>
+                    </>
+                ) : (
+                    <>
+
+
+                        <div className="mt-2 ml-2 font-semibold text-white text-xs uppercase tracking-wide inline md:hidden">
+                            {getName ? <button onClick={() => setLogout(!logout)}><i className="fa-solid fa-user fa-lg"></i> <span className="ml-1">{getName}</span></button> : "Profile"}
+                        </div>
+                        {logout &&
+                            <div className="h-24 w-28 rounded-md bg-blue-800 absolute right-0 top-28 md:hidden z-50">
+                                <div className="block md:hidden">
+                                    <NavLink onClick={() => setLogout(!logout)} to="/wishlist">
+                                        <button className="text-xs btn font-bold btn text-white py-2 px-2 ml-2 rounded"><i style={{ color: 'white' }} className="fa-solid fa-heart"></i><span className="ml-1">My Wishlist</span> </button>
+                                    </NavLink>
+                                </div>
+                                <div className="inline md:hidden">
+                                    <NavLink to="/mycart">
+                                        <button onClick={() => setLogout(!logout)} className="text-xs btn font-bold ml-2 btn text-white py-2 px-2 rounded"><i className="fa-solid fa-cart-shopping"></i><span className="ml-1"> My Cart<span className="ml-1">({totalCartItems})</span></span></button>
+                                    </NavLink>
+                                </div>
+                                <button onClick={logoutHandler} className="btn font-bold btn text-white inline md:hidden ml-2 py-2 px-2 rounded text-xs"><i className="fa-solid fa-right-from-bracket mr-1"></i>Log Out</button>
+                            </div>}
+                    </>
+                )}
+            </div>
+        </div>
+    </>);
 }
+
 export default TopNavbar;

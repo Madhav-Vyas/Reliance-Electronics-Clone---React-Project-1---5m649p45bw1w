@@ -112,59 +112,57 @@ const PaymentPage = () => {
     }
 
     return (<>
-        <div className='bg-white w-4/5 flex-col justify-center mx-auto '>
-            <div className='text-xl m-6 font-bold'>Shipping Address</div>
-
-            <span> <div className='card p-4 bg-slate-300 w-96 m-4'>
-                <span> <input type="radio" checked /></span>
-                <span className='text-lg font-bold'>{firstname} {lastname}</span>
-                <p>{houseNo} , {colony} , {landmark}</p>
-                <p>{city}-{pincode} , {state}</p>
-                <p>Mobile: {mobile}</p>
+        <div className='bg-white w-4/5 ml-4  md:w-4/5 flex flex-col md:flex-row justify-around md:mx-auto md:gap-20 mt-8 mb-8'>
 
 
+            <span>
+                <div className='text-xl m-6 font-bold'>Shipping Address <i className="fa-solid fa-truck" style={{ color: "blue" }}></i></div>
+                <div className='card p-4 bg-slate-300 w-64 md:w-96 m-4'>
 
-            </div></span>
+                    <span><input type="radio" checked /></span>
+                    <span className='text-md  md:text-lg font-bold'>{firstname} {lastname}</span>
+                    <p>{houseNo}, {colony}, {landmark}</p>
+                    <p>{city}-{pincode}, {state}</p>
+                    <p>Mobile: {mobile}</p>
+                </div>
+            </span>
 
-
-            <div className="max-w-lg ml-6 mt-24 mb-96">
+            <div className="max-w-lg mx-6  mt-8 mb-40">
                 <div className="mb-4">
-                    <div className='text-2xl'>Order Total : &#8377;{totalPrice}</div>
+                    <div className='text-2xl'>Order Total: &#8377;{totalPrice}</div>
                 </div>
                 <div className="mb-4">
                     <p className="font-semibold mb-2">Select Payment Method:</p>
-                    <div className="h-32">  <select
-                        value={selectedPayment}
-                        onChange={handlePaymentChange}
-                        className="block w-full p-2 border border-gray-300 rounded "
-                    >
-                        <option value="">Select Payment Method</option>
-                        <option value="Credit-Card">Credit Card</option>
-                        <option value="Google-pay">Google Pay</option>
-                        <option value="paytm">Paytm</option>
-                        <option value="COD">Cash on Delivery</option>
-                        {/* Add more options for other payment methods if needed */}
-                    </select></div>
-
-
-
+                    <div className="h-20 md:32">
+                        <select
+                            value={selectedPayment}
+                            onChange={handlePaymentChange}
+                            className="block w-64 md:w-full p-2 border border-gray-300 rounded"
+                        >
+                            <option value="">Select Payment Method</option>
+                            <option value="Credit-Card">Credit Card</option>
+                            <option value="Google-pay">Google Pay</option>
+                            <option value="paytm">Paytm</option>
+                            <option value="COD">Cash on Delivery</option>
+                        </select>
+                    </div>
                 </div>
-                {cod && <button onClick={successhandler} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-12">
-                    Proceed
-                </button>
+                {cod && (
+                    <button onClick={successhandler} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-12">
+                        Proceed
+                    </button>
+                )}
 
-                }
+                {qr && (
+                    <>
+                        <img className='w-40 h-auto' src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/google-payment-qr-code-template-design-f00259ea89eb7cc0f6cc20bd8967a639_screen.jpg?ts=1702881345" alt="Google Pay QR Code"></img>
+                        <div className='text-sm text-green-600 mt-1'>Scan It To Make Payment</div>
+                        <button onClick={successhandler} className="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300 ease-in-out text-sm">paid</button>
+                        <div className='text-xs text-red-500'>*Click here if payment is made Successful</div>
+                    </>
+                )}
 
-                {/* ..........................................................For GooglePay and Paytm..................................................................................................... */}
-                {qr && <> <img className='w-40 h-auto' src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/google-payment-qr-code-template-design-f00259ea89eb7cc0f6cc20bd8967a639_screen.jpg?ts=1702881345"></img>
-                    <div className='text-sm text-green-600 mt-1'>Scan It To Make Payment </div>
-                    <button onClick={successhandler} className="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300 ease-in-out  text-sm">paid</button>
-                    <div className='text-xs text-red-500'>*Click here if payment is made Sucessful</div>
-
-
-                </>}
-                {/* ..........................................................For CreditCard Payments..................................................................................................... */}
-                {getForm &&
+                {getForm && (
                     <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white rounded-lg overflow-hidden p-6 space-y-6 shadow-lg">
                         {error && (
                             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
@@ -192,23 +190,11 @@ const PaymentPage = () => {
                         </div>
                         <button type="submit" className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit</button>
                     </form>
-                }
-                {/* {text && <>
-                    <div className='text-green-600 w-full text-nowrap mb-2'>Order Placed Sucessfully and will be deliverd to you in 3-4 business days✅</div>
-                    <button className="bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-2 rounded" onClick={continueShopping}>Continue Shopping</button>
-                </>} */}
-
-
-                {/* {order && <> */}
-                {/* <div className='text-green-600'>Order Placed Sucessfully and will be deliverd to you in 3-4 business days✅</div> */}
-
-                {/* </> */}
-
+                )}
             </div>
-
         </div>
-
     </>
+
     )
 };
 

@@ -39,7 +39,7 @@ const WishListCard = ({ displayImage, name, price, rating, id, onDelete }) => {
         <div className='flex flex-col w-56 h-auto bg-transparent rounded-lg p-4  cursor-pointer transform transition duration-300  text-ellipsis overflow-hidden max-h-[504px]'>
             <button onClick={onClickHandler} className="mt-3 ml-1">
                 <div className="w-56 h-auto bg-transparent rounded-lg p-4  cursor-pointer transform transition duration-300  text-ellipsis overflow-hidden max-h-[504px]">
-                    <img className="w-full md:w-32 h-32 object-cover hover:scale-105 mx-auto mb-4" src={displayImage} alt="Product Image" />
+                    <img className="w-full md:w-44 h-auto p-2 object-cover hover:scale-105 mx-auto mb-4" src={displayImage} alt="Product Image" />
                     <div className="text-left pt-6 md:pt-8 font ">
 
                         <h4 className="text-xs hover:text-red-600 md:text-xs font-semibold text-blue-800 overflow-hidden" style={{ maxHeight: '2rem', textOverflow: 'ellipsis' }}>{name}</h4>

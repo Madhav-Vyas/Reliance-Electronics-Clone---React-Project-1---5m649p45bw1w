@@ -19,6 +19,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { NavLink } from 'react-router-dom';
+import Subnavbar from '../components/Subnavbar';
 
 const Home = () => {
     const [products, setProducts] = useState([]);
@@ -137,10 +138,10 @@ const Home = () => {
 
 
     return (<>
-
+        <Subnavbar />
         <div className="global-Container sm:w-full ">
 
-            <h1 className='text-xl text-center mb-3 mt-3'>What Do You Want To Buy Today, <span className='text-orange-500'>{getName}</span>?</h1>
+            <div className='text-xl text-center mb-3 md:mt-3 ml-8'>What Do You Want To Buy Today, <span className='text-orange-500'>{getName}</span>?</div>
 
 
 

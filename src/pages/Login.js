@@ -35,7 +35,9 @@ const Login = () => {
             }
         }).then((result) => {
             onTokenHandler(result.data.token);
-            onNameHandler(result.data.data.name);
+            console.log(result.data.token);
+            onNameHandler(result.data.data.user.name);
+            console.log(result.data.data.user.name);
             navigate('/');
         }).catch((error) => {
             console.log(error);
@@ -50,7 +52,7 @@ const Login = () => {
             <div className='flex gap-5'>
 
                 <div className='w-3/5'>
-                    <img className=' mt-32 h-auto' src="https://www.reliancedigital.in/akamai/images/web/LoginWebBanner.jpeg"></img>
+                    <img className=' mt-32 h-auto hidden md:inline' src="https://www.reliancedigital.in/akamai/images/web/LoginWebBanner.jpeg"></img>
                 </div>
                 <div className='mb-8 mt-4'>
 

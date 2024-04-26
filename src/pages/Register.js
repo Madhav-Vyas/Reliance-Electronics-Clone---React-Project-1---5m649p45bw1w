@@ -2,8 +2,10 @@ import React from 'react'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import { useData } from '../Providers/AllcategoryData';
 
 const Register = () => {
+    const { onNameHandler } = useData();
     const [getData, setData] = useState({
         name: "",
         email: "",
@@ -15,9 +17,11 @@ const Register = () => {
 
     const onChangeHandler = (event) => {
         setData({ ...getData, [event.target.name]: event.target.value })
+
     }
     const onSubmitHandler = (event) => {
         event.preventDefault();
+
         setError(null);
         if (!getData.name) {
             setError('userName is mandatory');
@@ -37,6 +41,7 @@ const Register = () => {
             }
         }).then((result) => {
             console.log(result);
+
             navigate('/login');
         }).catch((error) => {
             console.log(error);

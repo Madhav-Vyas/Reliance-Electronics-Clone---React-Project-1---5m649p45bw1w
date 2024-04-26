@@ -4,7 +4,7 @@ const Footer = () => {
     return (<>
         <div className='w-full h-80 bg-blue-700 text-white flex justify-around '>
 
-            <div id="product-cat" className='text-sm mt-4'><span className='text-xl underline'>Product Categories</span>
+            <div id="product-cat" className='text-sm mt-4 mx-2'><span className='text-xl underline'>Product Categories</span>
 
                 <ul className='mt-2'>
                     <NavLink className="hover:text-red-600" to="/acpage"><li>Ac</li></NavLink>
@@ -21,7 +21,7 @@ const Footer = () => {
                 </ul>
 
             </div>
-            <div id="contact Us" className="mt-4"><span className='text-xl underline '>Contact Us</span>
+            <div id="contact Us" className="mt-4 ml-8"><span className='text-xl underline '>Contact Us</span>
                 <ul className='mt-2'>
                     <li className='text-sm'>Email Address: RelainceDigital@gmail.com</li>
                     <li className='text-sm'>Contact No: 9213459012</li>

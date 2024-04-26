@@ -138,10 +138,13 @@ const productDetailpage2 = () => {
     return (
 
 
+
         <>
+            <>
+            </>
             <div className="global-container w-full flex flex-col md:flex-row mt-5">
                 <div className="left w-full md:w-[30%] h-full">
-                    <div className="container mx-auto p-4 w-full">
+                    <div className="container p-4 w-72 md:w-full">
                         <img src={displayImage} alt="Product" className="mb-4"></img>
                         <h2 className="text-4xl font-bold mb-4">Product Images</h2>
                         <div className="grid grid-cols-3 gap-6">
@@ -164,7 +167,7 @@ const productDetailpage2 = () => {
                         </div>
                     </div>
                 </div>
-                <div className="right w-full md:w-[40%] h-full mt-6 pr-3">
+                <div className="right w-full md:w-[40%] h-full mt-6 pr-3 ml-2">
                     <h1 className="text-lg text-blue-800 font-bold text mb-4">{name}</h1>
                     <h1 className="text-lg font-semibold my-2">{brand}</h1>
                     <p className="text-lg font-semibold mb-2">{category}</p>
@@ -273,7 +276,7 @@ const productDetailpage2 = () => {
 
                     </div>
                 </div>
-                <div className="right w-full md:w-[25%] h-full mt-3">
+                <div className="right w-full md:w-[25%] h-full mt-3 ml-2">
                     <p className="text-lg mb-2 mt-2"> Offer Price: <span className="text-2xl font-bold mb-2 text-blue-900 mt-2" >&#8377;{price}</span></p>
                     <p className='mb-2 mt-2'>MRP : <span className='line-through'>{price * 115 / 100}</span><span> (Inclusive of all taxes)</span></p>
                     <p className='text-green-500 mb-2 mt-2'>You save : 15% ({price * 15 / 100})</p>
