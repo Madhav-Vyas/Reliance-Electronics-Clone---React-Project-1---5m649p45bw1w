@@ -91,16 +91,16 @@ function TopNavbar() {
                 </button>
             </div>
             {/* INPUTBOX */}
-            <div className="flex justify-evenly flex-wrap md:flex-no-wrap">
-                <div className="rounded-full bg-white p-0 ml-2 ">
+            <div className="flex justify-evenly flex-wrap sm:flex-nowrap">
+                <div className="rounded-full bg-white p-0 ml-2 flex-nowrap sm:flex-nowrap ">
                     <input
                         type="text"
-                        className="w-4/5  md:w-96 h-6 md:h-10 rounded-full md:px-4 px-2 border-none focus:outline-none focus:border-none"
+                        className="w-4/5  sm:w-96 h-6 sm:h-8 rounded-full sm:px-4 px-2 border-none focus:outline-none focus:border-none"
                         placeholder="Find your favorite product..."
                         onChange={handleSearchTerm}
                         value={searchTerm}
                     />
-                    <i className="fa-solid fa-magnifying-glass pr-1 md:pr-4"></i>
+                    <i className="fa-solid fa-magnifying-glass pr-1 inline sm:pr-4"></i>
                 </div>
             </div>
             <div className="flex flex-wrap gap-1 md:ml-24">

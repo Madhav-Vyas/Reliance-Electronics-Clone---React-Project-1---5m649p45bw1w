@@ -3,8 +3,9 @@ import { useData } from '../Providers/AllcategoryData';
 import CheckOutCard from '../components/CheckOutCard';
 const OrderHistoryPage = () => {
     const { orderHistory, cartOrders } = useData();
-    console.log(cartOrders[0]);
+    console.log(cartOrders.flat());
 
+    const allcartOrders = cartOrders.flat();
 
     return (
         <div>
@@ -24,7 +25,7 @@ const OrderHistoryPage = () => {
 
                 />
             ))}
-            {cartOrders[0].map((order, index) => (
+            {allcartOrders.map((order, index) => (
 
                 <CheckOutCard
                     displayImage={order.product.displayImage}

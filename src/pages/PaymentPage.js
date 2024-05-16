@@ -81,8 +81,8 @@ const PaymentPage = () => {
 
 
     const handleSubmit = (event) => {
-        onPlacedHandler();
         event.preventDefault();
+        onPlacedHandler();
 
         if (!cardNumber || !cardHolder || !expiryDate || !cvv) {
             setError("* Fill all the Fields")
