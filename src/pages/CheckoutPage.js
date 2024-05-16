@@ -63,11 +63,11 @@ const CheckoutPage = () => {
             console.log(getData);
             navigate("/paymentpage", {
                 state: {
-                    totalPrice, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline
+                    data, totalPrice, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline
                 }
             })
             console.log({
-
+                data,
                 totalPrice
             });
         }

@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import "../Providers/QR.jpg"
+import { useData } from '../Providers/AllcategoryData';
 
 const BuynowPaymentPage = () => {
     const navigate = useNavigate();
-
+    const { orderHistory, orderHistoryHandler } = useData();
     const [cod, setCod] = useState();
     const location = useLocation();
 
-    const { price, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline } = location.state;
+    const { displayImage, name, price, ratings, sellerTag, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline } = location.state;
+    const orderData = { displayImage, name, price, ratings, sellerTag };
+    const onPlacedHandler = () => {
+        orderHistoryHandler(orderData);
+        console.log(orderHistory);
+    }
 
 
     // State to store selected payment method
@@ -80,6 +86,7 @@ const BuynowPaymentPage = () => {
 
 
     const handleSubmit = (event) => {
+        onPlacedHandler();
         event.preventDefault();
 
         if (!cardNumber || !cardHolder || !expiryDate || !cvv) {
@@ -107,6 +114,7 @@ const BuynowPaymentPage = () => {
         }
     };
     const successhandler = () => {
+        onPlacedHandler();
         navigate("/ordersuccessB", {
             state: {
                 price, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline
@@ -116,6 +124,9 @@ const BuynowPaymentPage = () => {
 
 
     return (<>
+        <>
+
+        </>
         <div className='bg-white w-4/5 flex-col md:flex-row justify-center mx-auto'>
             <div className='text-xl m-6 font-bold'>Shipping Address</div>
 

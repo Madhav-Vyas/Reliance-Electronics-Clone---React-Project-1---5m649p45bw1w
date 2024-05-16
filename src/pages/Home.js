@@ -129,7 +129,7 @@ const Home = () => {
         return (
             <div
                 className={className}
-                style={{ ...style, display: "block", background: "blue", opacity: 0.3 }}
+                style={{ ...style, display: "block", background: "blue", position: "absolute", opacity: 0.3 }}
                 onClick={onClick}
             />
         );

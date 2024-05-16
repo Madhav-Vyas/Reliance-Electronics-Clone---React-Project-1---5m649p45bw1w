@@ -18,10 +18,10 @@ export const DataProvider = ({ children }) => {
     const [getTravel, setTravel] = useState([]);
     const [getWashingMachine, setWashingMachine] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
-    const [orderHistory, setOrderHistory] = useState([]);
+
     const [totalCartItems, setTotalCartItems] = useState(0);
-
-
+    const [orderHistory, setOrderHistory] = useState([]);
+    const [cartOrders, setCartOrders] = useState([]);
 
     const totalCartItemsHandler = (data) => {
         setTotalCartItems(data);
@@ -82,13 +82,26 @@ export const DataProvider = ({ children }) => {
     const washingMachineDatahandler = (data) => {
         setWashingMachine(data);
     };
-
+    const orderHistoryHandler = (data) => {
+        setOrderHistory(prev => [...prev, data]);
+        localStorage.setItem('orderHistory', JSON.stringify([...orderHistory, data]));
+    }
+    const cartOrderHistoryHandler = (data) => {
+        setCartOrders(prev => [...prev, data]);
+        localStorage.setItem('cartOrderHistory', JSON.stringify([...cartOrders, data]));
+    }
 
     const object = {
         getName,
         getToken,
         onTokenHandler,
         onNameHandler,
+
+        cartOrders,
+        cartOrderHistoryHandler,
+
+        orderHistory,
+        orderHistoryHandler,
 
         getAc,
         acDataHandler,

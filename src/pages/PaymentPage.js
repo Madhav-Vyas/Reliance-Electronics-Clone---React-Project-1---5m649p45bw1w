@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-
+import { useData } from '../Providers/AllcategoryData';
 const PaymentPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
-
-    const { totalPrice, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline } = location.state;
-
+    const { cartOrders, cartOrderHistoryHandler, orderHistory, orderHistoryHandler } = useData();
+    const { data, totalPrice, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline } = location.state;
+    console.log(data);
     // State to store selected payment method
     const [selectedPayment, setSelectedPayment] = useState(null);
     const [qr, setQr] = useState(false);
@@ -33,7 +33,10 @@ const PaymentPage = () => {
         payment()
     }, [selectedPayment])
 
-
+    const onPlacedHandler = () => {
+        cartOrderHistoryHandler(data);
+    }
+    console.log(cartOrders);
     const payment = () => {
         if (selectedPayment === "paytm" || selectedPayment === "Google-pay") {
             setQr(true);
@@ -78,6 +81,7 @@ const PaymentPage = () => {
 
 
     const handleSubmit = (event) => {
+        onPlacedHandler();
         event.preventDefault();
 
         if (!cardNumber || !cardHolder || !expiryDate || !cvv) {
@@ -104,6 +108,7 @@ const PaymentPage = () => {
         }
     };
     const successhandler = () => {
+        onPlacedHandler();
         navigate("/ordersuccess", {
             state: {
                 totalPrice, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline

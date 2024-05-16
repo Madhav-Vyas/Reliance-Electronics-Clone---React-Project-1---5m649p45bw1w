@@ -8,7 +8,7 @@ const Subnavbar = () => {
     return (
         <>
 
-            <div className='w-full bg-blue-900 h-8 md:flex justify-between px-2 py-1 text-sm overflow-hidden hidden  '>
+            <div className='w-full bg-blue-900 h-8 md:flex justify-between px-2  py-1 text-sm overflow-hidden hidden  '>
                 <NavLink to="/acpage" className='text-white  hover:bg-red-600 px-3 '>Ac <i class="fa-solid fa-angle-down"></i></NavLink>
                 <NavLink to="/audiopage" className='text-white hover:bg-red-600 px-3'>Audio <i class="fa-solid fa-angle-down"></i></NavLink>
                 <NavLink to="/healthpage" className='text-white  hover:bg-red-600 px-3'>Health <i class="fa-solid fa-angle-down"></i></NavLink>

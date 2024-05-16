@@ -16,9 +16,11 @@ const OrderSuccessPageb = () => {
             <div className='global flex flex-col md:flex-row justify-between'>
                 <div className='left w-full md:w-3/5'>
                     <div className=''>
-                        <img className='mt-8 mx-8' src={orderConfirmed}></img>
+                        <img className='mt-8 mr-4 md:mx-8' src={orderConfirmed}></img>
                         <div className='text-slate-500 text-xs flex ml-6 mt-2'>Order with id #{Math.floor(Math.random() * 900000) + 100000} is placed and will reach you in 3-5 Business Days </div>
                         <button className="bg-slate-500 mt-20 w-44 mb-8 hover:bg-slate-700 text-white font-bold py-2 px-2 rounded ml-6" onClick={continueShopping}>Continue Shopping</button>
+
+
                     </div>
                 </div>
                 <div className='right w-full md:w-96 mt-8 md:mt-0 mr-2'>

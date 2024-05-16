@@ -62,7 +62,7 @@ const BuynowCheckoutPage = () => {
             console.log(getData);
             navigate("/buynowpayment", {
                 state: {
-                    price, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline
+                    displayImage, name, price, ratings, sellerTag, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline
                 }
             })
             console.log({
@@ -79,9 +79,9 @@ const BuynowCheckoutPage = () => {
 
             </>
 
-            <div className='flex flex-col md:flex-row '>
+            <div className='flex flex-col md:flex-row flex-wrap '>
                 <div className='mt-5 md:ml-2'>
-                    <div className='text-xl mt-4 font-semibold mr-4  md:ml-52 underline ml-2'>Order Summary <i className="fa-solid fa-box" style={{ color: "red" }}></i></div>
+                    <div className='text-xl mt-4 font-semibold mr-4  md:ml-52 underline ml-2 md:mr-40 '>Order Summary <i className="fa-solid fa-box" style={{ color: "red" }}></i></div>
                     <CheckOutCard
                         displayImage={displayImage}
                         price={price}
@@ -146,7 +146,7 @@ const BuynowCheckoutPage = () => {
                         {/* Mobile No. and Landline No. */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <div className="col-span-2 sm:col-span-1">
-                                <input type="number" name="mobile" id="mobile" placeholder="Mobile No." value={getData.mobile} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />
+                                <input type="tel" name="mobile" id="mobile" placeholder="Mobile No." minLength={10} maxLength={10} value={getData.mobile} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />
                             </div>
                             <div className="col-span-2 sm:col-span-1">
                                 <input type="tel" name="landline" id="landline" placeholder="Landline No." value={getData.landline} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />

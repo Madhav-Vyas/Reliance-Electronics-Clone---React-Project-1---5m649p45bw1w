@@ -72,6 +72,7 @@ const MyCart = () => {
 
             console.log("Items length", response.data.data.items.length);
             setData(response.data.data.items);
+            console.log(...data);
 
 
 
