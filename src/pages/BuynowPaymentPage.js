@@ -155,8 +155,8 @@ const BuynowPaymentPage = () => {
                     >
                         <option value="">Select Payment Method</option>
                         <option value="Credit-Card">Credit Card</option>
-                        <option value="Google-pay">Google Pay</option>
-                        <option value="paytm">Paytm</option>
+                        {/* <option value="Google-pay">Google Pay</option>
+                        <option value="paytm">Paytm</option> */}
                         <option value="COD">Cash on Delivery</option>
                         {/* Add more options for other payment methods if needed */}
                     </select></div>
@@ -174,13 +174,13 @@ const BuynowPaymentPage = () => {
                 </>}
 
                 {/* ..........................................................For GooglePay and Paytm..................................................................................................... */}
-                {qr && <> <img className='w-40 h-auto' src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/google-payment-qr-code-template-design-f00259ea89eb7cc0f6cc20bd8967a639_screen.jpg?ts=1702881345"></img>
+                {/* {qr && <> <img className='w-40 h-auto' src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/google-payment-qr-code-template-design-f00259ea89eb7cc0f6cc20bd8967a639_screen.jpg?ts=1702881345"></img>
                     <div className='text-sm text-green-600 mt-1'>Scan It To Make Payment </div>
                     <button onClick={successhandler} className="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300 ease-in-out  text-sm">paid</button>
                     <div className='text-xs text-red-500'>*Click here if payment is made Sucessful</div>
 
 
-                </>}
+                </>} */}
                 {/* ..........................................................For CreditCard Payments..................................................................................................... */}
                 {getForm &&
                     <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white rounded-lg overflow-hidden p-6 space-y-6 shadow-lg">
