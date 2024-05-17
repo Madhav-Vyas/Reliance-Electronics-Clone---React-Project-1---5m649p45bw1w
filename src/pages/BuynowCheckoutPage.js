@@ -79,7 +79,7 @@ const BuynowCheckoutPage = () => {
 
             </>
 
-            <div className='flex flex-col md:flex-row flex-wrap '>
+            <div className='flex flex-col md:flex-row gap-x-4'>
                 <div className='mt-5 md:ml-2'>
                     <div className='text-xl mt-4 font-semibold mr-4  md:ml-52 underline ml-2 md:mr-40 '>Order Summary <i className="fa-solid fa-box" style={{ color: "red" }}></i></div>
                     <CheckOutCard

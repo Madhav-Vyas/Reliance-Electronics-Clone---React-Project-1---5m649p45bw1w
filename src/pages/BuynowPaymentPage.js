@@ -127,28 +127,27 @@ const BuynowPaymentPage = () => {
         <>
 
         </>
-        <div className='bg-white w-4/5 flex-col md:flex-row justify-center mx-auto'>
-            <div className='text-xl m-6 font-bold'>Shipping Address</div>
+        <div className='bg-white w-4/5 ml-4  md:w-4/5 flex flex-col md:flex-row justify-around md:mx-auto md:gap-20 mt-8 mb-8'>
+            <span>
+                <div className='text-xl m-6 font-bold'>Shipping Address <i className="fa-solid fa-truck" style={{ color: "blue" }}></i></div>
+                <div className='card p-4 bg-slate-300 w-64 md:w-96 m-4'>
 
-            <span> <div className='card p-4 bg-slate-300 w-64 md:w-72 m-4'>
-                <span> <input type="radio" checked /></span>
-                <span className='text-lg font-bold'>{firstname} {lastname}</span>
-                <p>{houseNo} , {colony} , {landmark}</p>
-                <p>{city}-{pincode} , {state}</p>
-                <p>Mobile: {mobile}</p>
+                    <span><input type="radio" checked /></span>
+                    <span className='text-md  md:text-lg font-bold'>{firstname} {lastname}</span>
+                    <p>{houseNo}, {colony}, {landmark}</p>
+                    <p>{city}-{pincode}, {state}</p>
+                    <p>Mobile: {mobile}</p>
+                </div>
+            </span>
 
 
-
-            </div></span>
-
-
-            <div className="max-w-lg ml-6 mr-6 mt-24 mb-40">
+            <div className="max-w-lg ml-6 mr-6 mt-12 mb-40">
                 <div className="mb-4">
                     <div className='text-2xl'>Order Total : &#8377;{price}</div>
                 </div>
                 <div className="mb-4">
                     <p className="font-semibold mb-2">Select Payment Method:</p>
-                    <div className='h-32'> <select
+                    <div className='h-32 w-64'> <select
                         value={selectedPayment}
                         onChange={handlePaymentChange}
                         className="block w-full p-2 border border-gray-300 rounded"
@@ -193,7 +192,7 @@ const BuynowPaymentPage = () => {
                         <div className="mb-4">
                             <label htmlFor="cardNumber" className="block text-gray-700 font-bold mb-2">Card Number</label>
                             <input
-                                type="number"
+                                type="text"
                                 id="cardNumber"
                                 value={cardNumber}
                                 onChange={(e) => setCardNumber(e.target.value)}
@@ -220,7 +219,7 @@ const BuynowPaymentPage = () => {
                             <div className="mb-4">
                                 <label htmlFor="expiryDate" className="block text-gray-700 font-bold mb-2">Expiry Date</label>
                                 <input
-                                    type="number"
+                                    type="text"
                                     id="expiryDate"
                                     value={expiryDate}
                                     onChange={(e) => setExpiryDate(e.target.value)}
@@ -233,7 +232,7 @@ const BuynowPaymentPage = () => {
                             <div className="mb-4">
                                 <label htmlFor="cvv" className="block text-gray-700 font-bold mb-2">CVV</label>
                                 <input
-                                    type="number"
+                                    type="text"
                                     id="cvv"
                                     value={cvv}
                                     onChange={(e) => setCvv(e.target.value)}
