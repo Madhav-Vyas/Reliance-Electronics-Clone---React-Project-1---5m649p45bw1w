@@ -1,6 +1,6 @@
 import axios from "axios";
 import "../styles/App.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { useData } from "../Providers/AllcategoryData";
 import { useNavigate } from "react-router-dom";
@@ -13,34 +13,81 @@ function TopNavbar() {
     const [logoutMob, setLogoutMob] = useState(false);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        menuHandler();
-    }, []);
 
-    const menuHandler = async () => {
-        try {
-            const response = await axios.get("https://academics.newtonschool.co/api/v1/ecommerce/electronics/categories", {
-                headers: {
-                    projectId: "5m649p45bw1w"
-                }
-            });
-            console.log(response.data.data);
-            setList(response.data.data);
-        } catch (error) {
-            console.error("Error fetching categories:", error);
-        }
+
+    ///------------------------------------Logic of closing box when cliked outside----------
+    const boxRef = useRef(null);
+
+    // // Function to handle click outside
+    // const handleClickOutside = (event) => {
+    //     if (boxRef.current && !boxRef.current.contains(event.target)) {
+    //         setLogout(false);
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     if (logout) {
+    //         document.addEventListener('mousedown', handleClickOutside);
+    //     } else {
+    //         document.removeEventListener('mousedown', handleClickOutside);
+    //     }
+
+    //     return () => {
+    //         document.removeEventListener('mousedown', handleClickOutside);
+    //     };
+    // }, [logout]);
+
+    // Function to stop propagation
+    const stopPropagation = (event) => {
+        event.stopPropagation();
     };
+
+    // const handleLogout = () => {
+    //     // Add your logout logic here
+    //     setLogout(false);
+    // };
+
+
+    //---------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+    // useEffect(() => {
+    //     menuHandler();
+    // }, []);
+
+    // const menuHandler = async () => {
+    //     try {
+    //         const response = await axios.get("https://academics.newtonschool.co/api/v1/ecommerce/electronics/categories", {
+    //             headers: {
+    //                 projectId: "5m649p45bw1w"
+    //             }
+    //         });
+    //         console.log(response.data.data);
+    //         setList(response.data.data);
+    //     } catch (error) {
+    //         console.error("Error fetching categories:", error);
+    //     }
+    // };
 
     const navigateToHome = () => {
         navigate("/");
     };
 
+    //Sets the search term using searchTermHandler function which comes from context API
+    //called onChange of input , and value property of inputbox should be searchTerm
     const handleSearchTerm = (e) => {
         searchTermHandler(e.target.value);
         console.log(e.target.value);
         navigate("/searchpage");
     };
 
+    //setting the value of token and name to null , using  onTokenHandler, onNameHandler function which comes from cntext API
     const logoutHandler = () => {
         onTokenHandler(null);
         onNameHandler(null);
@@ -50,6 +97,7 @@ function TopNavbar() {
     };
 
     return (<>
+        {/* LINKS ON TOP---------------------------------------------------------------- */}
         <div className="w-100% overflow-x-auto">
             <div className="bg-red-600 text-white border-b border-gray-300 flex justify-between p-1 text-xs font-bold">
                 <div className="w-24 sm:w-auto flex items-center border-gray-300 pl-3">
@@ -68,12 +116,7 @@ function TopNavbar() {
                         <i className="fas fa-ribbon mr-1"></i> SERVICE GUARANTEE
                     </NavLink>
                 </div>
-                {/* <div className="w-24 sm:w-auto flex items-center border-l border-gray-300 px-2">
-                <span><i className="fas fa-network-wired mr-1"></i> UNMATCHED NETWORK</span>
-            </div> */}
-                {/* <div className="w-24 sm:w-auto flex items-center border-l border-gray-300 pl-3">
-                <span><i className="fas fa-location-dot mr-1"></i> FIND A STORE</span>
-            </div> */}
+
                 <div className="w-24 sm:w-auto flex items-center border-l border-gray-300 px-2">
                     <NavLink to="/customercare" className="flex items-center">
                         <i className="fas fa-headset mr-1"></i> CONTACT US
@@ -81,16 +124,18 @@ function TopNavbar() {
                 </div>
             </div>
         </div>
+        {/* ----------------------------------------------------------------------End of links on top----------------------------------------------- */}
 
-        {/* LOGO */}
+
         <div className="flex justify-between h-16 items-end w-full bg-red-600 sm:min-w-full p-2">
 
+            {/* LOGO....................................................................... */}
             <div className="flex justify-end w-20 md:w-32 mr-10">
                 <button onClick={navigateToHome}>
                     <img className="w-40 h-auto" src="https://www.reliancedigital.in/build/client/images/loaders/rd_logo.svg" alt="logo" />
                 </button>
             </div>
-            {/* INPUTBOX */}
+            {/* INPUTBOX....................................... */}
             <div className="flex justify-evenly flex-wrap sm:flex-nowrap">
                 <div className="rounded-full bg-white p-0 ml-2 flex-nowrap sm:flex-nowrap ">
                     <input
@@ -103,7 +148,12 @@ function TopNavbar() {
                     <i className="fa-solid fa-magnifying-glass pr-1 inline sm:pr-4"></i>
                 </div>
             </div>
+
+
+
+            {/* ------------------------------------Style for big Devices----------------------------------------------- */}
             <div className="flex flex-wrap gap-1 md:ml-24">
+
                 {!getToken ? (
                     <>
                         <div className="hidden md:inline md:ml-20">
@@ -127,15 +177,27 @@ function TopNavbar() {
                             {getName ? <button onClick={() => setLogout(!logout)}><i className="fa-solid fa-user fa-lg"></i> <span className="ml-1">{getName}</span></button> : "Profile"}
                         </div>
                         {logout &&
-                            <div className="h-32 w-28 rounded-md bg-blue-800 absolute right-0 hidden md:inline md:top-20 md:right-8  z-50">
-                                <NavLink to="/orderhistory"><button onClick={() => setLogout(!logout)} className="text-xs btn font-bold btn text-white py-2 px-2 rounded"><i style={{ color: 'white' }} className="fa-solid fa-heart"></i><span className="ml-1">Order History</span> </button></NavLink>
+                            <div className="h-32 w-28 rounded-md bg-blue-800 absolute right-0 hidden md:inline md:top-20 md:right-8 z-50" onClick={stopPropagation}>
+                                <NavLink to="/orderhistory">
+                                    <button onClick={() => setLogout(!logout)} className="text-xs btn font-bold btn text-white py-2 px-2 rounded">
+                                        <i style={{ color: 'white' }} className="fa-solid fa-heart"></i>
+                                        <span className="ml-1">Order History</span>
+                                    </button>
+                                </NavLink>
                                 <div className="hidden md:block">
                                     <NavLink onClick={() => setLogout(!logout)} to="/wishlist">
-                                        <button onClick={() => setLogout(!logout)} className="text-xs btn font-bold btn text-white py-2 px-2 ml-2 rounded"><i style={{ color: 'white' }} className="fa-solid fa-heart"></i><span className="ml-1">My Wishlist</span> </button>
+                                        <button onClick={() => setLogout(!logout)} className="text-xs btn font-bold btn text-white py-2 px-2 ml-2 rounded">
+                                            <i style={{ color: 'white' }} className="fa-solid fa-heart"></i>
+                                            <span className="ml-1">My Wishlist</span>
+                                        </button>
                                     </NavLink>
                                 </div>
-                                <button onClick={logoutHandler} className="btn font-bold btn text-white hidden md:inline ml-2 py-2 px-2 rounded text-xs"><i className="fa-solid fa-right-from-bracket mr-1"></i>Log Out</button>
-                            </div>}
+                                <button onClick={logoutHandler} className="btn font-bold btn text-white hidden md:inline ml-2 py-2 px-2 rounded text-xs">
+                                    <i className="fa-solid fa-right-from-bracket mr-1"></i>
+                                    Log Out
+                                </button>
+                            </div>
+                        }
                     </>
                 )}
             </div>
@@ -146,7 +208,7 @@ function TopNavbar() {
 
 
 
-
+            {/* ---------------------------------------------Style For Small Devices------------------------------------------ */}
 
             <div className="flex  gap-1 ">
                 {!getToken ? (
@@ -168,7 +230,7 @@ function TopNavbar() {
                             {getName ? <button onClick={() => setLogout(!logout)}><i className="fa-solid fa-user fa-lg"></i> <span className="ml-1">{getName}</span></button> : "Profile"}
                         </div>
                         {logout &&
-                            <div className="h-32 w-28 rounded-md bg-blue-800 absolute right-0 top-28 md:hidden z-50">
+                            <div ref={boxRef} className="h-32 w-28 rounded-md bg-blue-800 absolute right-0 top-28 md:hidden z-50">
                                 <div className="block md:hidden">
                                     <NavLink onClick={() => setLogout(!logout)} to="/wishlist">
                                         <button className="text-xs btn font-bold btn text-white py-2 px-2 ml-2 rounded"><i style={{ color: 'white' }} className="fa-solid fa-heart"></i><span className="ml-1">My Wishlist</span> </button>

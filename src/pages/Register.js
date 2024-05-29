@@ -3,9 +3,11 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { useData } from '../Providers/AllcategoryData';
+import { toast } from 'react-toastify';
 
 const Register = () => {
     const { onNameHandler } = useData();
+    //State for getting form data, in form of object , these are passed in value property of input as {getdata.name} etc
     const [getData, setData] = useState({
         name: "",
         email: "",
@@ -15,10 +17,13 @@ const Register = () => {
     const [getError, setError] = useState(null);
     const navigate = useNavigate();
 
+    //function for handleing onChange event of input 
     const onChangeHandler = (event) => {
         setData({ ...getData, [event.target.name]: event.target.value })
 
     }
+
+    //on submit of form all inputs are checked if all of it are filled or not , if filled , then a post request to signup API of newton school has been made   
     const onSubmitHandler = (event) => {
         event.preventDefault();
 
@@ -43,6 +48,7 @@ const Register = () => {
             console.log(result);
 
             navigate('/login');
+            toast.success("Registered Successfully")
         }).catch((error) => {
             console.log(error);
             setError("internal server error please try after sometime");

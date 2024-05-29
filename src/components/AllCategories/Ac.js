@@ -12,40 +12,9 @@ import "slick-carousel/slick/slick-theme.css";
 const Ac = () => {
     const { getAc, acDataHandler } = useData();
     const [getCategory, setCategory] = useState([]);
-    const [selectedsubCataegory, setSelectedSubCataegory] = useState('ac');
+    const selectedsubCataegory = 'ac';
 
-
-    useEffect(() => {
-        onAcHandeler();
-    }, []);
-    //slides to show based on screen size ------------------------------------------------------
-    const [slidesToShow, setSlidesToShow] = useState(6);
-    useEffect(() => {
-        const handleResize = () => {
-            // Adjust slidesToShow based on screen width
-            if (window.innerWidth < 768) {
-                setSlidesToShow(2);
-            } else {
-                setSlidesToShow(6);
-            }
-        };
-
-        // Initial call to set slidesToShow
-        handleResize();
-
-        // Listen to window resize event
-        window.addEventListener('resize', handleResize);
-
-        // Clean up on component unmount
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-
-    //----------------------------------------------
-
-
-
+    //gets the ACs and setting it in a variable using useState  , after that mapping it using productCard
     const onAcHandeler = async () => {
         try {
             const response = await axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/electronics/products?filter={"subCategory":"${selectedsubCataegory}"}`, {
@@ -64,12 +33,51 @@ const Ac = () => {
 
 
     }
+    //it is on home page so it is called on load of home page 
+    useEffect(() => {
+        onAcHandeler();
+    }, []);
+
+
+
+    //slides to show based on screen size ------------------------------------------------------
+    const [slidesToShow, setSlidesToShow] = useState(6);
+    useEffect(() => {
+        //if screen size is less than 768px then show only 2 slides otherwise 6 slides
+        const handleResize = () => {
+            // Adjust slidesToShow based on screen width
+            if (window.innerWidth < 768) {
+                setSlidesToShow(2);
+            } else {
+                setSlidesToShow(6);
+            }
+        };
+
+        // Initial call to set slidesToShow
+        handleResize();
+
+        // Listen to window resize event, when resize event happens means , when we change screen size then this function is trigreed
+        window.addEventListener('resize', handleResize);
+
+        // Clean up on component unmount
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    //----------------------------------------------
+
+
+
+
     const settings = {
         dots: false,
         infinite: true,
         speed: 500,
         slidesToShow: slidesToShow,
         slidesToScroll: 2,
+        nextArrow: <SampleNextArrow />,
+        prevArrow: <SamplePrevArrow />
 
     };
     function SampleNextArrow(props) {

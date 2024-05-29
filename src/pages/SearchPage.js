@@ -5,18 +5,25 @@ import { useData } from "../Providers/AllcategoryData";
 import ProductCard from '../components/ProductCard';
 import { useNavigate } from 'react-router-dom';
 const SearchPage = () => {
+    //these 2 terms come from context 
     const { searchTerm, searchTermHandler } = useData();//should be in context
     const [searchResults, setSearchResults] = useState([]);
     const navigate = useNavigate();
+
+    //whenever there is change in searchTerm this initial function will be triggred
     useEffect(() => {
         initial();
     }, [searchTerm])
+
+
     const initial = async () => {
+        //if there is total backspace and there is no character in search bar, navigate to home page
         if (searchTerm == '') {
             navigate("/")
         }
+        //otherwise searchterm is entered here and API is beig hit searchResults will be set and data will be displayed
         try {
-            const response = await axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/electronics/products?search={"subCategory":"${searchTerm}"}`, {
+            const response = await axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/electronics/products?search={"description":"${searchTerm}"}`, {
                 headers: {
                     projectID: "5m649p45bw1w"
                 }
@@ -29,6 +36,7 @@ const SearchPage = () => {
         }
 
     }
+    //there is a home button on search page this function is called on click of that
     const goHome = () => {
         searchTermHandler("");
         navigate("/")

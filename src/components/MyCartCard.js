@@ -8,6 +8,8 @@ const MyCartCard = ({ brand, category, displayImage, price, rating, id, name, qu
     const { getToken, totalCartItemsHandler, totalCartItems } = useData();
     const [qty, setQty] = useState(1);
     const onClickHandler = () => {
+
+        //in CART  if we click on the product card it will lead to detailed information page of that product
         navigate("/productDetail", {
             state: {
                 brand, category, displayImage, price, rating, name, id
@@ -19,6 +21,8 @@ const MyCartCard = ({ brand, category, displayImage, price, rating, id, name, qu
 
 
     }
+
+    //when we click on delte button of myCartCard this delte api is called and it deletes thet item ,it also calls onDelte function which ultimately calls fetch cart function on mycart page and item will disappear from UI
     const onItemDeleteHandler = async () => {
         try {
             const response = await axios.delete(`https://academics.newtonschool.co/api/v1/ecommerce/cart/${id}`, {
@@ -39,11 +43,19 @@ const MyCartCard = ({ brand, category, displayImage, price, rating, id, name, qu
         }
 
     }
+    //when we add quantity of a product qty will be set
     const plusHandler = () => {
+
         setQty(qty + 1);
         addToCart();
     }
+    //when we decrese the quantity of a product this function is called
+
     const minusHandler = () => {
+        if (qty == 1) {
+            onItemDeleteHandler()
+            onDelete();
+        }
         if (qty > 0) {
             setQty(qty - 1);
             addToCart();
@@ -54,14 +66,14 @@ const MyCartCard = ({ brand, category, displayImage, price, rating, id, name, qu
         try {
 
             await axios.patch(`https://academics.newtonschool.co/api/v1/ecommerce/cart/${id}`, {
-                quantity: qty // Assuming you want to add 1 quantity of the product
+                quantity: qty
             }, {
                 headers: {
                     Authorization: `Bearer ${getToken}`,
                     projectId: "5m649p45bw1w"
                 }
             });
-
+            //this function is also recived as props and it also calls fetchcart() on myCart page
             onUpdate();
             // totalCartItemsHandler(totalCartItems + 1);
         } catch (error) {
@@ -82,6 +94,8 @@ const MyCartCard = ({ brand, category, displayImage, price, rating, id, name, qu
                 <button onClick={onClickHandler} className="focus:outline-none block">
                     <h4 className="text-sm font-semibold text-gray-700 mb-2">{name}</h4>
                 </button>
+
+
                 <p className="text-sm text-gray-600 ml-6 mb-2">Price: &#8377;{price}</p>
                 <p className="text-sm text-gray-600 ml-6 mb-2">Category: {category}</p>
                 <div className="flex items-center">

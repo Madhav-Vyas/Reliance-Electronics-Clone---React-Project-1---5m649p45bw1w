@@ -2,8 +2,14 @@ import React, { useState } from 'react'
 import { useData } from "../Providers/AllcategoryData";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import { toast } from 'react-toastify';
 const Login = () => {
+    //these are 2 functions which comes from ContextAPI , these are used to-
+    //onTokenHandler--> this is used to save the token of user so that he can enter website
+    //onNamehandler-->this is used to save the name of user so that it can be displayed in topNavbar 
     const { onTokenHandler, onNameHandler } = useData();
+
+    //this form has only 2 input fields 1 is email and 2nd is password , app type is static
     const [getData, setData] = useState({
         email: "",
         password: "",
@@ -13,6 +19,7 @@ const Login = () => {
     const [getError, setError] = useState(null);
     const navigate = useNavigate();
 
+    //function to handle onChange event in input Tag
     const onChangeHandler = (event) => {
         setData({ ...getData, [event.target.name]: event.target.value })
     }
@@ -26,8 +33,13 @@ const Login = () => {
             return;
         } else if (!getData.password) {
             setError('Password cannot be empty');
+            toast.error('Password cannot be empty')
             return;
         }
+
+
+        //onSubmit first , email and password are being checked if everything is fine then we are redirected to home page , along with onTokenHandler sets the token of user in COntextAPI and onNameHandler saves orsets the name of user in contextAPI
+
 
         axios.post("https://academics.newtonschool.co/api/v1/user/login", getData, {
             headers: {
@@ -41,7 +53,8 @@ const Login = () => {
             navigate('/');
         }).catch((error) => {
             console.log(error);
-            setError("Internal server error. Please try again later.");
+            setError("Internal server error");
+
         });
     }
 

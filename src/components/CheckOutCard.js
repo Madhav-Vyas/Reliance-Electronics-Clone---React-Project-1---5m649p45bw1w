@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-const CheckOutCard = ({ displayImage, price, rating, name, quantity }) => {
+const CheckOutCard = ({ displayImage, totalPrice, price, rating, name, qtyhandler, qty, setTotalPrice }) => {
+
+    useEffect(() => {
+        setTotalPrice(price * qty)
+    }, [qty])
     return (
         <>
             <button></button>
@@ -9,10 +13,13 @@ const CheckOutCard = ({ displayImage, price, rating, name, quantity }) => {
                     <img src={displayImage} alt={name} className="w-32 h-32 object-cover mr-4" />
                     <div>
                         <p className="text-xs md:text-sm font-semibold">{name}</p>
-                        <p className="text-gray-500 text-xs">Quantity: {quantity}</p>
+                        <div className='flex gap-2'>
+                            <p className="text-gray-500 text-xs">Quantity:</p>
+                            <input className='w-10' type='number' onChange={qtyhandler} min={1} />
+                        </div>
                     </div>
                 </div>
-                <p className="text-sm md:text-lg text-right absolute top-2 right-5 md:top-4 md:right-6 text-red-500 font-semibold">&#8377;{price}</p>
+                <p className="text-sm md:text-lg text-right absolute top-2 right-5 md:top-4 md:right-6 text-red-500 font-semibold">&#8377;{totalPrice}</p>
             </div>
 
 

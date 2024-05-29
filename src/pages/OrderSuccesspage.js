@@ -7,6 +7,7 @@ const OrderSuccesspage = () => {
     }
     const location = useLocation();
 
+    //reciving data from payment page and then simply displaying on UI as desired 
     const { totalPrice, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline } = location.state;
     const navigate = useNavigate();
 

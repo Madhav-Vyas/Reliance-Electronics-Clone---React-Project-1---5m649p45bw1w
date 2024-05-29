@@ -4,9 +4,12 @@ import { NavLink } from "react-router-dom";
 import Hamburger from 'hamburger-react';
 
 const Subnavbar = () => {
+    //simply have links of all category pages
+    //Hamburger is installed from external resource
     const [isOpen, setOpen] = useState(false)
     return (
         <>
+            {/* ---------------------------------------Style for big screens---------------------------------- */}
 
             <div className='w-full bg-blue-900 h-8 md:flex justify-between px-2  py-1 text-sm overflow-hidden hidden  '>
                 <NavLink to="/acpage" className='text-white  hover:bg-red-600 px-3 '>Ac <i class="fa-solid fa-angle-down"></i></NavLink>
@@ -21,6 +24,12 @@ const Subnavbar = () => {
                 <NavLink to="/travelpage" className='text-white hover:bg-red-600 px-3'>Travel <i class="fa-solid fa-angle-down"></i></NavLink>
                 <NavLink to="/washingmachinepage" className='text-white hover:bg-red-600 px-3'>Washing Machine <i class="fa-solid fa-angle-down"></i></NavLink>
             </div>
+
+
+
+
+            {/* --------------------------------Style for small devices------------------------------------------ */}
+
             <span className="md:hidden">
                 <div className="w-1 h-1 mr-2">
                     <Hamburger toggled={isOpen} toggle={setOpen} /></div>

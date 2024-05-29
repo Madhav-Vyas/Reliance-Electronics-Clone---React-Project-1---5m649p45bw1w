@@ -1,5 +1,6 @@
 import React, { useState, createContext, useContext } from 'react';
 
+//created the context, from this data context our App.js component is being wrapped in index.js page
 export const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
@@ -27,14 +28,18 @@ export const DataProvider = ({ children }) => {
         setTotalCartItems(data);
     }
 
+    //Function for setting search term in context
     const searchTermHandler = (data) => {
         setSearchTerm(data);
     }
 
+    //Function for settng token and adding it it to local-Storage
     const onTokenHandler = (data) => {
         setToken(data);
         localStorage.setItem('token', data);
     };
+
+    //Function for settng name and adding it to local-Storage
     const onNameHandler = (data) => {
         setName(data);
         localStorage.setItem('name', data);
@@ -82,15 +87,20 @@ export const DataProvider = ({ children }) => {
     const washingMachineDatahandler = (data) => {
         setWashingMachine(data);
     };
+
+    //when order is placed dirctly witout adding it to cart , then orderHistory is being set using this function
     const orderHistoryHandler = (data) => {
         setOrderHistory(prev => [...prev, data]);
         localStorage.setItem('orderHistory', JSON.stringify([...orderHistory, data]));
     }
+
+    //when order is placed  adding it to cart , then cartOrders is being set using this function
     const cartOrderHistoryHandler = (data) => {
         setCartOrders(prev => [...prev, data]);
         localStorage.setItem('cartOrderHistory', JSON.stringify([...cartOrders, data]));
     }
 
+    //this is object in which all function and varibles are added ,so that it can be added in provider and can be used useing useContext
     const object = {
         getName,
         getToken,
@@ -150,7 +160,7 @@ export const DataProvider = ({ children }) => {
         </DataContext.Provider>
     );
 };
-
+//useData is the function which will be used to called, so that we can all data which are used in context API
 export function useData() {
     return useContext(DataContext);
 }

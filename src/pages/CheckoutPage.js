@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
-import CheckOutCard from "../components/CheckOutCard";
+import CheckOutCardCart from '../components/CheckOutCardCart';
+import { toast } from 'react-toastify';
 
 const CheckoutPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    //data varible contains the array of products which are added in cart and total price contains the sum of prices of all products
     const { data, totalPrice } = location.state;
 
+    //get data is state made to handle form on checkout page
     const [getData, setData] = useState({
         pincode: "",
         firstname: "",
@@ -19,44 +22,51 @@ const CheckoutPage = () => {
         mobile: "",
         landline: ""
     });
+
+
+    //we have destructured this data in order to send it to next page
     const { pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline } = getData;
     const [error, setError] = useState("");
     const onChangeHandler = (event) => {
         setData({ ...getData, [event.target.name]: event.target.value })
     }
+
+    //on submit  we are redirected to next page i.e(payment page) before that on submission this function is called and this function checks that if all details of for are being filled or not if not filled an error state will be set
+
+    //and if there is no error we are redirected to payment page along with required details
     const onSubmitHandler = (e) => {
         e.preventDefault();
 
         if (!getData.pincode) {
-            setError("PIN code is mandatory")
+            toast.error("PIN code is mandatory")
         }
         else if (!getData.firstname) {
-            setError("First-name is mandatory")
+            toast.error("First-name is mandatory")
         }
         else if (!getData.lastname) {
-            setError("Last-name is mandatory")
+            toast.error("Last-name is mandatory")
         }
         else if (!getData.houseNo) {
-            setError("Please enter house No.")
+            toast.error("Please enter house No.")
         }
         else if (!getData.colony) {
-            setError("Please enter colony")
+            toast.error("Please enter colony")
         }
         else if (!getData.landmark) {
-            setError("Landmark is mandatory")
+            toast.error("Landmark is mandatory")
         }
         else if (!getData.city) {
-            setError("Enter your city")
+            toast.error("Enter your city")
         }
         else if (!getData.state) {
-            setError("Enter your state")
+            toast.error("Enter your state")
         }
         else if (!getData.mobile) {
-            setError("Enter Your Mobile Number")
+            toast.error("Enter Your Mobile Number")
         }
 
         else if (getData.mobile && getData.mobile.length < 10) {
-            setError("Please Enter a Valid Mobile Number")
+            toast.error("Please Enter a Valid Mobile Number")
         }
 
         else {
@@ -103,7 +113,7 @@ const CheckoutPage = () => {
                 <div className='text-xl font-semibold mr-4 md:mt-2 md:ml-52 underline mt-2'>Order Summary <i className="fas fa-box" style={{ color: "red" }}></i></div>
                 {Array.isArray(data) && data.map((obj) => {
                     return (
-                        <CheckOutCard
+                        <CheckOutCardCart
                             key={obj.product.id}
                             displayImage={obj.product.displayImage}
                             price={obj.product.price}

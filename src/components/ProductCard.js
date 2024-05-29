@@ -3,12 +3,17 @@ import { useData } from "../Providers/AllcategoryData";
 import { NavLink } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+//this component simply recives the data through props and make a card out of it.
 const ProductCard = ({ brand, category, displayImage, price, rating, name, id, description, features, sellerTag, subCategory, videos }) => {
+
+    //work of getToken is to add data to wishlist if , user is loggedin he can add product to wishlist
     const { getToken } = useData();
     const navigate = useNavigate();
     const [fav, setFav] = useState(false);
+
+    //this function is called whenever we click on card, it lead us to product detail page , it sends the reqiured data to it.
     const onClickHandler = () => {
         navigate("/productDetail", {
             state: {
@@ -21,17 +26,18 @@ const ProductCard = ({ brand, category, displayImage, price, rating, name, id, d
 
 
     }
+    //when we click on heart axios patch request is made and product is added to wishlist
     const wishHandler = async () => {
         try {
 
             const response = await axios.patch(
                 "https://academics.newtonschool.co/api/v1/ecommerce/wishlist",
                 {
-                    productId: id // Assuming 'id' is defined and holds the product ID
+                    productId: id
                 },
                 {
                     headers: {
-                        Authorization: `Bearer ${getToken}`, // Pass the token
+                        Authorization: `Bearer ${getToken}`,
                         projectId: "5m649p45bw1w"
                     }
                 }
@@ -52,6 +58,10 @@ const ProductCard = ({ brand, category, displayImage, price, rating, name, id, d
             <div className="mt-3 ml-1 rounded-xl">
 
                 <div className='w-full flex justify-end pr-4 pt-4'>
+
+                    {/* if fav state is false then show blank-heart but when we click on heart fav state become true , then show red heart  */}
+
+
                     {getToken && !fav && <button onClick={wishHandler}><i class="fa-regular fa-heart"></i></button>}
                     {getToken && fav && <button onClick={wishHandler}><i style={{ color: 'red' }} class="fa-solid fa-heart"></i></button>}
                 </div>
@@ -77,7 +87,7 @@ const ProductCard = ({ brand, category, displayImage, price, rating, name, id, d
                     </div>
                 </button>
 
-                <ToastContainer />
+
             </div>
         </>
 

@@ -11,9 +11,11 @@ const MyCart = () => {
     const [data, setData] = useState([]);
     const [totalQty, setTotalQty] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
+    const [itemqty, setItemqty] = useState(1);
 
     const navigate = useNavigate();
-    const [delivery, setDelivery] = useState("");
+
+    //this function is called every time we come to myCart page 
     useEffect(() => {
         fetchCart();
     }, [])
@@ -48,7 +50,7 @@ const MyCart = () => {
     }
 
 
-
+    //this function make get request to API to fetch data which are added to cart by user
     const fetchCart = async () => {
         try {
             const response = await axios.get("https://academics.newtonschool.co/api/v1/ecommerce/cart", {
@@ -60,15 +62,18 @@ const MyCart = () => {
             console.log("All Data...", response.data);
 
 
-            console.log("No of Data", response.data.results);//incluing all products with their respective qty total is this
+            //console.log("No of Data", response.data.results);//incluing all products with their respective qty total is this
             ////////////////////////
-            setTotalQty(response.data.data.items.length)
-            console.log("items length", response.data.data.items.length);
+            //setTotalQty(response.data.data.items.length)
+            //console.log("items length", response.data.data.items.length);
             totalCartItemsHandler(response.data.data.items.length)
             ///////////////////////////////
 
-            console.log("Total Price", response.data.data.totalPrice);
+            // console.log("Total Price", response.data.data.totalPrice);
             setTotalPrice(response.data.data.totalPrice)
+
+            console.log("itemQty", response.data.data.items[0].quantity);
+
 
             console.log("Items length", response.data.data.items.length);
             setData(response.data.data.items);
@@ -82,6 +87,7 @@ const MyCart = () => {
         }
 
     }
+    //when we click on checkout ,all items present in cart are stored in data array and are sent to checkout page along with total price of all products
     const checkout = () => {
         navigate("/checkoutpage", {
             state: {
@@ -92,14 +98,8 @@ const MyCart = () => {
             data, totalPrice
         });
     }
-    const deliveryCharges = () => {
-        if (totalPrice > 500) {
-            setDelivery("0");
-        }
-        else {
-            setDelivery("100")
-        }
-    }
+    //these all products are being mapped using MyCartCard component , we send data through props and along with that we also send onUpdate and onDelte function so that if user delete some item in cart , fetchCart function is called and updated items are mapped inside myCart page
+
     return (<div className='flex flex-col md:flex-row justify-between mx-4 mb-6'>
 
         <div className='w-full md:w-3/5 md:mr-16 mb-2 md:mb-0'>

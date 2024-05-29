@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import CheckOutCard from '../components/CheckOutCard';
+import { toast } from 'react-toastify';
 const BuynowCheckoutPage = () => {
     const navigate = useNavigate();
+    //recive data from product detail page.
     const location = useLocation();
     const { displayImage, name, price, ratings, sellerTag } = location.state;
+    const [qty, setQty] = useState(1);
+    const [totalPrice, setTotalPrice] = useState(price);
 
+    //object state is made to handle form data
     const [getData, setData] = useState({
         pincode: "",
         firstname: "",
@@ -21,48 +26,53 @@ const BuynowCheckoutPage = () => {
     const { pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline } = getData;
     console.log(pincode);
     const [error, setError] = useState("");
+
+    //Function to handle change in form and setting values to getdata state
     const onChangeHandler = (event) => {
         setData({ ...getData, [event.target.name]: event.target.value })
     }
+
+    //On submission of form this function first checks if , all fields are being filled properly ,then we are lead to product Buynowpaymet page
     const onSubmitHandler = (e) => {
         e.preventDefault();
 
         if (!getData.pincode) {
-            setError("PIN code is mandatory")
+            //setError("PIN code is mandatory")
+            toast.error("PIN code is mandatory")
         }
         else if (!getData.firstname) {
-            setError("First-name is mandatory")
+            toast.error("First-name is mandatory")
         }
         else if (!getData.lastname) {
-            setError("Last-name is mandatory")
+            toast.error("Last-name is mandatory")
         }
         else if (!getData.houseNo) {
-            setError("Please enter house No.")
+            toast.error("Please enter house No.")
         }
         else if (!getData.colony) {
-            setError("Please enter colony")
+            toast.error("Please enter colony")
         }
         else if (!getData.landmark) {
-            setError("Landmark is mandatory")
+            toast.error("Landmark is mandatory")
         }
         else if (!getData.city) {
-            setError("Enter your city")
+            toast.error("Enter your city")
         }
         else if (!getData.state) {
-            setError("Enter your state")
+            toast.error("Enter your state")
         }
         else if (!getData.mobile) {
-            setError("Enter Your Mobile Number")
+            toast.error("Enter Your Mobile Number")
         }
         else if (getData.mobile && getData.mobile.length < 10) {
-            setError("Please Enter a Valid Mobile Number")
+            toast.error("Please Enter a Valid Mobile Number")
         }
 
         else {
             console.log(getData);
             navigate("/buynowpayment", {
                 state: {
-                    displayImage, name, price, ratings, sellerTag, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline
+                    displayImage, name, totalPrice, ratings, sellerTag, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline
                 }
             })
             console.log({
@@ -71,7 +81,9 @@ const BuynowCheckoutPage = () => {
             });
         }
     }
-
+    const qtyhandler = (e) => {
+        setQty(e.target.value)
+    }
 
     return (
         <>
@@ -82,12 +94,22 @@ const BuynowCheckoutPage = () => {
             <div className='flex flex-col md:flex-row gap-x-4'>
                 <div className='mt-5 md:ml-2'>
                     <div className='text-xl mt-4 font-semibold mr-4  md:ml-52 underline ml-2 md:mr-40 '>Order Summary <i className="fa-solid fa-box" style={{ color: "red" }}></i></div>
+                    {/* 1. totalPrice is the state whose initial value is price
+                   2. we send it to CheckOutCard
+                   3. we also have price variable which we have recived from product detail page
+                   4. totalPrice will be equal to price (totalPrice==price) if qty is 1
+                   5. we are going to update totalPrice and qty in checkout card so we also sent functions to update it  through props 
+                   6. totalPrice will be updated on change of qty (price * qty == totalPrice ) we used useEffect for this */}
                     <CheckOutCard
                         displayImage={displayImage}
+                        totalPrice={totalPrice}
                         price={price}
+                        setTotalPrice={setTotalPrice}
                         rating={ratings}
                         name={name}
-                        quantity={1}
+                        qtyhandler={qtyhandler}
+                        qty={qty}
+
                     />
 
 

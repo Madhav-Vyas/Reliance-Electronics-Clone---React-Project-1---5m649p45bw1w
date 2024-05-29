@@ -60,7 +60,7 @@ const Home = () => {
 
     }, [])
 
-
+    //sets the products which are going tobe shown in Deal Of The Day secton
     const onProductHandler = async () => {
         try {
             const response = await axios.get("https://academics.newtonschool.co/api/v1/ecommerce/electronics/products", {
@@ -76,6 +76,7 @@ const Home = () => {
 
     }
 
+    //sets the product which are to be shown in lowest price today sction
     const onLowestHandler = async () => {
         try {
             const response = await axios.get("https://academics.newtonschool.co/api/v1/ecommerce/electronics/products", {
@@ -95,6 +96,9 @@ const Home = () => {
         console.log(lowest, "lowest data........................");
 
     }
+
+
+    // -----------------------------carousal logic-------------------------------
     const settings = {
         dots: false,
         infinite: true,
@@ -124,6 +128,7 @@ const Home = () => {
         );
     }
 
+    //context of this external library called "react-slick" automatically pass some props to its child comoponent
     function SamplePrevArrow(props) {
         const { className, style, onClick } = props;
         return (
@@ -135,7 +140,7 @@ const Home = () => {
         );
     }
 
-
+    // --------------------------------------------------------------------------------------------------
 
     return (<>
         <Subnavbar />
@@ -183,7 +188,6 @@ const Home = () => {
             </div>
             {/* --------------------------------Lowest price of the day----------------------------------------------------------------------------- */}
             <>
-
 
                 <div className="bg-white my-1 w-full">
                     <div className="text-lg font-semibold pt-6 px-4">Lowest Price Of Today </div>
@@ -260,7 +264,7 @@ const Home = () => {
                 </div>
             </>
 
-            {/* -----------------------------------search by catagories----------------------------------------------------------- */}
+            {/* -------------All catagories folder components along with some banners in between--------------------- */}
             <>
 
                 <Mobile />

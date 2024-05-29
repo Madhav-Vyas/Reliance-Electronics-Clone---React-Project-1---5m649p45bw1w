@@ -2,15 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import "../Providers/QR.jpg"
 import { useData } from '../Providers/AllcategoryData';
+import { toast } from 'react-toastify';
 
 const BuynowPaymentPage = () => {
     const navigate = useNavigate();
+
+    //order history is array which contains all orders which are placed tillnow , order history handler adds the order when a new order is placed
     const { orderHistory, orderHistoryHandler } = useData();
     const [cod, setCod] = useState();
     const location = useLocation();
 
-    const { displayImage, name, price, ratings, sellerTag, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline } = location.state;
-    const orderData = { displayImage, name, price, ratings, sellerTag };
+    const { displayImage, name, totalPrice, ratings, sellerTag, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline } = location.state;
+    const orderData = { displayImage, name, totalPrice, ratings, sellerTag };
     const onPlacedHandler = () => {
         orderHistoryHandler(orderData);
         console.log(orderHistory);
@@ -23,6 +26,8 @@ const BuynowPaymentPage = () => {
     const [text, setText] = useState(false);
     const [getForm, setForm] = useState(false);
     const [error, setError] = useState("")
+
+
     // Function to handle dropdown change
     const handlePaymentChange = (event) => {
         setSelectedPayment(event.target.value);
@@ -37,10 +42,12 @@ const BuynowPaymentPage = () => {
     const onEdit = () => {
         navigate("/chekoutpageb")
     }
-
+    //payment function is called every time we change mode of payment 
     useEffect(() => {
         payment()
     }, [selectedPayment])
+
+
     const payment = () => {
         if (selectedPayment === "paytm" || selectedPayment === "Google-pay") {
             setQr(true);
@@ -78,46 +85,55 @@ const BuynowPaymentPage = () => {
         setText(true);
         setForm(false)
     }
-
+    //states for handleing credit card form details
     const [cardNumber, setCardNumber] = useState(null);
     const [cardHolder, setCardHolder] = useState(null);
     const [expiryDate, setExpiryDate] = useState(null);
     const [cvv, setCvv] = useState(null);
 
-
+    //this function is called when we submit credit card form 
     const handleSubmit = (event) => {
-        onPlacedHandler();
         event.preventDefault();
+        onPlacedHandler();
 
-        if (!cardNumber || !cardHolder || !expiryDate || !cvv) {
-            setError("* Fill all the Fields")
-        }
-        else if (cardNumber.length < 16 || cardNumber.length > 16) {
-            setError("Enter a Valid Card Number");
-        }
-        else if (expiryDate.length < 4 || expiryDate.length > 4) {
-            setError("Please Check and Re-enter Valid  Expiry Date ")
-        }
-        else if (cvv.length < 3 || cvv.length > 3) {
-            setError("Enter Valid CVV");
-        }
+        const trimmedCardNumber = cardNumber.trim();
+        const trimmedCardHolder = cardHolder.trim();
+        const trimmedExpiryDate = expiryDate.trim();
+        const trimmedCvv = cvv.trim();
 
-        else {
+        if (!trimmedCardNumber || !trimmedCardHolder || !trimmedExpiryDate || !trimmedCvv) {
+            toast.error("* Fill all the Fields");
+        }
+        else if (trimmedCardNumber.length !== 16) {
+            toast.error("Enter a Valid Card Number");
+        }
+        else if (trimmedExpiryDate.length !== 4) {
+            toast.error("Please Check and Re-enter Valid Expiry Date");
+        }
+        else if (trimmedCvv.length !== 3) {
+            toast.error("Enter Valid CVV");
+        } else {
             console.log("Form submitted!");
             setForm(false)
             setText(true);
+            toast.success("Order Placed , Paymet sucessful")
             navigate("/ordersuccessB", {
                 state: {
-                    price, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline
+                    totalPrice, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline
                 }
             })
         }
-    };
+    }
+
+
+
+    //this function is called when we choose COD as a payment option.
     const successhandler = () => {
         onPlacedHandler();
+        toast.success("Order Placed, Pay on Delivery")
         navigate("/ordersuccessB", {
             state: {
-                price, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline
+                totalPrice, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline
             }
         })
     }
@@ -143,7 +159,7 @@ const BuynowPaymentPage = () => {
 
             <div className="max-w-lg ml-6 mr-6 mt-12 mb-40">
                 <div className="mb-4">
-                    <div className='text-2xl'>Order Total : &#8377;{price}</div>
+                    <div className='text-2xl'>Order Total : &#8377;{totalPrice}</div>
                 </div>
                 <div className="mb-4">
                     <p className="font-semibold mb-2">Select Payment Method:</p>
@@ -198,8 +214,8 @@ const BuynowPaymentPage = () => {
                                 onChange={(e) => setCardNumber(e.target.value)}
                                 placeholder="Enter card number"
                                 className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                minLength={16}  // Minimum 16-digit card number
-                                maxLength={16}  // Maximum 16-digit card number
+                            // minLength={16}  // Minimum 16-digit card number
+                            // maxLength={16}  // Maximum 16-digit card number
                             />
                         </div>
 
@@ -223,10 +239,10 @@ const BuynowPaymentPage = () => {
                                     id="expiryDate"
                                     value={expiryDate}
                                     onChange={(e) => setExpiryDate(e.target.value)}
-                                    placeholder="MM/YY"
+                                    placeholder="MMYY"
                                     className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    minLength={4}  // Minimum length of 4 characters
-                                    maxLength={4}  // Maximum length of 4 characters
+                                // minLength={4}  // Minimum length of 4 characters
+                                // maxLength={4}  // Maximum length of 4 characters
                                 />
                             </div>
                             <div className="mb-4">
@@ -238,8 +254,8 @@ const BuynowPaymentPage = () => {
                                     onChange={(e) => setCvv(e.target.value)}
                                     placeholder="CVV"
                                     className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    minLength={4}  // Minimum 3-digit CVV
-                                    maxlength={4}  // Maximum 3-digit CVV
+                                // minLength={3}  // Minimum 3-digit CVV
+                                // maxlength={3}  // Maximum 3-digit CVV
                                 />
                             </div>
                         </div>

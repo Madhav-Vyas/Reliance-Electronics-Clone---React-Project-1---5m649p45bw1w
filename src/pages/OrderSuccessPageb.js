@@ -8,7 +8,7 @@ const OrderSuccessPageb = () => {
     }
     const location = useLocation();
 
-    const { price, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline } = location.state;
+    const { totalPrice, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline } = location.state;
     const navigate = useNavigate();
     return (
         <>
@@ -44,7 +44,7 @@ const OrderSuccessPageb = () => {
                         <div className='mt-2'>
                             <div className='flex justify-between'>
                                 <p className='font-semibold'>Sub-total: </p>
-                                <p>{price}</p>
+                                <p>{totalPrice}</p>
                             </div>
                         </div>
                         <div className='mt-2'>
@@ -54,7 +54,7 @@ const OrderSuccessPageb = () => {
                             </div>
                             <div className='mt-4 border-t-2 flex justify-between'>
                                 <p className='text-sm'>Total </p>
-                                <p className="">{price}</p>
+                                <p className="">{totalPrice}</p>
                             </div>
                         </div>
                     </div>

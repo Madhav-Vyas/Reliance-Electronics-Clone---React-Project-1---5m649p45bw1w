@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import parse from 'html-react-parser';
 import { useData } from "../Providers/AllcategoryData";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 const unescapeHTML = str => {
     if (str) {
         return str.replace(
@@ -31,11 +32,14 @@ const productDetailpage2 = () => {
 
     const [reviews, setReviews] = useState([]);
     const location = useLocation();
+    //this id come when we click on product card , many details are sent but here we use only id
     const { id } = location.state;
 
+    //this is state ,in which all detailed information is being stored.
     const [user, setUser] = useState([]);
     const [getCart, setCart] = useState(false);
 
+    //a button is made to see data more or less that thing is handled by these 2 states  ->seemore,custRev
     const [seeMore, setSeeMore] = useState(false);
     const descriptionHandler = () => {
         setSeeMore(!seeMore);
@@ -45,7 +49,11 @@ const productDetailpage2 = () => {
         setCustRev(!custRev)
     }
 
+    const [qty, setQty] = useState(1);
+    //the data set in user variable , is being destructred here and used to display data.
     const { brand, category, createdAt, description, displayImage, features, images, name, price, ratings, sellerTag, subCategory, videos, _id } = user;
+
+    //these 2 functions are called every time when we are lead to this page
     useEffect(() => {
         fetchProductDetails();
         fetchProductReviews();
@@ -55,44 +63,7 @@ const productDetailpage2 = () => {
         navigate("/register");
     }
 
-    const fetchCart = async () => {
-        try {
-            const response = await axios.get("https://academics.newtonschool.co/api/v1/ecommerce/cart", {
-                headers: {
-                    projectId: "5m649p45bw1w",
-                    Authorization: `Bearer ${getToken}`,
-                }
-            })
-            totalCartItemsHandler(response.data.data.items.length)///////////////////////////////
-        }
-        catch (err) {
-            alert("someError occured");
-        }
-
-    }
-
-    // Example usage
-    const addToCart = async () => {
-        try {
-
-            await axios.patch(`https://academics.newtonschool.co/api/v1/ecommerce/cart/${id}`, {
-                quantity: 1 // Assuming you want to add 1 quantity of the product
-            }, {
-                headers: {
-                    Authorization: `Bearer ${getToken}`,
-                    projectId: "5m649p45bw1w"
-                }
-            });
-            alert("Product added to cart successfully!");
-            fetchCart();
-
-        } catch (error) {
-            console.error("Error adding product to cart:", error);
-            alert("Failed to add product to cart. Please try again later.");
-        }
-    }
-
-
+    //The id which come from product card click is used here in API to fetch detailed data of product
     const fetchProductDetails = async () => {
         try {
             const response = await axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/product/${id}`, {
@@ -101,6 +72,7 @@ const productDetailpage2 = () => {
                 }
             })
             console.log(response.data.data);
+            //this is state ,in which all detailed information is being stored.
             setUser(response.data.data);
 
         }
@@ -109,7 +81,7 @@ const productDetailpage2 = () => {
         }
 
     }
-
+    //The id which come from product card click is used here in API to fetch customer reviews of product
     const fetchProductReviews = async () => {
         try {
             const response = await axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/review/${id}`, {
@@ -124,6 +96,50 @@ const productDetailpage2 = () => {
 
         }
     }
+
+    const fetchCart = async () => {
+        try {
+            const response = await axios.get("https://academics.newtonschool.co/api/v1/ecommerce/cart", {
+                headers: {
+                    projectId: "5m649p45bw1w",
+                    Authorization: `Bearer ${getToken}`,
+                }
+            })
+            totalCartItemsHandler(response.data.data.items.length)
+            console.log(response.data.data.items.length);
+        }
+        catch (err) {
+            alert("someError occured");
+        }
+
+    }
+
+    //when we click on addToCart button a patch request is made and product will be added to cart 
+    const addToCart = async () => {
+        try {
+
+            const response = await axios.patch(`https://academics.newtonschool.co/api/v1/ecommerce/cart/${id}`, {
+                quantity: qty // Assuming you want to add 1 quantity of the product
+            }, {
+                headers: {
+                    Authorization: `Bearer ${getToken}`,
+                    projectId: "5m649p45bw1w"
+                }
+            });
+            console.log(response);
+            console.log(response.data.data.items[0].quantity);
+            toast.success("Product added to cart successfully!");
+            //this function is called every time we add product to cart to update length of arry which contains all cart products
+            fetchCart();
+
+        } catch (error) {
+            console.error("Error adding product to cart:", error);
+            toast.alert("Failed to add product to cart. Please try again later.");
+        }
+    }
+
+
+    //when we click on buy now these data is being transfered to BuyNowcheckoutpage, along with this data
     const buyNowHandler = () => {
         navigate("/checkoutpageb", {
             state: {

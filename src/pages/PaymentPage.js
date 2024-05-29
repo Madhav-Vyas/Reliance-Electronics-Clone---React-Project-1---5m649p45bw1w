@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useData } from '../Providers/AllcategoryData';
+import { toast } from 'react-toastify';
 const PaymentPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { cartOrders, cartOrderHistoryHandler, orderHistory, orderHistoryHandler } = useData();
+
+    //cartOrders is a variable which contains all the orders which are placed and we map this variable on orederHistory page and cartOrderHistoryHandler is a function which adds new orders on list of past orders placed
+    const { cartOrders, cartOrderHistoryHandler } = useData();
+
+    //this is data recived from checkoutpage
     const { data, totalPrice, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline } = location.state;
     console.log(data);
     // State to store selected payment method
@@ -29,10 +34,12 @@ const PaymentPage = () => {
         navigate("/chekoutpageb")
     }
 
+    //when we change mode of payment this function is called
     useEffect(() => {
         payment()
     }, [selectedPayment])
 
+    //this function adds the new cart orders to the cartOrders Array
     const onPlacedHandler = () => {
         cartOrderHistoryHandler(data);
     }
@@ -79,27 +86,28 @@ const PaymentPage = () => {
     const [expiryDate, setExpiryDate] = useState('');
     const [cvv, setCvv] = useState('');
 
-
+    //this function is called when payment method is credit-card along with onPlaceHandler function is called to add new orders
     const handleSubmit = (event) => {
         event.preventDefault();
         onPlacedHandler();
 
         if (!cardNumber || !cardHolder || !expiryDate || !cvv) {
-            setError("* Fill all the Fields")
+            toast.error("* Fill all the Fields")
         }
         else if (cardNumber.length < 16 || cardNumber.length > 16) {
-            setError("Enter a Valid Card Number");
+            toast.error("Enter a Valid Card Number");
         }
         else if (expiryDate.length < 4 || expiryDate.length > 4) {
-            setError("Please Check and Re-enter Valid  Expiry Date ")
+            toast.error("Please Check and Re-enter Valid  Expiry Date ")
         }
         else if (cvv.length < 3 || cvv.length > 3) {
-            setError("Enter Valid CVV");
+            toast.error("Enter Valid CVV");
         }
         else {
             console.log("Form submitted!");
             setForm(false)
             setText(true);
+            toast.success("Order Placed Successfully")
             navigate("/ordersuccess", {
                 state: {
                     totalPrice, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline
@@ -107,6 +115,7 @@ const PaymentPage = () => {
             })
         }
     };
+    //this function is called when payment method is COD along with onPlaceHandler function is called to add new orders
     const successhandler = () => {
         onPlacedHandler();
         navigate("/ordersuccess", {
@@ -186,7 +195,7 @@ const PaymentPage = () => {
                         <div className="grid grid-cols-2 gap-4">
                             <div className="mb-4">
                                 <label htmlFor="expiryDate" className="block text-gray-700 font-bold mb-2">Expiry Date</label>
-                                <input type="text" id="expiryDate" value={expiryDate} onChange={(e) => setExpiryDate(e.target.value)} placeholder="MM/YY" className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                                <input type="text" id="expiryDate" value={expiryDate} onChange={(e) => setExpiryDate(e.target.value)} placeholder="MMYY" className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                             </div>
                             <div className="mb-4">
                                 <label htmlFor="cvv" className="block text-gray-700 font-bold mb-2">CVV</label>
