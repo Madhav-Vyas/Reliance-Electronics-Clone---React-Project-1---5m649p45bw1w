@@ -14,7 +14,9 @@ function TopNavbar() {
     const [logoutMob, setLogoutMob] = useState(false);
     const navigate = useNavigate();
 
-
+    const closeModal = () => {
+        setLogout(false);
+    }
 
     ///------------------------------------Logic of closing box when cliked outside----------
 
@@ -80,6 +82,9 @@ function TopNavbar() {
     //     }
     // };
 
+    useEffect(() => {
+        document.addEventListener("scroll", closeModal)
+    })
     const navigateToHome = () => {
         navigate("/");
     };
