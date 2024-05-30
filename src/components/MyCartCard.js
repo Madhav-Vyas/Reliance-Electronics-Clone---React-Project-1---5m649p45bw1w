@@ -54,19 +54,22 @@ const MyCartCard = ({ brand, category, displayImage, price, rating, id, name, qu
     const minusHandler = () => {
         if (qty == 1) {
             onItemDeleteHandler()
+
             onDelete();
         }
-        if (qty > 0) {
+        else if (qty > 0) {
+            console.log("qty in minus handler", qty);
             setQty(qty - 1);
-            addToCart();
+            //
+            addToCart(-1);
         }
     }
 
-    const addToCart = async () => {
+    const addToCart = async (value = 1) => {
         try {
-
+            console.log("Quantity is", qty);
             await axios.patch(`https://academics.newtonschool.co/api/v1/ecommerce/cart/${id}`, {
-                quantity: qty
+                quantity: value
             }, {
                 headers: {
                     Authorization: `Bearer ${getToken}`,

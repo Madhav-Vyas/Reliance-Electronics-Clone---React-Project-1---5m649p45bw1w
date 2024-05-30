@@ -69,10 +69,11 @@ const MyCart = () => {
             totalCartItemsHandler(response.data.data.items.length)
             ///////////////////////////////
 
-            // console.log("Total Price", response.data.data.totalPrice);
+            console.log("Total Price", response.data.data.totalPrice);
+
             setTotalPrice(response.data.data.totalPrice)
 
-            console.log("itemQty", response.data.data.items[0].quantity);
+            //console.log("itemQty", response.data.data.items[0].quantity);
 
 
             console.log("Items length", response.data.data.items.length);
@@ -83,6 +84,7 @@ const MyCart = () => {
 
         }
         catch (err) {
+            console.log(err);
             alert("someError occured");
         }
 

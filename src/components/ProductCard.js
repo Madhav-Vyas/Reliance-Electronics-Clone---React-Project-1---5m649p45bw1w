@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 //this component simply recives the data through props and make a card out of it.
 const ProductCard = ({ brand, category, displayImage, price, rating, name, id, description, features, sellerTag, subCategory, videos }) => {
@@ -44,7 +45,7 @@ const ProductCard = ({ brand, category, displayImage, price, rating, name, id, d
             );
             console.log(response);
             setFav(true);
-            alert("Product is added to wishlist")
+            toast.success("Product is added to wishlist")
 
         } catch (err) {
             console.log(err);

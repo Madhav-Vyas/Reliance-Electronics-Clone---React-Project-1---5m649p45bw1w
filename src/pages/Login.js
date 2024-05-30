@@ -53,7 +53,7 @@ const Login = () => {
             navigate('/');
         }).catch((error) => {
             console.log(error);
-            setError("Internal server error");
+            toast.error("Id or Password is wrong try Again");
 
         });
     }
