@@ -24,6 +24,12 @@ export const DataProvider = ({ children }) => {
     const [orderHistory, setOrderHistory] = useState([]);
     const [cartOrders, setCartOrders] = useState([]);
 
+    const [buyNowTotalPriceAfterQty, setBuyNowTotalpriceAfterQty] = useState(0);
+
+    const buyQtySetter = (data) => {
+        setBuyNowTotalpriceAfterQty(data);
+    }
+
     const totalCartItemsHandler = (data) => {
         setTotalCartItems(data);
     }
@@ -150,7 +156,10 @@ export const DataProvider = ({ children }) => {
         searchTermHandler,
 
         totalCartItems,
-        totalCartItemsHandler
+        totalCartItemsHandler,
+
+        buyNowTotalPriceAfterQty,
+        buyQtySetter
 
     };
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { useData } from '../Providers/AllcategoryData';
 import CheckOutCard from '../components/CheckOutCard';
 import CheckOutCardCart from '../components/CheckOutCardCart';
+import OrderHistoryCard from '../components/OrderHistoryCard';
 const OrderHistoryPage = () => {
     //orderHistory is variable which comes from context API in this all orders which are placed directly without adding to cart is stored in form of array
 
@@ -12,6 +13,7 @@ const OrderHistoryPage = () => {
     //CheckoutCard component is used to map data in form of card
     const { orderHistory, cartOrders } = useData();
     console.log(cartOrders.flat());
+    console.log(orderHistory);
 
     const allcartOrders = cartOrders.flat();
 
@@ -20,9 +22,9 @@ const OrderHistoryPage = () => {
             <div className='w-full text-center md:text-xl mt-4 underline text-semibold flex flex-row justify-center'><h2 className=''>My Order History </h2><i className="fa-solid fa-boxes-stacked mt-2 ml-2"></i></div>
             {orderHistory.map((order, index) => (
 
-                <CheckOutCard
+                <OrderHistoryCard
                     displayImage={order.displayImage}
-                    price={order.price}
+                    price={order.totalPrice}
                     rating={order.ratings}
                     name={order.name}
 

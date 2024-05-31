@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import CheckOutCard from '../components/CheckOutCard';
 import { toast } from 'react-toastify';
+import { useData } from '../Providers/AllcategoryData';
 const BuynowCheckoutPage = () => {
     const navigate = useNavigate();
     //recive data from product detail page.
@@ -10,6 +11,10 @@ const BuynowCheckoutPage = () => {
     const [qty, setQty] = useState(1);
     const [totalPrice, setTotalPrice] = useState(price);
 
+
+    // const totalPriceSetter = (value) => {
+    //     setTotalPrice(value);
+    // }
     //object state is made to handle form data
     const [getData, setData] = useState({
         pincode: "",
@@ -23,6 +28,9 @@ const BuynowCheckoutPage = () => {
         mobile: "",
         landline: ""
     });
+    const { buyNowTotalPriceAfterQty } = useData();
+
+
     const { pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline } = getData;
     console.log(pincode);
     const [error, setError] = useState("");
@@ -72,7 +80,7 @@ const BuynowCheckoutPage = () => {
             console.log(getData);
             navigate("/buynowpayment", {
                 state: {
-                    displayImage, name, totalPrice, ratings, sellerTag, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline
+                    displayImage, name, totalPrice, ratings, sellerTag, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline,buyNowTotalPriceAfterQty
                 }
             })
             console.log({
@@ -83,6 +91,7 @@ const BuynowCheckoutPage = () => {
     }
     const qtyhandler = (e) => {
         setQty(e.target.value)
+        setTotalPrice(qty * price)
     }
 
     return (
@@ -102,15 +111,36 @@ const BuynowCheckoutPage = () => {
                    6. totalPrice will be updated on change of qty (price * qty == totalPrice ) we used useEffect for this */}
                     <CheckOutCard
                         displayImage={displayImage}
-                        totalPrice={totalPrice}
+                        // totalPriceSetter={totalPriceSetter}
                         price={price}
-                        setTotalPrice={setTotalPrice}
+                        totalPrice={totalPrice}
+                        //setTotalPrice={setTotalPrice}
                         rating={ratings}
                         name={name}
                         qtyhandler={qtyhandler}
                         qty={qty}
 
                     />
+
+                    {/* ------------------------COPY OF CHECKOUT CARD ONLY----------------------- */}
+
+                    {/* 
+                    <button></button>
+                    <div className="border border-gray-200 rounded-lg p-4 mb-1 relative flex justify-start w-4/5 ">
+                        <div className="flex flex-wrap items-center mb-2">
+                            <img src={displayImage} alt={name} className="w-32 h-32 object-cover mr-4" />
+                            <div>
+                                <p className="text-xs md:text-sm font-semibold">{name}</p>
+                                <div className='flex gap-2'>
+                                    <p className="text-gray-500 text-xs">Quantity:</p>
+                                    <input className='w-10' type='number' onChange={qtyhandler} min={1} />
+                                </div>
+                            </div>
+                        </div>
+                        <p className="text-sm md:text-lg text-right absolute top-2 right-5 md:top-4 md:right-6 text-red-500 font-semibold">&#8377;{qty * price}</p>
+                    </div> */}
+
+
 
 
                 </div>

@@ -5,6 +5,9 @@ import parse from 'html-react-parser';
 import { useData } from "../Providers/AllcategoryData";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 const unescapeHTML = str => {
     if (str) {
         return str.replace(
@@ -52,7 +55,7 @@ const productDetailpage2 = () => {
     const [qty, setQty] = useState(1);
     //the data set in user variable , is being destructred here and used to display data.
     const { brand, category, createdAt, description, displayImage, features, images, name, price, ratings, sellerTag, subCategory, videos, _id } = user;
-
+    console.log(brand, displayImage);
     //these 2 functions are called every time when we are lead to this page
     useEffect(() => {
         fetchProductDetails();
@@ -151,6 +154,95 @@ const productDetailpage2 = () => {
 
 
 
+
+
+    //slides to show based on screen size ------------------------------------------------------
+    const [slidesToShow, setSlidesToShow] = useState(6);
+    useEffect(() => {
+        //if screen size is less than 768px then show only 2 slides otherwise 6 slides
+        const handleResize = () => {
+            // Adjust slidesToShow based on screen width
+            if (window.innerWidth < 768) {
+                setSlidesToShow(4);
+            } else {
+                setSlidesToShow(3);
+            }
+        };
+
+        // Initial call to set slidesToShow
+        handleResize();
+
+        // Listen to window resize event, when resize event happens means , when we change screen size then this function is trigreed
+        window.addEventListener('resize', handleResize);
+
+        // Clean up on component unmount
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    //----------------------------------------------
+
+
+
+
+
+
+
+    const settings = {
+        dots: false,
+        infinite: true,
+        speed: 300,
+        slidesToShow: slidesToShow,
+        slidesToScroll: 3,
+        nextArrow: <SampleNextArrow />,
+        prevArrow: <SamplePrevArrow />
+
+    };
+    function SampleNextArrow(props) {
+        const { className, style, onClick } = props;
+        return (
+            <div
+                className={className}
+                style={{ ...style, display: "block", background: "blue", opacity: 0.3 }}
+                onClick={onClick}
+            />
+        );
+    }
+
+    function SamplePrevArrow(props) {
+        const { className, style, onClick } = props;
+        return (
+            <div
+                className={className}
+                style={{ ...style, display: "block", background: "blue", opacity: 0.3 }}
+                onClick={onClick}
+            />
+        );
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    useEffect(() => {
+        setMainImage(displayImage)
+    }, [displayImage])
+    console.log(displayImage);
+    const [mainImage, setMainImage] = useState();
     return (
 
 
@@ -160,17 +252,22 @@ const productDetailpage2 = () => {
             </>
             <div className="global-container w-full flex flex-col md:flex-row mt-5">
                 <div className="left w-full md:w-[30%] h-full">
-                    <div className="container p-4 w-72 md:w-full">
-                        <img src={displayImage} alt="Product" className="mb-4"></img>
-                        <h2 className="text-4xl font-bold mb-4">Product Images</h2>
-                        <div className="grid grid-cols-3 gap-6">
-                            {images && images.length > 0 ? (
-                                images.map((image, index) => (
-                                    <img key={index} src={image} alt={`Product Image ${index}`} className="w-full" />
-                                ))
-                            ) : (
-                                <p className="text-xl">No Images Available</p>
-                            )}
+                    <div className="container p-4 w-full md:w-full">
+                        <img src={mainImage} alt="Product" className="mb-4"></img>
+                        {/* <h2 className="text-4xl font-bold mb-4">Product Images</h2> */}
+                        <div className="">
+                            <Slider {...settings}>
+                                {images && images.length > 0 ? (
+                                    images.map((image, index) => (
+
+                                        <img onClick={() => setMainImage(image)} key={index} src={image} alt={`Product Image ${index}`} className="w-full rounded-md" />
+
+
+                                    ))
+                                ) : (
+                                    <p className="text-xl">No Images Available</p>
+                                )}
+                            </Slider>
                         </div>
                         <div className="grid grid-cols-3 gap-6">
                             {videos && videos.length > 0 ? (
@@ -178,7 +275,7 @@ const productDetailpage2 = () => {
                                     return <video key={index} src={video} controls autoPlay muted loop className="w-full"></video>;
                                 })
                             ) : (
-                                <p className="text-xl">No Videos Available </p>
+                                <p className="text-xl mt-10">No Videos Available </p>
                             )}
                         </div>
                     </div>

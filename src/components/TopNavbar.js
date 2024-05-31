@@ -110,7 +110,7 @@ function TopNavbar() {
 
     return (<>
         {/* LINKS ON TOP---------------------------------------------------------------- */}
-        <div className="w-100% overflow-x-auto">
+        <div className="w-100% overflow-x-auto ">
             <div className="bg-red-600 text-white border-b border-gray-300 flex justify-between p-1 text-xs font-bold">
                 <div className="w-24 sm:w-auto flex items-center border-gray-300 pl-3">
                     <span>OUR BRAND PROMISE</span>
@@ -139,12 +139,12 @@ function TopNavbar() {
         {/* ----------------------------------------------------------------------End of links on top----------------------------------------------- */}
 
 
-        <div className="flex justify-between h-16 items-end w-full bg-red-600 sm:min-w-full p-2">
+        <div className="flex justify-between h-16 items-end md:w-full ipad:w-full w-full bg-red-600 sm:min-w-full p-2">
 
             {/* LOGO....................................................................... */}
-            <div className=" number-1 flex justify-end w-20 md:w-60 xl:w-60 lg:w-40 mr-10">
+            <div className=" number-1 flex justify-end w-20 md:w-60 xl:w-60  lg:w-40 md:mr-10">
                 <button onClick={navigateToHome}>
-                    <img className="w-20   md:w-32 lg:w-40 h-auto" src="https://www.reliancedigital.in/build/client/images/loaders/rd_logo.svg" alt="logo" />
+                    <img className="w-20  md:w-32 lg:w-40 h-auto" src="https://www.reliancedigital.in/build/client/images/loaders/rd_logo.svg" alt="logo" />
                 </button>
             </div>
 

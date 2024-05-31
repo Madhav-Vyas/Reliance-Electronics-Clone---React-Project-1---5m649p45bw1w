@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
+import { useData } from '../Providers/AllcategoryData'
+const CheckOutCard = ({ displayImage, totalPrice, price, rating, name, qtyhandler, qty, }) => {
 
-const CheckOutCard = ({ displayImage, totalPrice, price, rating, name, qtyhandler, qty, setTotalPrice }) => {
-
+    const { buyQtySetter, buyNowTotalPriceAfterQty } = useData();
     useEffect(() => {
-        setTotalPrice(price * qty)
+        buyQtySetter(price * qty);
     }, [qty])
     return (
         <>
@@ -19,7 +20,7 @@ const CheckOutCard = ({ displayImage, totalPrice, price, rating, name, qtyhandle
                         </div>
                     </div>
                 </div>
-                <p className="text-sm md:text-lg text-right absolute top-2 right-5 md:top-4 md:right-6 text-red-500 font-semibold">&#8377;{totalPrice}</p>
+                <p className="text-sm md:text-lg text-right absolute top-2 right-5 md:top-4 md:right-6 text-red-500 font-semibold">&#8377;{buyNowTotalPriceAfterQty}</p>
             </div>
 
 

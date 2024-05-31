@@ -12,7 +12,7 @@ const BuynowPaymentPage = () => {
     const [cod, setCod] = useState();
     const location = useLocation();
 
-    const { displayImage, name, totalPrice, ratings, sellerTag, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline } = location.state;
+    const { displayImage, name, totalPrice, ratings, sellerTag, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline, buyNowTotalPriceAfterQty } = location.state;
     const orderData = { displayImage, name, totalPrice, ratings, sellerTag };
     const onPlacedHandler = () => {
         orderHistoryHandler(orderData);
@@ -119,7 +119,7 @@ const BuynowPaymentPage = () => {
             toast.success("Order Placed , Paymet sucessful")
             navigate("/ordersuccessB", {
                 state: {
-                    totalPrice, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline
+                    buyNowTotalPriceAfterQty, totalPrice, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline
                 }
             })
         }
@@ -133,7 +133,7 @@ const BuynowPaymentPage = () => {
         toast.success("Order Placed, Pay on Delivery")
         navigate("/ordersuccessB", {
             state: {
-                totalPrice, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline
+                totalPrice, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline, buyNowTotalPriceAfterQty
             }
         })
     }
@@ -159,7 +159,7 @@ const BuynowPaymentPage = () => {
 
             <div className="max-w-lg ml-6 mr-6 mt-12 mb-40">
                 <div className="mb-4">
-                    <div className='text-2xl'>Order Total : &#8377;{totalPrice}</div>
+                    <div className='text-2xl'>Order Total : &#8377;{buyNowTotalPriceAfterQty}</div>
                 </div>
                 <div className="mb-4">
                     <p className="font-semibold mb-2">Select Payment Method:</p>

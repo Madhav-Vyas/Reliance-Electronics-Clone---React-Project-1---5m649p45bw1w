@@ -12,6 +12,7 @@ const MyCart = () => {
     const [totalQty, setTotalQty] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
     const [itemqty, setItemqty] = useState(1);
+    const [totalItemsInCart, setTotalItemsInCart] = useState(0);
 
     const navigate = useNavigate();
 
@@ -76,9 +77,12 @@ const MyCart = () => {
             //console.log("itemQty", response.data.data.items[0].quantity);
 
 
-            console.log("Items length", response.data.data.items.length);
+            //console.log("Items length", response.data.data.items.length);
+            console.log("Items in cart are -------------->", response.data.results);
+            setTotalItemsInCart(response.data.results)
+
             setData(response.data.data.items);
-            console.log(...data);
+            //console.log(...data);
 
 
 
@@ -106,7 +110,7 @@ const MyCart = () => {
 
         <div className='w-full md:w-3/5 md:mr-16 mb-2 md:mb-0'>
             <div className='w-full h-12 mt-6 bg-slate-100 shadow-lg rounded-md p-3 flex justify-between'>
-                <div>My Cart ({totalQty} items)</div>
+                <div>My Cart ({totalItemsInCart} Items) </div>
                 <div>Items Total : <span className='text-red-600'>{totalPrice}</span></div>
             </div>
 
@@ -137,7 +141,7 @@ const MyCart = () => {
                 </div>
                 <div className="px-4 py-2">
                     <div className='flex justify-between'>
-                        <p className="text-sm mt-2">Price ({totalQty} Items)</p>
+                        <p className="text-sm mt-2">Price ({totalItemsInCart} Items)</p>
                         <p>{totalPrice} </p>
                     </div>
                     {/* Assuming totalQty and totalPrice are variables holding the quantity and total price */}
