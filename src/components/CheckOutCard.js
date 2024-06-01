@@ -16,7 +16,7 @@ const CheckOutCard = ({ displayImage, totalPrice, price, rating, name, qtyhandle
                         <p className="text-xs md:text-sm font-semibold">{name}</p>
                         <div className='flex gap-2'>
                             <p className="text-gray-500 text-xs">Quantity:</p>
-                            <input className='w-10' type='number' onChange={qtyhandler} min={1} />
+                            <input className='w-10' type='number' onChange={qtyhandler} min={1} defaultValue={1} />
                         </div>
                     </div>
                 </div>
