@@ -255,7 +255,7 @@ const productDetailpage2 = () => {
                     <div className="container p-4 w-full md:w-full">
                         <img src={mainImage} alt="Product" className="mb-4"></img>
                         {/* <h2 className="text-4xl font-bold mb-4">Product Images</h2> */}
-                        <div className="">
+                        <div className=" px-6">
                             <Slider {...settings}>
                                 {images && images.length > 0 ? (
                                     images.map((image, index) => (
@@ -269,7 +269,9 @@ const productDetailpage2 = () => {
                                 )}
                             </Slider>
                         </div>
-                        <div className="grid grid-cols-3 gap-6">
+                        <div className='mt-8 text-sm'>Product videos</div>
+                        <div className="grid grid-cols-3 gap-6 mt-4">
+
                             {videos && videos.length > 0 ? (
                                 videos.map((video, index) => {
                                     return <video key={index} src={video} controls autoPlay muted loop className="w-full"></video>;
