@@ -91,6 +91,10 @@ const BuynowPaymentPage = () => {
     const [expiryDate, setExpiryDate] = useState(null);
     const [cvv, setCvv] = useState(null);
 
+
+    const validateDate = (input) => {
+
+    }
     //this function is called when we submit credit card form 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -98,16 +102,16 @@ const BuynowPaymentPage = () => {
 
         const trimmedCardNumber = cardNumber.trim();
         const trimmedCardHolder = cardHolder.trim();
-        const trimmedExpiryDate = expiryDate.trim();
+        //const trimmedExpiryDate = expiryDate.trim();
         const trimmedCvv = cvv.trim();
 
-        if (!trimmedCardNumber || !trimmedCardHolder || !trimmedExpiryDate || !trimmedCvv) {
+        if (!trimmedCardNumber || !trimmedCardHolder || !expiryDate || !trimmedCvv) {
             toast.error("* Fill all the Fields");
         }
         else if (trimmedCardNumber.length !== 16) {
             toast.error("Enter a Valid Card Number");
         }
-        else if (trimmedExpiryDate.length !== 4) {
+        else if (expiryDate < Date.now) {
             toast.error("Please Check and Re-enter Valid Expiry Date");
         }
         else if (trimmedCvv.length !== 3) {
@@ -235,10 +239,17 @@ const BuynowPaymentPage = () => {
                             <div className="mb-4">
                                 <label htmlFor="expiryDate" className="block text-gray-700 font-bold mb-2">Expiry Date</label>
                                 <input
-                                    type="text"
+                                    type="date"
                                     id="expiryDate"
                                     value={expiryDate}
-                                    onChange={(e) => setExpiryDate(e.target.value)}
+                                    onChange={
+                                        (e) => {
+                                            setExpiryDate(e.target.value)
+
+                                        }
+
+
+                                    }
                                     placeholder="MMYY"
                                     className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 // minLength={4}  // Minimum length of 4 characters
