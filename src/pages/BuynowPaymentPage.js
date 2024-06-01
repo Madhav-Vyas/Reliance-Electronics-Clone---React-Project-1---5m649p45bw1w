@@ -100,9 +100,15 @@ const BuynowPaymentPage = () => {
         event.preventDefault();
         onPlacedHandler();
 
+        var date = new Date(expiryDate);
+
+        // Get the timestamp (number of milliseconds since January 1, 1970)
+
+        var timestamp = date.getTime();
+
         const trimmedCardNumber = cardNumber.trim();
         const trimmedCardHolder = cardHolder.trim();
-        //const trimmedExpiryDate = expiryDate.trim();
+
         const trimmedCvv = cvv.trim();
 
         if (!trimmedCardNumber || !trimmedCardHolder || !expiryDate || !trimmedCvv) {
@@ -111,7 +117,9 @@ const BuynowPaymentPage = () => {
         else if (trimmedCardNumber.length !== 16) {
             toast.error("Enter a Valid Card Number");
         }
-        else if (expiryDate < Date.now) {
+        else if (timestamp < Date.now()) {
+            console.log("expiry", expiryDate);
+            console.log("now date", Date.now);
             toast.error("Please Check and Re-enter Valid Expiry Date");
         }
         else if (trimmedCvv.length !== 3) {

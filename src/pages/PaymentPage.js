@@ -86,6 +86,11 @@ const PaymentPage = () => {
     const [expiryDate, setExpiryDate] = useState('');
     const [cvv, setCvv] = useState('');
 
+    var date = new Date(expiryDate);
+
+    // Get the timestamp (number of milliseconds since January 1, 1970)
+
+    var timestamp = date.getTime();
     //this function is called when payment method is credit-card along with onPlaceHandler function is called to add new orders
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -97,7 +102,7 @@ const PaymentPage = () => {
         else if (cardNumber.length < 16 || cardNumber.length > 16) {
             toast.error("Enter a Valid Card Number");
         }
-        else if (expiryDate.length < 4 || expiryDate.length > 4) {
+        else if (timestamp < Date.now()) {
             toast.error("Please Check and Re-enter Valid  Expiry Date ")
         }
         else if (cvv.length < 3 || cvv.length > 3) {
@@ -195,7 +200,7 @@ const PaymentPage = () => {
                         <div className="grid grid-cols-2 gap-4">
                             <div className="mb-4">
                                 <label htmlFor="expiryDate" className="block text-gray-700 font-bold mb-2">Expiry Date</label>
-                                <input type="text" id="expiryDate" value={expiryDate} onChange={(e) => setExpiryDate(e.target.value)} placeholder="MMYY" className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                                <input type="date" id="expiryDate" value={expiryDate} onChange={(e) => setExpiryDate(e.target.value)} placeholder="MMYY" className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                             </div>
                             <div className="mb-4">
                                 <label htmlFor="cvv" className="block text-gray-700 font-bold mb-2">CVV</label>
