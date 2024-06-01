@@ -5,6 +5,7 @@ import ProductCard from '../../components/ProductCard';
 import { useData } from "../../Providers/AllcategoryData";
 import MyCartCard from '../../components/MyCartCard';
 import { useNavigate } from "react-router-dom"
+import { toast } from 'react-toastify';
 const MyCart = () => {
     const { getToken, totalCartItems,
         totalCartItemsHandler } = useData();
@@ -95,11 +96,17 @@ const MyCart = () => {
     }
     //when we click on checkout ,all items present in cart are stored in data array and are sent to checkout page along with total price of all products
     const checkout = () => {
-        navigate("/checkoutpage", {
-            state: {
-                data, totalPrice
-            }
-        })
+        if (totalCartItems < 1) {
+            toast.error("cart is empty")
+        }
+        else {
+            navigate("/checkoutpage", {
+                state: {
+                    data, totalPrice
+                }
+            })
+        }
+
         console.log({
             data, totalPrice
         });
