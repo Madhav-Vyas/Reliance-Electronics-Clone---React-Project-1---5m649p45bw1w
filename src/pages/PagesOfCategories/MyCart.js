@@ -97,7 +97,7 @@ const MyCart = () => {
     //when we click on checkout ,all items present in cart are stored in data array and are sent to checkout page along with total price of all products
     const checkout = () => {
         if (totalCartItems < 1) {
-            toast.error("cart is empty")
+            toast.error("OOPS, No Items in cart")
         }
         else {
             navigate("/checkoutpage", {
