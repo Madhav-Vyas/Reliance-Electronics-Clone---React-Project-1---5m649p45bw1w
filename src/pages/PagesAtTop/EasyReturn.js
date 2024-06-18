@@ -3,8 +3,8 @@ import React from 'react'
 const EasyReturn = () => {
     return (
         <div className="text-gray-800">
-            <h2 className="text-lg font-semibold mb-4 ml-6 mr-6 mt-6 underline text-slate-600">CANCELLATION AND RETURN POLICY</h2>
-            <div className="mb-6  ml-20 mr-20">
+            <h2 className="text-lg font-semibold mb-4 md:ml-6 md:mr-6 mt-6 underline text-slate-600">CANCELLATION AND RETURN POLICY</h2>
+            <div className="mb-6  md:ml-20 md:mr-20 mx-4">
                 <h3 className="text-md font-semibold mb-2 text-lg text-slate-600 mt-6">1.General</h3>
                 <ul className='list-disc text-sm'>
                     <li className='m-1'>Reliance Retail Limited, having its registered address at 3rd Floor, Court House, Lokmanya Tilak Marg, Dhobi Talao, Mumbai-400 002 (“Reliance”, “we”, “us” or “our”) is managing and operating the mobile application/website www.reliancedigital.in (collectively referred to as the “Reliance Digital Platform”) through which it inter alia facilitates the sale of mobiles, tablets, televisions, audio, home appliances, computers, cameras, kitchen appliances, personal care and grooming accessories and other products (“Product(s)”) to the users of the Reliance Digital Platform (“User” or “Users” or “you” or “your”).</li>

@@ -33,6 +33,7 @@ import ShippingPage from "../pages/ShippingPage";
 import OrderSuccesspage from "../pages/OrderSuccesspage";
 import OrderSuccessPageb from "../pages/OrderSuccessPageb";
 import OrderHistoryPage from "../pages/OrderHistoryPage";
+import Underconstructionpage from "./Underconstructionpage";
 
 function App() {
   const { getToken } = useData();
@@ -82,6 +83,7 @@ function App() {
         <Route path="/ordersuccess" element={<OrderSuccesspage />} />
         <Route path="/ordersuccessB" element={<OrderSuccessPageb />} />
         <Route path="/orderhistory" element={<OrderHistoryPage />} />
+        <Route path="/underconstruction" element={<Underconstructionpage />} />
 
 
 

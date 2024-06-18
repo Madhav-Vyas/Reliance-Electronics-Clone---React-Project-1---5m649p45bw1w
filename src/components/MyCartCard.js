@@ -86,27 +86,34 @@ const MyCartCard = ({ brand, category, displayImage, price, rating, id, name, qu
     }
     return (<>
 
-        <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 w-full flex flex-col md:flex-row focus:outline-none mt-12">
+        <div className="bg-white rounded-t-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 w-full flex flex-col md:flex-row focus:outline-none mt-12">
             <div className="w-full md:w-1/3 flex items-start justify-center md:justify-start">
                 {/* Align text at the start */}
-                <img className="w-44 h-44 p-4 object-cover" src={displayImage} alt="Product Image" />
+                <img className="w-32 h-32 p-4 object-cover" src={displayImage} alt="Product Image" />
             </div>
             <div className="p-4 flex flex-col justify-start flex-grow">
                 {/* Align text at the start */}
                 <h2 className="text-sm font-semibold text-gray-800">{brand}</h2>
                 <button onClick={onClickHandler} className="focus:outline-none block">
-                    <h4 className="text-sm font-semibold text-gray-700 mb-2">{name}</h4>
+                    <h4 className="text-sm  text-[#003380] mb-2">{name}</h4>
                 </button>
 
 
-                <p className="text-sm text-gray-600 ml-6 mb-2">Price: &#8377;{price}</p>
-                <p className="text-sm text-gray-600 ml-6 mb-2">Category: {category}</p>
                 <div className="flex items-center">
                     <i className="fas fa-star text-yellow-500 mr-1 ml-6"></i>
                     <p className="text-sm text-gray-600 ">{rating}</p>
                 </div>
             </div>
-            <div className='flex flex-col justify-between items-center md:items-start mt-4 md:mt-0'>
+
+            <div className='px-4 md:ml-0 ml-56'>
+                <p className="  mt-2 text-xl mb-2 font-bold"> &#8377; {price}</p>
+                <p className="text-xs text-green-600 ml-6 mb-2">Free Shipping</p>
+
+            </div>
+
+        </div>
+        <div className='bg-white rounded-b-lg'>
+            <div className='flex flex-row justify-between items-center md:items-start mt-0 md:mt-0'>
                 <div className='flex items-center w-full ml-4 '>
                     <span className='pr-2 font-lg font-semibold text-center'>Qty:</span>
                     <div className="text-sm text-gray-600 border border-gray-600 flex justify-between rounded-xl bg-white w-20">

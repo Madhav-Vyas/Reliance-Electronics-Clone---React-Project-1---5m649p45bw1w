@@ -110,7 +110,7 @@ const CheckoutPage = () => {
         </>
         <div className='flex flex-col md:flex-row gap-x-4'>
             <div className='mb-12 md:mb-96 ml-2 md:ml-2'>
-                <div className='text-xl font-semibold mr-4 md:mt-2 md:ml-52 underline mt-2'>Order Summary <i className="fas fa-box" style={{ color: "red" }}></i></div>
+                <div className='text-xl font-semibold mr-4 md:mt-8 md:ml-52 underline mt-2'>Order Summary <i className="fas fa-box" style={{ color: "red" }}></i></div>
                 {Array.isArray(data) && data.map((obj) => {
                     return (
                         <CheckOutCardCart

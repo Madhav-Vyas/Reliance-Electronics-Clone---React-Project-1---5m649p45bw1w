@@ -141,7 +141,11 @@ const MyCart = () => {
 
         <div className='w-full md:w-2/5 mt-4 md:mt-0'>
 
-
+            <div className="flex justify-center md:pr-12 md:pl-0">
+                <button onClick={checkout} className="p-5 mt-6 mb-6 bg-red-600 w-64 md:w-96 hover:bg-blue-700 text-md text-slate-100 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    Checkout
+                </button>
+            </div>
             <div className="card mt-3  w-full max-w-md bg-white shadow-md rounded-md overflow-hidden md:mt-6">
                 <div className="text-gray-800 border-x-0 border-y px-4 py-2">
                     <h1 className="text-xl font-semibold">PRICE DETAILS</h1>
@@ -165,11 +169,7 @@ const MyCart = () => {
             </div>
 
 
-            <div className="flex justify-center md:pr-12 md:pl-0">
-                <button onClick={checkout} className="p-5 mt-6 mb-6 bg-red-600 w-64 md:w-96 hover:bg-blue-700 text-md text-slate-100 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                    Checkout
-                </button>
-            </div>
+
         </div>
     </div>
 

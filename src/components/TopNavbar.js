@@ -139,21 +139,21 @@ function TopNavbar() {
         {/* ----------------------------------------------------------------------End of links on top----------------------------------------------- */}
 
 
-        <div className="flex justify-between h-16 items-end md:w-full ipad:w-full w-full bg-red-600 sm:min-w-full p-2">
+        <div className="flex  h-16  md:w-full ipad:w-full w-full bg-red-600  p-2">
 
             {/* LOGO....................................................................... */}
-            <div className=" number-1 flex justify-end w-20 md:w-60 xl:w-60  lg:w-40 md:mr-10">
+            <div className=" number-1 flex ">
                 <button onClick={navigateToHome}>
-                    <img className="w-20  md:w-32 lg:w-40 h-auto" src="https://www.reliancedigital.in/build/client/images/loaders/rd_logo.svg" alt="logo" />
+                    <img className="md:w-80 w-20 md:mr-20" src="https://www.reliancedigital.in/build/client/images/loaders/rd_logo.svg" alt="logo" />
                 </button>
             </div>
 
             {/* INPUTBOX....................................... */}
-            <div className=" number-2 xl:ml-32  flex  md:justify-evenly justify-around flex-wrap md:flex-nowrap sm:flex-nowrap lg:h-8 lg:mb-2">
-                <div className="rounded-full xl:flex xl:h-10 md:h-10 bg-white p-0 ml-2 flex-nowrap sm:flex-nowrap md:flex">
+            <div className=" number-2  md:mt-1  flex  md:pl-60">
+                <div className="rounded-full xl:flex h-6 md:mt-0 mt-4 xl:h-10 md:h-10 bg-white p-0 md:ml-2 ml-4 flex-nowrap sm:flex-nowrap md:flex">
                     <input
                         type="text"
-                        className="w-3/5 sm:w-4/5 md:w-96 bg-white h-6 sm:h-8 md:h-10 rounded-full sm:px-4 px-2 md:px-4 border-none focus:outline-none focus:border-none"
+                        className=" md:w-96 w-32 bg-white h-6 sm:h-8 md:h-10 rounded-full sm:px-4 px-2 md:px-4 border-none focus:outline-none focus:border-none"
                         placeholder="Find your favorite product..."
                         onChange={handleSearchTerm}
                         value={searchTerm}
@@ -165,14 +165,14 @@ function TopNavbar() {
 
 
 
-            {/* ------------------------------------Style for big Devices----------------------------------------------- */}
-            <div className="number-3  xl:flex xl:flex-wrap lg:flex-nowrap lg:w-full lg:ml-20 gap-1 md:ml-24 ">
+            {/* ------------------------------------Style for big Devices profile part----------------------------------------------- */}
+            <div className="number-3   xl:flex xl:flex-wrap lg:flex-nowrap lg:w-full mt-2  gap-1  ">
 
                 {!getToken ? (
                     <>
-                        <div className="hidden md:inline md:ml-52">
+                        <div className="hidden md:inline ">
                             <NavLink to="/login">
-                                <button className="text-xs text-white font-bold py-2 px-4 rounded"><i className="fa-solid fa-user"></i> Login</button>
+                                <button className="text-xs text-white font-bold ml-60 py-2 px-4 rounded"><i className="fa-solid fa-user"></i> Login</button>
                             </NavLink>
                             <NavLink to="/register">
                                 <button className="text-xs text-white font-bold py-2 px-4 rounded"><i className="fa-regular fa-user"></i> Register</button>
@@ -182,13 +182,13 @@ function TopNavbar() {
                 ) : (
                     <>
                         <div className="flex md:w-full lg:w-full xl:w-full">
-                            <div className="hidden md:inline ml-20 pl-32">
+                            <div className="hidden md:inline md:ml-52">
                                 <NavLink to="/mycart">
                                     <button className="text-xs btn font-bold btn text-white py-2 px-2 rounded"><i className="fa-solid fa-cart-shopping"></i><span className="ml-1"> My Cart<span className="ml-1">({totalCartItems})</span></span></button>
                                 </NavLink>
                             </div>
                             <span className="text-white hidden md:inline">|</span>
-                            <div className="mt-2 ml-2 font-semibold text-white text-xs uppercase tracking-wide hidden md:inline">
+                            <div className="mt-2 ml-2 font-semibold text-white text-xs uppercase  hidden md:inline">
                                 {getName ? <button onClick={() => setLogout(!logout)}><i className="fa-solid fa-user fa-lg"></i> <span className="ml-1">{getName}</span></button> : "Profile"}
                             </div>
                         </div>
@@ -202,22 +202,22 @@ function TopNavbar() {
                                 <NavLink to="/orderhistory">
                                     <button onClick={() => setLogout(!logout)} className="text-xs btn font-bold btn text-white py-2 px-2 rounded">
                                         <i style={{ color: 'white' }} className="fa-solid fa-heart"></i>
-                                        <span className="ml-1">Order History</span>
+                                        <span className="ml-2">Order History</span>
                                     </button>
                                 </NavLink>
                                 <div className="hidden md:block">
                                     <NavLink onClick={() => setLogout(!logout)} to="/wishlist">
-                                        <button onClick={() => setLogout(!logout)} className="text-xs btn font-bold btn text-white py-2 px-2 ml-2 rounded">
+                                        <button onClick={() => setLogout(!logout)} className="text-xs btn font-bold btn text-white py-2  ml-2 rounded">
                                             <i style={{ color: 'white' }} className="fa-solid fa-heart"></i>
-                                            <span className="ml-1">My Wishlist</span>
+                                            <span className="ml-2">My Wishlist</span>
                                         </button>
                                     </NavLink>
                                 </div>
 
 
-                                <button onClick={logoutHandler} className="btn font-bold btn text-white hidden md:inline ml-2 py-2 px-2 rounded text-xs">
+                                <button onClick={logoutHandler} className="btn font-bold btn text-white hidden md:inline ml-2 py-2 px-1 rounded text-xs">
                                     <i className="fa-solid fa-right-from-bracket mr-1"></i>
-                                    Log Out
+                                    <span className="ml-2">Log out</span>
                                 </button>
 
 
@@ -240,12 +240,12 @@ function TopNavbar() {
             <div className="flex  gap-1 ">
                 {!getToken ? (
                     <>
-                        <div className="inline md:hidden">
+                        <div className="inline md:hidden ml-4 mt-3 ">
                             <NavLink to="/login">
-                                <button className="text-xs text-white font-bold py-2 px-4 rounded"><i className="fa-solid fa-user"></i> Login</button>
+                                <button className="text-xs text-white font-bold py-2 rounded"><i className="fa-solid fa-user"></i> Login /</button>
                             </NavLink>
                             <NavLink to="/register">
-                                <button className="text-xs text-white font-bold py-2 px-4 rounded"><i className="fa-regular fa-user"></i> Register</button>
+                                <button className="text-xs text-white font-bold py-2 ml-1 rounded"><i className="fa-regular fa-user"></i> Register</button>
                             </NavLink>
                         </div>
                     </>
@@ -253,7 +253,7 @@ function TopNavbar() {
                     <>
 
 
-                        <div className="mt-2 ml-2 font-semibold text-white text-xs uppercase tracking-wide inline md:hidden">
+                        <div className="md:mt-2 mt-4 md:ml-2 ml-8 font-semibold text-white text-xs uppercase tracking-wide inline md:hidden">
                             {getName ? <button onClick={() => setLogout(!logout)}><i className="fa-solid fa-user fa-lg"></i> <span className="ml-1">{getName}</span></button> : "Profile"}
                         </div>
                         {logout &&
@@ -262,17 +262,17 @@ function TopNavbar() {
                                     <button className="text-white text-xs pl-24" onClick={() => setLogout(false)}><i className="fa-solid fa-circle-xmark"></i></button>
                                     <div className="block md:hidden">
                                         <NavLink onClick={() => setLogout(!logout)} to="/wishlist">
-                                            <button className="text-xs btn font-bold btn text-white py-2 px-2 ml-2 rounded"><i style={{ color: 'white' }} className="fa-solid fa-heart"></i><span className="ml-1">My Wishlist</span> </button>
+                                            <button className="text-xs btn font-bold btn text-white py-2  pl-1 rounded"><i style={{ color: 'white' }} className="fa-solid fa-heart"></i><span className="ml-1">My Wishlist</span> </button>
                                         </NavLink>
 
-                                        <NavLink to="/orderhistory"><button onClick={() => setLogout(!logout)} className="text-xs btn font-bold btn text-white py-2 px-2 rounded"><i style={{ color: 'white' }} className="fa-solid fa-heart"></i><span className="ml-1">Order History</span> </button></NavLink>
+                                        <NavLink to="/orderhistory"><button onClick={() => setLogout(!logout)} className="text-xs btn font-bold btn text-white py-2 px-1 rounded"><i style={{ color: 'white' }} className="fa-solid fa-heart"></i><span className="ml-1">Order History</span> </button></NavLink>
                                     </div>
                                     <div className="inline md:hidden">
                                         <NavLink to="/mycart">
-                                            <button onClick={() => setLogout(!logout)} className="text-xs btn font-bold ml-2 btn text-white py-2 px-2 rounded"><i className="fa-solid fa-cart-shopping"></i><span className="ml-1"> My Cart<span className="ml-1">({totalCartItems})</span></span></button>
+                                            <button onClick={() => setLogout(!logout)} className="text-xs btn font-bold  btn text-white py-2 px-1 rounded"><i className="fa-solid fa-cart-shopping"></i><span className="ml-1"> My Cart<span className="ml-1">({totalCartItems})</span></span></button>
                                         </NavLink>
                                     </div>
-                                    <button onClick={logoutHandler} className="btn font-bold btn text-white inline md:hidden ml-2 py-2 px-2 rounded text-xs"><i className="fa-solid fa-right-from-bracket mr-1"></i>Log Out</button>
+                                    <button onClick={logoutHandler} className="btn font-bold btn text-white inline md:hidden  py-2 px-1 rounded text-xs"><i className="fa-solid fa-right-from-bracket mr-1"></i>Log Out</button>
                                 </div>
                             </div>
                         }
