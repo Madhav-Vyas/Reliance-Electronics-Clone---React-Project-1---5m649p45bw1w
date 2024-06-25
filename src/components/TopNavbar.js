@@ -172,7 +172,7 @@ function TopNavbar() {
                     <>
                         <div className="hidden md:inline ">
                             <NavLink to="/login">
-                                <button className="text-xs text-white font-bold ml-52 py-2 px-4 rounded"><i className="fa-solid fa-user"></i> Login</button>
+                                <button className="text-xs text-white font-bold ml-60 py-2 px-4 rounded"><i className="fa-solid fa-user"></i> Login</button>
                             </NavLink>
                             <NavLink to="/register">
                                 <button className="text-xs text-white font-bold py-2 px-4 rounded"><i className="fa-regular fa-user"></i> Register</button>
@@ -197,30 +197,30 @@ function TopNavbar() {
 
 
                             // <div className="absolute inset-0 bg-black bg-opacity-30 backdrop-blur-sm items-center z-20" >
-                            <div className="h-52 w-56 rounded-md bg-blue-800 absolute right-0 hidden md:inline md:top-64 md:right-[500px] z-50" >
+                            <div className="h-32 w-32 rounded-md bg-blue-800 absolute right-0 hidden md:inline md:top-24 md:right-4 z-50" >
                                 <div>
-                                    <button className="text-white text-xs pl-48" onClick={() => setLogout(false)}><i class="fa-solid fa-x text-xl"></i></button></div>
+                                    <button className="text-white text-xs pl-28" onClick={() => setLogout(false)}><i class="fa-solid fa-x "></i></button></div>
 
-                                <div className="px-8 py-4">
+                                <div className="">
                                     <NavLink to="/orderhistory">
-                                        <button onClick={() => setLogout(!logout)} className="text-xl btn font-bold btn text-white py-2 px-2 rounded ">
+                                        <button onClick={() => setLogout(!logout)} className=" btn font-bold btn text-white py-2 px-2 rounded text-xs ">
                                             <i style={{ color: 'white' }} className="fa-solid fa-heart"></i>
-                                            <span className="ml-2 text-lg ">Order History</span>
+                                            <span className="ml-2 text-xs ">Order History</span>
                                         </button>
                                     </NavLink>
                                     <div className="hidden md:block">
                                         <NavLink onClick={() => setLogout(!logout)} to="/wishlist">
-                                            <button onClick={() => setLogout(!logout)} className="text-xl btn font-bold btn text-white py-2   ml-2 rounded">
+                                            <button onClick={() => setLogout(!logout)} className=" text-xs btn font-bold btn text-white py-2   ml-2 rounded">
                                                 <i style={{ color: 'white' }} className="fa-solid fa-heart"></i>
-                                                <span className="ml-2 text-lg">My Wishlist</span>
+                                                <span className="ml-2  text-xs ">My Wishlist</span>
                                             </button>
                                         </NavLink>
                                     </div>
 
 
                                     <button onClick={logoutHandler} className="btn font-bold btn text-white hidden md:inline ml-2 py-2 px-1 rounded text-xs">
-                                        <i className="fa-solid fa-right-from-bracket mr-1 text-xl"></i>
-                                        <span className="ml-2 text-lg">Log out</span>
+                                        <i className="fa-solid fa-right-from-bracket mr-1  text-xs"></i>
+                                        <span className="ml-2  text-xs">Log out</span>
                                     </button>
 
                                 </div>
