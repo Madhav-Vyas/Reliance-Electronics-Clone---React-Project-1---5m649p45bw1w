@@ -12,17 +12,64 @@ const Subnavbar = () => {
             {/* ---------------------------------------Style for big screens---------------------------------- */}
 
             <div className='w-full bg-blue-900 h-8 md:flex justify-between px-2  py-1 text-sm overflow-hidden hidden  '>
-                <NavLink to="/acpage" className='text-white  hover:bg-red-600 px-3 '>Ac <i class="fa-solid fa-angle-down"></i></NavLink>
-                <NavLink to="/audiopage" className='text-white hover:bg-red-600 px-3'>Audio <i class="fa-solid fa-angle-down"></i></NavLink>
-                <NavLink to="/healthpage" className='text-white  hover:bg-red-600 px-3'>Health <i class="fa-solid fa-angle-down"></i></NavLink>
-                <NavLink to="/kitchenpage" className='text-white hover:bg-red-600 px-3'>Kitchen Appliance <i class="fa-solid fa-angle-down"></i></NavLink>
-                <NavLink to="/laptoppage" className='text-white  hover:bg-red-600 px-3'>Laptops <i class="fa-solid fa-angle-down"></i></NavLink>
-                <NavLink to="/mobilepage" className='text-white hover:bg-red-600 px-3'>Mobiles <i class="fa-solid fa-angle-down"></i></NavLink>
-                <NavLink to="/refregeratorpage" className='text-white hover:bg-red-600 px-3'>Refrigerators <i class="fa-solid fa-angle-down"></i></NavLink>
-                <NavLink to="/tabletpage" className='text-white hover:bg-red-600 px-3'>Tablets <i class="fa-solid fa-angle-down"></i></NavLink>
-                <NavLink to="/televisonpage" className='text-white hover:bg-red-600 px-3'>Televison <i class="fa-solid fa-angle-down"></i></NavLink>
-                <NavLink to="/travelpage" className='text-white hover:bg-red-600 px-3'>Travel <i class="fa-solid fa-angle-down"></i></NavLink>
-                <NavLink to="/washingmachinepage" className='text-white hover:bg-red-600 px-3'>Washing Machine <i class="fa-solid fa-angle-down"></i></NavLink>
+                <NavLink to="/acpage">
+                    <div className='text-white  hover:bg-red-600 px-3 flex gap-1 '>
+                        <div>Ac</div>
+                        <div className='pt-1 text-xs'><i class="fa-solid fa-angle-down"></i></div>
+                    </div>
+                </NavLink>
+
+
+
+
+
+                <NavLink to="/audiopage">
+                    <div className='text-white  hover:bg-red-600 px-3 flex gap-1 '>
+                        <div>Audio</div>
+                        <div className='pt-1 text-xs'><i class="fa-solid fa-angle-down"></i></div>
+                    </div></NavLink>
+                <NavLink to="/healthpage" >
+                    <div className='text-white  hover:bg-red-600 px-3 flex gap-1 '>
+                        <div>Health</div>
+                        <div className='pt-1 text-xs'><i class="fa-solid fa-angle-down"></i></div>
+                    </div></NavLink>
+                <NavLink to="/kitchenpage">
+                    <div className='text-white  hover:bg-red-600 px-3 flex gap-1 '>
+                        <div>Kitchen Appliances</div>
+                        <div className='pt-1 text-xs'><i class="fa-solid fa-angle-down"></i></div>
+                    </div></NavLink>
+                <NavLink to="/laptoppage">
+                    <div className='text-white  hover:bg-red-600 px-3 flex gap-1 '>
+                        <div>Laptop</div>
+                        <div className='pt-1 text-xs'><i class="fa-solid fa-angle-down"></i></div>
+                    </div></NavLink>
+                <NavLink to="/mobilepage">
+                    <div className='text-white  hover:bg-red-600 px-3 flex gap-1 '>
+                        <div>Mobiles</div>
+                        <div className='pt-1 text-xs'><i class="fa-solid fa-angle-down"></i></div>
+                    </div></NavLink>
+                <NavLink to="/refregeratorpage">
+                    <div className='text-white  hover:bg-red-600 px-3 flex gap-1 '>
+                        <div>Refrigerators</div>
+                        <div className='pt-1 text-xs'><i class="fa-solid fa-angle-down"></i></div>
+                    </div></NavLink>
+                <NavLink to="/tabletpage" >
+                    <div className='text-white  hover:bg-red-600 px-3 flex gap-1 '>
+                        <div>Tablets</div>
+                        <div className='pt-1 text-xs'><i class="fa-solid fa-angle-down"></i></div>
+                    </div></NavLink>
+                <NavLink to="/televisonpage" >  <div className='text-white  hover:bg-red-600 px-3 flex gap-1 '>
+                    <div>Televisons</div>
+                    <div className='pt-1 text-xs'><i class="fa-solid fa-angle-down"></i></div>
+                </div></NavLink>
+                <NavLink to="/travelpage" >  <div className='text-white  hover:bg-red-600 px-3 flex gap-1 '>
+                    <div>Travel</div>
+                    <div className='pt-1 text-xs'><i class="fa-solid fa-angle-down"></i></div>
+                </div></NavLink>
+                <NavLink to="/washingmachinepage" >  <div className='text-white  hover:bg-red-600 px-3 flex gap-1 '>
+                    <div>Washing Machines</div>
+                    <div className='pt-1 text-xs'><i class="fa-solid fa-angle-down"></i></div>
+                </div></NavLink>
             </div>
 
 
