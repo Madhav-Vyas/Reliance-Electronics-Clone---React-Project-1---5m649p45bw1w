@@ -182,7 +182,7 @@ function TopNavbar() {
                 ) : (
                     <>
                         <div className="flex md:w-full lg:w-full xl:w-full">
-                            <div className="hidden md:inline md:ml-56">
+                            <div className="hidden md:inline md:ml-64">
                                 <NavLink to="/mycart">
                                     <button className="text-xs btn font-bold btn text-white py-2 px-2 rounded"><i className="fa-solid fa-cart-shopping"></i><span className="ml-1"> My Cart<span className="ml-1">({totalCartItems})</span></span></button>
                                 </NavLink>
@@ -197,7 +197,7 @@ function TopNavbar() {
 
 
                             // <div className="absolute inset-0 bg-black bg-opacity-30 backdrop-blur-sm items-center z-20" >
-                            <div className="h-32 w-32 rounded-md bg-blue-800 absolute right-0 hidden md:inline md:top-24 md:right-4 z-50" >
+                            <div className="h-32 w-32 rounded-md bg-blue-800 absolute right-0 hidden md:inline md:top-24 md:right-6 z-50" >
                                 <div>
                                     <button className="text-white text-xs pl-28" onClick={() => setLogout(false)}><i class="fa-solid fa-x "></i></button></div>
 
