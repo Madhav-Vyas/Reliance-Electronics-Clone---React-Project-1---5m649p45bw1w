@@ -182,7 +182,7 @@ function TopNavbar() {
                 ) : (
                     <>
                         <div className="flex md:w-full lg:w-full xl:w-full">
-                            <div className="hidden md:inline md:ml-52">
+                            <div className="hidden md:inline md:ml-56">
                                 <NavLink to="/mycart">
                                     <button className="text-xs btn font-bold btn text-white py-2 px-2 rounded"><i className="fa-solid fa-cart-shopping"></i><span className="ml-1"> My Cart<span className="ml-1">({totalCartItems})</span></span></button>
                                 </NavLink>
@@ -197,30 +197,33 @@ function TopNavbar() {
 
 
                             // <div className="absolute inset-0 bg-black bg-opacity-30 backdrop-blur-sm items-center z-20" >
-                            <div className="h-32 w-28 rounded-md bg-blue-800 absolute right-0 hidden md:inline md:top-20 md:right-8 z-50" >
-                                <button className="text-white text-xs pl-24" onClick={() => setLogout(false)}><i class="fa-solid fa-x"></i></button>
-                                <NavLink to="/orderhistory">
-                                    <button onClick={() => setLogout(!logout)} className="text-xs btn font-bold btn text-white py-2 px-2 rounded">
-                                        <i style={{ color: 'white' }} className="fa-solid fa-heart"></i>
-                                        <span className="ml-2">Order History</span>
-                                    </button>
-                                </NavLink>
-                                <div className="hidden md:block">
-                                    <NavLink onClick={() => setLogout(!logout)} to="/wishlist">
-                                        <button onClick={() => setLogout(!logout)} className="text-xs btn font-bold btn text-white py-2  ml-2 rounded">
+                            <div className="h-52 w-56 rounded-md bg-blue-800 absolute right-0 hidden md:inline md:top-64 md:right-[500px] z-50" >
+                                <div>
+                                    <button className="text-white text-xs pl-48" onClick={() => setLogout(false)}><i class="fa-solid fa-x text-xl"></i></button></div>
+
+                                <div className="px-8 py-4">
+                                    <NavLink to="/orderhistory">
+                                        <button onClick={() => setLogout(!logout)} className="text-xl btn font-bold btn text-white py-2 px-2 rounded ">
                                             <i style={{ color: 'white' }} className="fa-solid fa-heart"></i>
-                                            <span className="ml-2">My Wishlist</span>
+                                            <span className="ml-2 text-lg ">Order History</span>
                                         </button>
                                     </NavLink>
+                                    <div className="hidden md:block">
+                                        <NavLink onClick={() => setLogout(!logout)} to="/wishlist">
+                                            <button onClick={() => setLogout(!logout)} className="text-xl btn font-bold btn text-white py-2   ml-2 rounded">
+                                                <i style={{ color: 'white' }} className="fa-solid fa-heart"></i>
+                                                <span className="ml-2 text-lg">My Wishlist</span>
+                                            </button>
+                                        </NavLink>
+                                    </div>
+
+
+                                    <button onClick={logoutHandler} className="btn font-bold btn text-white hidden md:inline ml-2 py-2 px-1 rounded text-xs">
+                                        <i className="fa-solid fa-right-from-bracket mr-1 text-xl"></i>
+                                        <span className="ml-2 text-lg">Log out</span>
+                                    </button>
+
                                 </div>
-
-
-                                <button onClick={logoutHandler} className="btn font-bold btn text-white hidden md:inline ml-2 py-2 px-1 rounded text-xs">
-                                    <i className="fa-solid fa-right-from-bracket mr-1"></i>
-                                    <span className="ml-2">Log out</span>
-                                </button>
-
-
                             </div>
                             // </div>
 
