@@ -172,7 +172,7 @@ function TopNavbar() {
                     <>
                         <div className="hidden md:inline ">
                             <NavLink to="/login">
-                                <button className="text-xs text-white font-bold ml-60 py-2 px-4 rounded"><i className="fa-solid fa-user"></i> Login</button>
+                                <button className="text-xs text-white font-bold   ml-64 py-2 px-4 rounded"><i className="fa-solid fa-user"></i> Login</button>
                             </NavLink>
                             <NavLink to="/register">
                                 <button className="text-xs text-white font-bold py-2 px-4 rounded"><i className="fa-regular fa-user"></i> Register</button>
