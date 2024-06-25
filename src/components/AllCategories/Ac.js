@@ -85,7 +85,7 @@ const Ac = () => {
         return (
             <div
                 className={className}
-                style={{ ...style, display: "block", background: "blue", opacity: 0.3 }}
+                style={{ ...style, display: "block", height: "40px", paddingTop: "10px", borderRadius: "8px", background: "#a9adb0", opacity: 0.9, position: "absolute", zIndex: 12 }}
                 onClick={onClick}
             />
         );
@@ -96,7 +96,7 @@ const Ac = () => {
         return (
             <div
                 className={className}
-                style={{ ...style, display: "block", background: "blue", opacity: 0.3 }}
+                style={{ ...style, display: "block", height: "40px", paddingTop: "10px", borderRadius: "8px", background: "#a9adb0", opacity: 0.9, position: "absolute", zIndex: 12 }}
                 onClick={onClick}
             />
         );

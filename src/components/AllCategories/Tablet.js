@@ -16,31 +16,31 @@ const Tablet = () => {
         onTabletHandeler();
     }, [])
 
- //slides to show based on screen size ------------------------------------------------------
- const [slidesToShow, setSlidesToShow] = useState(6);
- useEffect(() => {
-     const handleResize = () => {
-         // Adjust slidesToShow based on screen width
-         if (window.innerWidth < 768) {
-             setSlidesToShow(2);
-         } else {
-             setSlidesToShow(6);
-         }
-     };
+    //slides to show based on screen size ------------------------------------------------------
+    const [slidesToShow, setSlidesToShow] = useState(6);
+    useEffect(() => {
+        const handleResize = () => {
+            // Adjust slidesToShow based on screen width
+            if (window.innerWidth < 768) {
+                setSlidesToShow(2);
+            } else {
+                setSlidesToShow(6);
+            }
+        };
 
-     // Initial call to set slidesToShow
-     handleResize();
+        // Initial call to set slidesToShow
+        handleResize();
 
-     // Listen to window resize event
-     window.addEventListener('resize', handleResize);
+        // Listen to window resize event
+        window.addEventListener('resize', handleResize);
 
-     // Clean up on component unmount
-     return () => {
-         window.removeEventListener('resize', handleResize);
-     };
- }, []);
+        // Clean up on component unmount
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
- //----------------------------------------------
+    //----------------------------------------------
 
 
     const onTabletHandeler = async () => {
@@ -73,7 +73,7 @@ const Tablet = () => {
         return (
             <div
                 className={className}
-                style={{ ...style, display: "block", background: "blue", opacity: 0.3 }}
+                style={{ ...style, display: "block", height: "40px", paddingTop: "10px", borderRadius: "8px", background: "#a9adb0", opacity: 0.9, position: "absolute", zIndex: 12 }}
                 onClick={onClick}
             />
         );
@@ -84,7 +84,7 @@ const Tablet = () => {
         return (
             <div
                 className={className}
-                style={{ ...style, display: "block", background: "blue", opacity: 0.3 }}
+                style={{ ...style, display: "block", height: "40px", paddingTop: "10px", borderRadius: "8px", background: "#a9adb0", opacity: 0.9, position: "absolute", zIndex: 12 }}
                 onClick={onClick}
             />
         );
