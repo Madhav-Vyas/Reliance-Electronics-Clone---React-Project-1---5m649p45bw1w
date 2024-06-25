@@ -153,11 +153,11 @@ const Home = () => {
 
 
 
-            <div className="bg-white my-1">
+            <div className="bg-white my-1 ">
                 <NavLink to="/acpage"><img src="https://www.reliancedigital.in/medias/Good-Friday-Sale-Banner-D-1-.jpg?context=bWFzdGVyfGltYWdlc3wxNzY0MjB8aW1hZ2UvanBlZ3xpbWFnZXMvaDE5L2hiMC8xMDEyNDkzNDE1MjIyMi5qcGd8ZjBlM2JiYTVhYzlmZDlkOWM2NTVhZGM5YzliOTZjZWNjMGQ5ZTlhZTMwODQ2MmI5YzNkY2Q2NjE5OWMyYzFhOA"></img></NavLink>
             </div>
-            <div className="bg-white my-1">
-                <div style={{ width: '97%', margin: '0 auto' }}>
+            <div className="bg-white my-1 rounded">
+                <div style={{ width: '95%', margin: '0 auto' }}>
                     <Slider {...settings2}>
                         <NavLink to="/kitchenpage"> <img src="https://www.reliancedigital.in/medias/Kitchen-Fest-Banner-D-rev-1.jpg?context=bWFzdGVyfGltYWdlc3w5OTQzM3xpbWFnZS9qcGVnfGltYWdlcy9oYzQvaDBhLzEwMTI0NzAzNzYwNDE0LmpwZ3xkNTRiZTQyMGZjNmM5NDhjYzRhZWQ2ZjAyNTFmNTk0NDhhMzkzY2YyZjQ0ZDg3MzMwZTY2YTgwYTE0OThhNGNm"></img></NavLink>
 
