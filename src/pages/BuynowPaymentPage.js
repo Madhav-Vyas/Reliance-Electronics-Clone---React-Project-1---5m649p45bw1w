@@ -259,7 +259,7 @@ const BuynowPaymentPage = () => {
 
 
                                 <div className='border flex '>
-                                    <div><input className="appearance-none  w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" onChange={(e) => setMonth(e.target.value)} value={month} placeholder='MM' /></div>
+                                    <div><input className="appearance-none  w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" onChange={(e) => setMonth(e.target.value)} value={month} placeholder='MM' min={1} max={12} /></div>
 
                                     <div className='md:text-2xl'>/</div>
 
