@@ -2,15 +2,16 @@ import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import CheckOutCardCart from '../components/CheckOutCardCart';
 import { toast } from 'react-toastify';
+import { useData } from "../Providers/AllcategoryData";
 
 const CheckoutPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
     //data varible contains the array of products which are added in cart and total price contains the sum of prices of all products
-    const { data, totalPrice } = location.state;
-
+    const { totalPrice } = location.state;
+    const { data, datahandler } = useData();
     //get data is state made to handle form on checkout page
-    const [getData, setData] = useState({
+    const [getDetail, setDetail] = useState({
         pincode: "",
         firstname: "",
         lastname: "",
@@ -25,10 +26,10 @@ const CheckoutPage = () => {
 
 
     //we have destructured this data in order to send it to next page
-    const { pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline } = getData;
+    const { pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline } = getDetail;
     const [error, setError] = useState("");
     const onChangeHandler = (event) => {
-        setData({ ...getData, [event.target.name]: event.target.value })
+        setDetail({ ...getDetail, [event.target.name]: event.target.value })
     }
 
     //on submit  we are redirected to next page i.e(payment page) before that on submission this function is called and this function checks that if all details of for are being filled or not if not filled an error state will be set
@@ -37,43 +38,43 @@ const CheckoutPage = () => {
     const onSubmitHandler = (e) => {
         e.preventDefault();
 
-        if (!getData.pincode) {
+        if (!getDetail.pincode) {
             toast.error("PIN code is mandatory")
         }
-        else if (!getData.firstname) {
+        else if (!getDetail.firstname) {
             toast.error("First-name is mandatory")
         }
-        else if (!getData.lastname) {
+        else if (!getDetail.lastname) {
             toast.error("Last-name is mandatory")
         }
-        else if (!getData.houseNo) {
+        else if (!getDetail.houseNo) {
             toast.error("Please enter house No.")
         }
-        else if (!getData.colony) {
+        else if (!getDetail.colony) {
             toast.error("Please enter colony")
         }
-        else if (!getData.landmark) {
+        else if (!getDetail.landmark) {
             toast.error("Landmark is mandatory")
         }
-        else if (!getData.city) {
+        else if (!getDetail.city) {
             toast.error("Enter your city")
         }
-        else if (!getData.state) {
+        else if (!getDetail.state) {
             toast.error("Enter your state")
         }
-        else if (!getData.mobile) {
+        else if (!getDetail.mobile) {
             toast.error("Enter Your Mobile Number")
         }
 
-        else if (getData.mobile && getData.mobile.length < 10) {
+        else if (getDetail.mobile && getDetail.mobile.length < 10) {
             toast.error("Please Enter a Valid Mobile Number")
         }
 
         else {
-            console.log(getData);
+            console.log(getDetail);
             navigate("/paymentpage", {
                 state: {
-                    data, totalPrice, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline
+                    totalPrice, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline
                 }
             })
             console.log({
@@ -142,47 +143,47 @@ const CheckoutPage = () => {
                     {/* Pincode */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
-                            <input type="text" name="pincode" id="pincode" placeholder="Pincode" value={getData.pincode} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />
+                            <input type="text" name="pincode" id="pincode" placeholder="Pincode" value={getDetail.pincode} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />
                         </div>
                     </div>
                     {/* First Name and Last Name */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div className="col-span-2 sm:col-span-1">
-                            <input type="text" name="firstname" id="first_name" placeholder="First Name" value={getData.firstname} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />
+                            <input type="text" name="firstname" id="first_name" placeholder="First Name" value={getDetail.firstname} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />
                         </div>
                         <div className="col-span-2 sm:col-span-1">
-                            <input type="text" name="lastname" id="last_name" placeholder="Last Name" value={getData.lastname} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />
+                            <input type="text" name="lastname" id="last_name" placeholder="Last Name" value={getDetail.lastname} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />
                         </div>
                     </div>
                     {/* House/Flat No. and Colony/Street */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div className="col-span-2 sm:col-span-1">
-                            <input type="text" name="houseNo" id="house_flat" placeholder="House/Flat No." value={getData.houseNo} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />
+                            <input type="text" name="houseNo" id="house_flat" placeholder="House/Flat No." value={getDetail.houseNo} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />
                         </div>
                         <div className="col-span-2 sm:col-span-1">
-                            <input type="text" name="colony" id="colony_street" placeholder="Colony/Street" value={getData.colony} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />
+                            <input type="text" name="colony" id="colony_street" placeholder="Colony/Street" value={getDetail.colony} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />
                         </div>
                     </div>
                     {/* Landmark */}
                     <div>
-                        <input type="text" name="landmark" id="landmark" placeholder="Landmark" value={getData.landmark} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />
+                        <input type="text" name="landmark" id="landmark" placeholder="Landmark" value={getDetail.landmark} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />
                     </div>
                     {/* City and State */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div className="col-span-2 sm:col-span-1">
-                            <input type="text" name="city" id="city" placeholder="City" value={getData.city} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />
+                            <input type="text" name="city" id="city" placeholder="City" value={getDetail.city} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />
                         </div>
                         <div className="col-span-2 sm:col-span-1">
-                            <input type="text" name="state" id="state" placeholder="State" value={getData.state} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />
+                            <input type="text" name="state" id="state" placeholder="State" value={getDetail.state} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />
                         </div>
                     </div>
                     {/* Mobile No. and Landline No. */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div className="col-span-2 sm:col-span-1">
-                            <input type="tel" minLength={10} maxLength={10} name="mobile" id="mobile" placeholder="Mobile No." value={getData.mobile} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />
+                            <input type="tel" minLength={10} maxLength={10} name="mobile" id="mobile" placeholder="Mobile No." value={getDetail.mobile} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />
                         </div>
                         <div className="col-span-2 sm:col-span-1">
-                            <input type="tel" name="landline" id="landline" placeholder="Landline No." value={getData.landline} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />
+                            <input type="tel" name="landline" id="landline" placeholder="Landline No." value={getDetail.landline} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />
                         </div>
                     </div>
                     {/* Submit Button */}

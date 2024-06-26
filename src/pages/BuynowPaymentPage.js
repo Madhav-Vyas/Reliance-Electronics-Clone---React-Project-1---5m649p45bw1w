@@ -90,6 +90,8 @@ const BuynowPaymentPage = () => {
     const [cardHolder, setCardHolder] = useState(null);
     const [expiryDate, setExpiryDate] = useState(null);
     const [cvv, setCvv] = useState(null);
+    const [month, setMonth] = useState()
+    const [year, setYear] = useState()
 
 
     const validateDate = (input) => {
@@ -111,16 +113,21 @@ const BuynowPaymentPage = () => {
 
         const trimmedCvv = cvv.trim();
 
-        if (!trimmedCardNumber || !trimmedCardHolder || !expiryDate || !trimmedCvv) {
+        if (!trimmedCardNumber || !trimmedCardHolder || !month || !year || !trimmedCvv) {
             toast.error("* Fill all the Fields");
         }
         else if (trimmedCardNumber.length !== 16) {
-            toast.error("Enter a Valid Card Number");
+            toast.error("Enter a Valid Card Number , it should be of 16 digits");
         }
-        else if (timestamp < Date.now()) {
-            console.log("expiry", expiryDate);
-            console.log("now date", Date.now);
-            toast.error("Please Check and Re-enter Valid Expiry Date");
+        else if (month > 12 || month < 1) {
+            toast.error("Please Check and Re-enter Valid  Expiry Date ")
+        }
+
+        else if (year < 2024) {
+            toast.error("Your Card is Expired")
+        }
+        else if (year == 2024 && month < 6) {
+            toast.error("Your Card is Expired")
         }
         else if (trimmedCvv.length !== 3) {
             toast.error("Enter Valid CVV");
@@ -246,24 +253,22 @@ const BuynowPaymentPage = () => {
                         <div className="grid grid-cols-2 gap-4">
                             <div className="mb-4">
                                 <label htmlFor="expiryDate" className="block text-gray-700 font-bold mb-2">Expiry Date</label>
-                                <input
-                                    type="date"
-                                    id="expiryDate"
-                                    value={expiryDate}
-                                    onChange={
-                                        (e) => {
-                                            setExpiryDate(e.target.value)
-
-                                        }
 
 
-                                    }
-                                    placeholder="MMYY"
-                                    className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                // minLength={4}  // Minimum length of 4 characters
-                                // maxLength={4}  // Maximum length of 4 characters
-                                />
+                                {/* <input type="date" id="expiryDate" value={expiryDate} onChange={(e) => setExpiryDate(e.target.value)} placeholder="MMYY" className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" /> */}
+
+
+                                <div className='border flex '>
+                                    <div><input className="appearance-none  w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" onChange={(e) => setMonth(e.target.value)} value={month} placeholder='MM' /></div>
+
+                                    <div className='md:text-2xl'>/</div>
+
+                                    <div><input className="appearance-none  w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" onChange={(e) => setYear(e.target.value)} value={year} placeholder='YYYY' /></div>
+                                </div>
                             </div>
+
+
+
                             <div className="mb-4">
                                 <label htmlFor="cvv" className="block text-gray-700 font-bold mb-2">CVV</label>
                                 <input

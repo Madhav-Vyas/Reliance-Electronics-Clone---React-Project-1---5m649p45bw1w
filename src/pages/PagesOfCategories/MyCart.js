@@ -8,12 +8,13 @@ import { useNavigate } from "react-router-dom"
 import { toast } from 'react-toastify';
 const MyCart = () => {
     const { getToken, totalCartItems,
-        totalCartItemsHandler } = useData();
-    const [data, setData] = useState([]);
+        totalCartItemsHandler, data, datahandler } = useData();
+
     const [totalQty, setTotalQty] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
     const [itemqty, setItemqty] = useState(1);
     const [totalItemsInCart, setTotalItemsInCart] = useState(0);
+
 
     const navigate = useNavigate();
 
@@ -82,7 +83,7 @@ const MyCart = () => {
             console.log("Items in cart are -------------->", response.data.results);
             setTotalItemsInCart(response.data.results)
 
-            setData(response.data.data.items);
+            datahandler(response.data.data.items);
             //console.log(...data);
 
 

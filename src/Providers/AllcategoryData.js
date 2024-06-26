@@ -26,12 +26,19 @@ export const DataProvider = ({ children }) => {
 
     const [buyNowTotalPriceAfterQty, setBuyNowTotalpriceAfterQty] = useState(0);
 
+    //Items shown on cart page are stored in this "data" state;
+    const [data, setData] = useState([]);
+
     const buyQtySetter = (data) => {
         setBuyNowTotalpriceAfterQty(data);
     }
 
     const totalCartItemsHandler = (data) => {
         setTotalCartItems(data);
+    }
+    //items on cart page are set by this setter
+    const datahandler = (data) => {
+        setData(data)
     }
 
     //Function for setting search term in context
@@ -159,7 +166,10 @@ export const DataProvider = ({ children }) => {
         totalCartItemsHandler,
 
         buyNowTotalPriceAfterQty,
-        buyQtySetter
+        buyQtySetter,
+
+        data,
+        datahandler
 
     };
 

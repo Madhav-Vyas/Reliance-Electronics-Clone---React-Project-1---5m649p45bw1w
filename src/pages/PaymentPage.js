@@ -7,10 +7,10 @@ const PaymentPage = () => {
     const location = useLocation();
 
     //cartOrders is a variable which contains all the orders which are placed and we map this variable on orederHistory page and cartOrderHistoryHandler is a function which adds new orders on list of past orders placed
-    const { cartOrders, cartOrderHistoryHandler } = useData();
+    const { cartOrders, cartOrderHistoryHandler, datahandler, data } = useData();
 
     //this is data recived from checkoutpage
-    const { data, totalPrice, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline } = location.state;
+    const { totalPrice, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline } = location.state;
     console.log(data);
     // State to store selected payment method
     const [selectedPayment, setSelectedPayment] = useState(null);
@@ -41,6 +41,7 @@ const PaymentPage = () => {
 
     //this function adds the new cart orders to the cartOrders Array
     const onPlacedHandler = () => {
+
         cartOrderHistoryHandler(data);
     }
     console.log(cartOrders);
@@ -85,6 +86,8 @@ const PaymentPage = () => {
     const [cardHolder, setCardHolder] = useState('');
     const [expiryDate, setExpiryDate] = useState('');
     const [cvv, setCvv] = useState('');
+    const [month, setMonth] = useState()
+    const [year, setYear] = useState()
 
     var date = new Date(expiryDate);
 
@@ -96,12 +99,24 @@ const PaymentPage = () => {
         event.preventDefault();
         onPlacedHandler();
 
-        if (!cardNumber || !cardHolder || !expiryDate || !cvv) {
+        if (!cardNumber || !cardHolder || !month || !year || !cvv) {
             toast.error("* Fill all the Fields")
         }
         else if (cardNumber.length < 16 || cardNumber.length > 16) {
-            toast.error("Enter a Valid Card Number");
+            toast.error("Enter a Valid Card Number , It Should be of 16 digits");
         }
+
+        else if (month > 12 || month < 1) {
+            toast.error("Please Check and Re-enter Valid  Expiry Date ")
+        }
+
+        else if (year < 2024) {
+            toast.error("Your Card is Expired")
+        }
+        else if (year == 2024 && month < 6) {
+            toast.error("Your Card is Expired")
+        }
+
         else if (timestamp < Date.now()) {
             toast.error("Please Check and Re-enter Valid  Expiry Date ")
         }
@@ -112,6 +127,7 @@ const PaymentPage = () => {
             console.log("Form submitted!");
             setForm(false)
             setText(true);
+            datahandler([])
             toast.success("Order Placed Successfully")
             navigate("/ordersuccess", {
                 state: {
@@ -119,15 +135,19 @@ const PaymentPage = () => {
                 }
             })
         }
+
     };
     //this function is called when payment method is COD along with onPlaceHandler function is called to add new orders
     const successhandler = () => {
         onPlacedHandler();
+        datahandler([])
         navigate("/ordersuccess", {
             state: {
                 totalPrice, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline
             }
         })
+
+
     }
 
     return (<>
@@ -197,11 +217,34 @@ const PaymentPage = () => {
                             <label htmlFor="cardHolder" className="block text-gray-700 font-bold mb-2">Card Holder</label>
                             <input type="text" id="cardHolder" value={cardHolder} onChange={(e) => setCardHolder(e.target.value)} placeholder="Enter card holder name" className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                         </div>
+
+
+
+
                         <div className="grid grid-cols-2 gap-4">
                             <div className="mb-4">
                                 <label htmlFor="expiryDate" className="block text-gray-700 font-bold mb-2">Expiry Date</label>
-                                <input type="date" id="expiryDate" value={expiryDate} onChange={(e) => setExpiryDate(e.target.value)} placeholder="MMYY" className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+
+
+                                {/* <input type="date" id="expiryDate" value={expiryDate} onChange={(e) => setExpiryDate(e.target.value)} placeholder="MMYY" className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" /> */}
+
+
+                                <div className='border flex '>
+                                    <div><input className="appearance-none  w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" onChange={(e) => setMonth(e.target.value)} value={month} placeholder='MM' /></div>
+
+                                    <div className='md:text-2xl'>/</div>
+
+                                    <div><input className="appearance-none  w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" onChange={(e) => setYear(e.target.value)} value={year} placeholder='YYYY' /></div>
+                                </div>
                             </div>
+
+
+
+
+
+
+
+
                             <div className="mb-4">
                                 <label htmlFor="cvv" className="block text-gray-700 font-bold mb-2">CVV</label>
                                 <input type="text" id="cvv" value={cvv} onChange={(e) => setCvv(e.target.value)} placeholder="CVV" className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
