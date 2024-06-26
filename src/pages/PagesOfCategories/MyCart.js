@@ -24,11 +24,12 @@ const MyCart = () => {
     }, [])
 
 
-    const clearCartHandler = async () => {
 
+    const clearCartHandler = async () => {
+        console.log("clr cart clicked");
         try {
 
-            const response = await axios.delete("http://academics.newtonschool.co/api/v1/ecommerce/cart/", {
+            const response = await axios.delete("https://academics.newtonschool.co/api/v1/ecommerce/cart/", {
 
                 headers: {
 
@@ -113,66 +114,79 @@ const MyCart = () => {
         });
     }
     //these all products are being mapped using MyCartCard component , we send data through props and along with that we also send onUpdate and onDelte function so that if user delete some item in cart , fetchCart function is called and updated items are mapped inside myCart page
+    const clearthecart = async () => {
 
-    return (<div className='flex flex-col md:flex-row justify-between mx-4 mb-6'>
+        await clearCartHandler();
+        fetchCart();
+    }
+    return (
+        <>
 
-        <div className='w-full md:w-3/5 md:mr-16 mb-2 md:mb-0'>
-            <div className='w-full h-12 mt-6 bg-slate-100 shadow-lg rounded-md p-3 flex justify-between'>
-                <div>My Cart ({totalItemsInCart} Items) </div>
-                <div>Items Total : <span className='text-red-600'>{totalPrice}</span></div>
-            </div>
+            <div className='flex flex-col md:flex-row justify-between mx-4 mb-6'>
 
-            <div>
-                {Array.isArray(data) && data.map((obj) => {
-                    return <MyCartCard
-                        brand={obj.product.brand}
-                        category={obj.product.category}
-                        displayImage={obj.product.displayImage}
-                        price={obj.product.price}
-                        rating={obj.product.ratings}
-                        id={obj.product._id}
-                        name={obj.product.name}
-                        quantity={obj.quantity}
-                        onDelete={() => fetchCart()}
-                        onUpdate={() => fetchCart()}
-                    />
-                })}
-            </div>
-        </div>
+                <div className='w-full md:w-3/5 md:mr-16 mb-2 md:mb-0'>
+                    <div className='w-full h-12 mt-6 bg-slate-100 shadow-lg rounded-md p-3 flex justify-between'>
+                        <div>My Cart ({totalItemsInCart} Items) </div>
 
-        <div className='w-full md:w-2/5 mt-4 md:mt-0'>
+                        <div>Items Total : <span className='text-red-600'>{totalPrice}</span></div>
+                    </div>
 
-            <div className="flex justify-center md:pr-12 md:pl-0">
-                <button onClick={checkout} className="p-5 mt-6 mb-6 bg-red-600 w-64 md:w-96 hover:bg-blue-700 text-md text-slate-100 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                    Checkout
-                </button>
-            </div>
-            <div className="card mt-3  w-full max-w-md bg-white shadow-md rounded-md overflow-hidden md:mt-6">
-                <div className="text-gray-800 border-x-0 border-y px-4 py-2">
-                    <h1 className="text-xl font-semibold">PRICE DETAILS</h1>
+
+                    <div>
+                        {Array.isArray(data) && data.map((obj) => {
+                            return <MyCartCard
+                                brand={obj.product.brand}
+                                category={obj.product.category}
+                                displayImage={obj.product.displayImage}
+                                price={obj.product.price}
+                                rating={obj.product.ratings}
+                                id={obj.product._id}
+                                name={obj.product.name}
+                                quantity={obj.quantity}
+                                onDelete={() => fetchCart()}
+                                onUpdate={() => fetchCart()}
+                            />
+                        })}
+                    </div>
                 </div>
-                <div className="px-4 py-2">
-                    <div className='flex justify-between'>
-                        <p className="text-sm mt-2">Price ({totalItemsInCart} Items)</p>
-                        <p>{totalPrice} </p>
+
+                <div className='w-full md:w-2/5 mt-4 md:mt-0'>
+
+                    <div className="flex justify-center md:pr-12 md:pl-0">
+                        <button onClick={checkout} className="p-5 mt-6 mb-6 bg-red-600 w-64 md:w-96 hover:bg-blue-700 text-md text-slate-100 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                            Checkout
+                        </button>
                     </div>
-                    {/* Assuming totalQty and totalPrice are variables holding the quantity and total price */}
-                    <div className='flex justify-between'>
-                        <p className="text-sm mt-2">Delivery Charges: </p>
-                        <p className="text-green-600"><i className="fas fa-truck-fast"></i> FREE</p>
+                    <div className="card mt-3  w-full max-w-md bg-white shadow-md rounded-md overflow-hidden md:mt-6">
+                        <div className="text-gray-800 border-x-0 border-y px-4 py-2">
+                            <h1 className="text-xl font-semibold">PRICE DETAILS</h1>
+                        </div>
+                        <div className="px-4 py-2">
+                            <div className='flex justify-between'>
+                                <p className="text-sm mt-2">Price ({totalItemsInCart} Items)</p>
+                                <p>{totalPrice} </p>
+                            </div>
+                            {/* Assuming totalQty and totalPrice are variables holding the quantity and total price */}
+                            <div className='flex justify-between'>
+                                <p className="text-sm mt-2">Delivery Charges: </p>
+                                <p className="text-green-600"><i className="fas fa-truck-fast"></i> FREE</p>
+                            </div>
+                            <div className='flex justify-between border-y'>
+                                <p className="text-lg mt-2 font-semibold py-4">AMOUNT PAYABLE:</p>
+                                <p className='text-lg mt-2 font-semibold py-4'> {totalPrice}</p>
+                            </div>
+                            <p className="text-xs text-gray-600 mt-2 py-4">Safe and Secure Payments. Easy returns. 100% Authentic products.</p>
+                        </div>
                     </div>
-                    <div className='flex justify-between border-y'>
-                        <p className="text-lg mt-2 font-semibold py-4">AMOUNT PAYABLE:</p>
-                        <p className='text-lg mt-2 font-semibold py-4'> {totalPrice}</p>
-                    </div>
-                    <p className="text-xs text-gray-600 mt-2 py-4">Safe and Secure Payments. Easy returns. 100% Authentic products.</p>
+                    <button className='px-4 py-1 ml-32 bg-red-700 rounded-xl mt-1 md:ml-48 mt-2 text-white ' onClick={clearthecart}
+
+                    >clear cart</button>
+
+
+
                 </div>
             </div>
-
-
-
-        </div>
-    </div>
+        </>
 
     )
 }

@@ -34,6 +34,34 @@ const PaymentPage = () => {
         navigate("/chekoutpageb")
     }
 
+    const clearCartHandler = async () => {
+        console.log("function is called");
+        try {
+
+            const response = await axios.delete("https://academics.newtonschool.co/api/v1/ecommerce/cart/", {
+
+                headers: {
+
+                    projectId: "5m649p45bw1w",
+
+                    Authorization: `Bearer ${getToken}`,
+
+                    'Content-Type': 'application/json',
+
+                }
+
+            });
+
+            console.log(response);
+
+        } catch (err) {
+
+            console.error("Error clearing cart:", err);
+
+        }
+
+    }
+
     //when we change mode of payment this function is called
     useEffect(() => {
         payment()
@@ -127,20 +155,21 @@ const PaymentPage = () => {
             console.log("Form submitted!");
             setForm(false)
             setText(true);
-            datahandler([])
+
             toast.success("Order Placed Successfully")
             navigate("/ordersuccess", {
                 state: {
                     totalPrice, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline
                 }
             })
+
         }
 
     };
     //this function is called when payment method is COD along with onPlaceHandler function is called to add new orders
-    const successhandler = () => {
+    const successhandler = async () => {
         onPlacedHandler();
-        datahandler([])
+        await clearCartHandler();
         navigate("/ordersuccess", {
             state: {
                 totalPrice, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline
