@@ -142,94 +142,98 @@ function TopNavbar() {
         <div className="flex justify-between  h-16  md:w-full ipad:w-full w-full bg-red-600  p-2">
 
             {/* LOGO....................................................................... */}
-            <div className=" number-1 flex ">
-                <button onClick={navigateToHome}>
-                    <img className="md:w-80 w-20 md:mr-20" src="https://www.reliancedigital.in/build/client/images/loaders/rd_logo.svg" alt="logo" />
-                </button>
+            <div className="">
+                <div className=" number-1 flex  ">
+                    <button onClick={navigateToHome}>
+                        <img className="md:w-40 w-20 mt-3 md:mt-0 " src="https://www.reliancedigital.in/build/client/images/loaders/rd_logo.svg" alt="logo" />
+                    </button>
+                </div>
             </div>
-
             {/* INPUTBOX....................................... */}
-            <div className=" number-2  md:mt-1  flex  md:pl-60">
-                <div className="rounded-full xl:flex h-6 md:mt-0 mt-4 xl:h-10 md:h-10 bg-white p-0 md:ml-2 ml-4 flex-nowrap sm:flex-nowrap md:flex">
-                    <input
-                        type="text"
-                        className=" md:w-96 w-32 bg-white h-6 sm:h-8 md:h-10 rounded-full sm:px-4 px-2 md:px-4 border-none focus:outline-none focus:border-none"
-                        placeholder="Find your favorite product..."
-                        onChange={handleSearchTerm}
-                        value={searchTerm}
-                    />
-                    <i className="fa-solid fa-magnifying-glass mt-3 text-slate-400 pr-1 inline sm:pr-4 md:pr-2"></i>
+            <div>
+                <div className=" number-2  md:mt-1  flex  md:ml-40">
+                    <div className="rounded-full xl:flex h-6 md:mt-0 mt-4 xl:h-10 md:h-10 bg-white p-0 md:ml-2 ml-4 flex-nowrap sm:flex-nowrap md:flex">
+                        <input
+                            type="text"
+                            className=" md:w-96 w-32 bg-white h-6 sm:h-8 md:h-10 rounded-full sm:px-4 px-2 md:px-4 border-none focus:outline-none focus:border-none"
+                            placeholder="Find your favorite product..."
+                            onChange={handleSearchTerm}
+                            value={searchTerm}
+                        />
+                        <i className="fa-solid fa-magnifying-glass mt-3 text-slate-400 pr-1 inline sm:pr-4 md:pr-2"></i>
+                    </div>
                 </div>
             </div>
 
 
 
-
             {/* ------------------------------------Style for big Devices profile part----------------------------------------------- */}
-            <div className="number-3   xl:flex xl:flex-wrap lg:flex-nowrap lg:w-full mt-2  gap-1  ">
+            <div className="">
+                <div className="number-3   xl:flex xl:flex-wrap lg:flex-nowrap lg:w-full mt-2  gap-1  ">
 
-                {!getToken ? (
-                    <>
-                        <div className="hidden md:inline ">
-                            <NavLink to="/login">
-                                <button className="text-xs text-white font-bold   ml-64 py-2 px-4 rounded"><i className="fa-solid fa-user"></i> Login</button>
-                            </NavLink>
-                            <NavLink to="/register">
-                                <button className="text-xs text-white font-bold py-2 px-4 rounded"><i className="fa-regular fa-user"></i> Register</button>
-                            </NavLink>
-                        </div>
-                    </>
-                ) : (
-                    <>
-                        <div className="flex md:w-full lg:w-full xl:w-full">
-                            <div className="hidden md:inline md:ml-60">
-                                <NavLink to="/mycart">
-                                    <button className="text-xs btn font-bold btn text-white py-2 px-2 rounded"><i className="fa-solid fa-cart-shopping"></i><span className="ml-1"> My Cart<span className="ml-1">({totalCartItems})</span></span></button>
+                    {!getToken ? (
+                        <>
+                            <div className="hidden md:inline md:pl-40 ">
+                                <NavLink to="/login">
+                                    <button className="text-xs text-white font-bold md:    py-2 px-4 rounded"><i className="fa-solid fa-user"></i> Login</button>
+                                </NavLink>
+                                <NavLink to="/register">
+                                    <button className="text-xs text-white font-bold py-2 px-4 rounded"><i className="fa-regular fa-user"></i> Register</button>
                                 </NavLink>
                             </div>
-                            <span className="text-white hidden md:inline">|</span>
-                            <div className="mt-2 ml-2 font-semibold text-white text-xs uppercase  hidden md:inline">
-                                {getName ? <button onClick={() => setLogout(!logout)}><i className="fa-solid fa-user fa-lg"></i> <span className="ml-1">{getName}</span></button> : "Profile"}
-                            </div>
-                        </div>
-                        {logout &&
-
-
-
-                            // <div className="absolute inset-0 bg-black bg-opacity-30 backdrop-blur-sm items-center z-20" >
-                            <div className="h-32 w-32 rounded-md bg-blue-800 absolute right-0 hidden md:inline md:top-24 md:right-6 z-50" >
-                                <div>
-                                    <button className="text-white text-xs pl-28" onClick={() => setLogout(false)}><i class="fa-solid fa-x "></i></button></div>
-
-                                <div className="">
-                                    <NavLink to="/orderhistory">
-                                        <button onClick={() => setLogout(!logout)} className=" btn font-bold btn text-white py-2 px-2 rounded text-xs ">
-                                            <i style={{ color: 'white' }} className="fa-solid fa-heart"></i>
-                                            <span className="ml-2 text-xs ">Order History</span>
-                                        </button>
+                        </>
+                    ) : (
+                        <>
+                            <div className="flex md:w-full lg:w-full xl:w-full">
+                                <div className="hidden md:inline md:ml-60">
+                                    <NavLink to="/mycart">
+                                        <button className="text-xs btn font-bold btn text-white py-2 px-2 rounded"><i className="fa-solid fa-cart-shopping"></i><span className="ml-1"> My Cart<span className="ml-1">({totalCartItems})</span></span></button>
                                     </NavLink>
-                                    <div className="hidden md:block">
-                                        <NavLink onClick={() => setLogout(!logout)} to="/wishlist">
-                                            <button onClick={() => setLogout(!logout)} className=" text-xs btn font-bold btn text-white py-2   ml-2 rounded">
-                                                <i style={{ color: 'white' }} className="fa-solid fa-heart"></i>
-                                                <span className="ml-2  text-xs ">My Wishlist</span>
-                                            </button>
-                                        </NavLink>
-                                    </div>
-
-
-                                    <button onClick={logoutHandler} className="btn font-bold btn text-white hidden md:inline ml-2 py-2 px-1 rounded text-xs">
-                                        <i className="fa-solid fa-right-from-bracket mr-1  text-xs"></i>
-                                        <span className="ml-2  text-xs">Log out</span>
-                                    </button>
-
+                                </div>
+                                <span className="text-white hidden md:inline">|</span>
+                                <div className="mt-2 ml-2 font-semibold text-white text-xs uppercase  hidden md:inline">
+                                    {getName ? <button onClick={() => setLogout(!logout)}><i className="fa-solid fa-user fa-lg"></i> <span className="ml-1">{getName}</span></button> : "Profile"}
                                 </div>
                             </div>
-                            // </div>
+                            {logout &&
 
-                        }
-                    </>
-                )}
+
+
+                                // <div className="absolute inset-0 bg-black bg-opacity-30 backdrop-blur-sm items-center z-20" >
+                                <div className="h-32 w-32 rounded-md bg-blue-800 absolute right-0 hidden md:inline md:top-24 md:right-6 z-50" >
+                                    <div>
+                                        <button className="text-white text-xs pl-28" onClick={() => setLogout(false)}><i class="fa-solid fa-x "></i></button></div>
+
+                                    <div className="">
+                                        <NavLink to="/orderhistory">
+                                            <button onClick={() => setLogout(!logout)} className=" btn font-bold btn text-white py-2 px-2 rounded text-xs ">
+                                                <i style={{ color: 'white' }} className="fa-solid fa-heart"></i>
+                                                <span className="ml-2 text-xs ">Order History</span>
+                                            </button>
+                                        </NavLink>
+                                        <div className="hidden md:block">
+                                            <NavLink onClick={() => setLogout(!logout)} to="/wishlist">
+                                                <button onClick={() => setLogout(!logout)} className=" text-xs btn font-bold btn text-white py-2   ml-2 rounded">
+                                                    <i style={{ color: 'white' }} className="fa-solid fa-heart"></i>
+                                                    <span className="ml-2  text-xs ">My Wishlist</span>
+                                                </button>
+                                            </NavLink>
+                                        </div>
+
+
+                                        <button onClick={logoutHandler} className="btn font-bold btn text-white hidden md:inline ml-2 py-2 px-1 rounded text-xs">
+                                            <i className="fa-solid fa-right-from-bracket mr-1  text-xs"></i>
+                                            <span className="ml-2  text-xs">Log out</span>
+                                        </button>
+
+                                    </div>
+                                </div>
+                                // </div>
+
+                            }
+                        </>
+                    )}
+                </div>
             </div>
 
 
