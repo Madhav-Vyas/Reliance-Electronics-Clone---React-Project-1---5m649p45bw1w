@@ -56,7 +56,7 @@ const Subnavbar = () => {
                     <div onMouseLeave={() => {
                         setIsHovered(false)
                         closeAllModal()
-                    }} className='w-full h-56  rounded bg-[#003380] absolute top-32  text-white'>
+                    }} className='w-full h-56   rounded bg-[#003380] absolute top-32  text-white'>
                         <div>
                             <div className='px-2 pt-2 cursor-pointer hover:underline hover:font-bold'><NavLink to="/acpage">Air Conditioners</NavLink></div>
                             <div className='text-xs p-4 text-slate-300 '>

@@ -232,7 +232,7 @@ const BuynowPaymentPage = () => {
                                 value={cardNumber}
                                 onChange={(e) => setCardNumber(e.target.value)}
                                 placeholder="Enter card number"
-                                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                className="appearance-none border md:text-base text-xs rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             // minLength={16}  // Minimum 16-digit card number
                             // maxLength={16}  // Maximum 16-digit card number
                             />
@@ -246,7 +246,7 @@ const BuynowPaymentPage = () => {
                                 value={cardHolder}
                                 onChange={(e) => setCardHolder(e.target.value)}
                                 placeholder="Enter card holder name"
-                                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                className="appearance-none md:text-base text-xs border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             />
                         </div>
 
@@ -259,11 +259,11 @@ const BuynowPaymentPage = () => {
 
 
                                 <div className='border flex '>
-                                    <div><input className="appearance-none  w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" onChange={(e) => setMonth(e.target.value)} value={month} placeholder='MM' min={1} max={12} /></div>
+                                    <div><input className="appearance-none w-12 md:w-20 py-2 px-3 text-xs md:text-base text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" onChange={(e) => setMonth(e.target.value)} value={month} placeholder='MM' min={1} max={12} /></div>
 
                                     <div className='md:text-2xl'>/</div>
 
-                                    <div><input className="appearance-none  w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" onChange={(e) => setYear(e.target.value)} value={year} placeholder='YYYY' /></div>
+                                    <div><input className="appearance-none  w-16 md:w-full text-xs md:text-base py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" onChange={(e) => setYear(e.target.value)} value={year} placeholder='YYYY' /></div>
                                 </div>
                             </div>
 
@@ -277,7 +277,7 @@ const BuynowPaymentPage = () => {
                                     value={cvv}
                                     onChange={(e) => setCvv(e.target.value)}
                                     placeholder="CVV"
-                                    className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    className="appearance-none md:text-base text-xs border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 // minLength={3}  // Minimum 3-digit CVV
                                 // maxlength={3}  // Maximum 3-digit CVV
                                 />

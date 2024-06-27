@@ -111,7 +111,7 @@ function TopNavbar() {
     return (<>
         {/* LINKS ON TOP---------------------------------------------------------------- */}
         <div className="w-100% overflow-x-auto ">
-            <div className="bg-red-600 text-white border-b border-gray-300 flex justify-between p-1 text-xs font-bold">
+            <div className="bg-red-600 text-white border-b border-gray-300 flex justify-between  p-1 text-xs font-bold">
                 <div className="w-24 sm:w-auto flex items-center border-gray-300 pl-3">
                     <span>OUR BRAND PROMISE</span>
                 </div>
@@ -139,7 +139,7 @@ function TopNavbar() {
         {/* ----------------------------------------------------------------------End of links on top----------------------------------------------- */}
 
 
-        <div className="flex  h-16  md:w-full ipad:w-full w-full bg-red-600  p-2">
+        <div className="flex justify-between  h-16  md:w-full ipad:w-full w-full bg-red-600  p-2">
 
             {/* LOGO....................................................................... */}
             <div className=" number-1 flex ">
@@ -182,7 +182,7 @@ function TopNavbar() {
                 ) : (
                     <>
                         <div className="flex md:w-full lg:w-full xl:w-full">
-                            <div className="hidden md:inline md:ml-64">
+                            <div className="hidden md:inline md:ml-60">
                                 <NavLink to="/mycart">
                                     <button className="text-xs btn font-bold btn text-white py-2 px-2 rounded"><i className="fa-solid fa-cart-shopping"></i><span className="ml-1"> My Cart<span className="ml-1">({totalCartItems})</span></span></button>
                                 </NavLink>

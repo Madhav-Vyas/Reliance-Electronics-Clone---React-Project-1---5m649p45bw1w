@@ -157,6 +157,7 @@ const PaymentPage = () => {
             setText(true);
 
             toast.success("Order Placed Successfully")
+            clearCartHandler()
             navigate("/ordersuccess", {
                 state: {
                     totalPrice, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline
@@ -240,11 +241,11 @@ const PaymentPage = () => {
                         )}
                         <div className="mb-4">
                             <label htmlFor="cardNumber" className="block text-gray-700 font-bold mb-2">Card Number</label>
-                            <input type="text" id="cardNumber" value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} placeholder="Enter card number" className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                            <input type="text" id="cardNumber" value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} placeholder="Enter card number" className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight md:text-base text-xs focus:outline-none focus:shadow-outline" />
                         </div>
                         <div className="mb-4">
                             <label htmlFor="cardHolder" className="block text-gray-700 font-bold mb-2">Card Holder</label>
-                            <input type="text" id="cardHolder" value={cardHolder} onChange={(e) => setCardHolder(e.target.value)} placeholder="Enter card holder name" className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                            <input type="text" id="cardHolder" value={cardHolder} onChange={(e) => setCardHolder(e.target.value)} placeholder="Enter card holder name" className="appearance-none border rounded w-full py-2 px-3 text-gray-700 md:text-base text-xs leading-tight focus:outline-none focus:shadow-outline" />
                         </div>
 
 
@@ -259,11 +260,11 @@ const PaymentPage = () => {
 
 
                                 <div className='border flex '>
-                                    <div><input className="appearance-none  w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" onChange={(e) => setMonth(e.target.value)} value={month} placeholder='MM' min={1} max={12} /></div>
+                                    <div><input className="appearance-none w-12 md:text-base text-xs  md:w-20 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" onChange={(e) => setMonth(e.target.value)} value={month} placeholder='MM' min={1} max={12} /></div>
 
                                     <div className='md:text-2xl'>/</div>
 
-                                    <div><input className="appearance-none  w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" onChange={(e) => setYear(e.target.value)} value={year} placeholder='YYYY' /></div>
+                                    <div><input className="appearance-none md:text-base text-xs w-16 md:w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" onChange={(e) => setYear(e.target.value)} value={year} placeholder='YYYY' /></div>
                                 </div>
                             </div>
 
@@ -276,7 +277,7 @@ const PaymentPage = () => {
 
                             <div className="mb-4">
                                 <label htmlFor="cvv" className="block text-gray-700 font-bold mb-2">CVV</label>
-                                <input type="text" id="cvv" value={cvv} onChange={(e) => setCvv(e.target.value)} placeholder="CVV" className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                                <input type="text" id="cvv" value={cvv} onChange={(e) => setCvv(e.target.value)} placeholder="CVV" className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight md:text-base text-xs focus:outline-none focus:shadow-outline" />
                             </div>
                         </div>
                         <button type="submit" className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit</button>
