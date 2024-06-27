@@ -131,7 +131,9 @@ const MyCart = () => {
                         <div>Items Total : <span className='text-red-600'>{totalPrice}</span></div>
                     </div>
 
+                    <button className='px-1 py-1 ml-2  rounded-xl mt-1 mt-2 text-red-700 hover:text-blue-600 ' onClick={clearthecart}
 
+                    ><i className="fa-solid fa-cart-shopping"> </i>Clear Cart</button>
                     <div>
                         {Array.isArray(data) && data.map((obj) => {
                             return <MyCartCard
@@ -178,9 +180,7 @@ const MyCart = () => {
                             <p className="text-xs text-gray-600 mt-2 py-4">Safe and Secure Payments. Easy returns. 100% Authentic products.</p>
                         </div>
                     </div>
-                    <button className='px-4 py-1 ml-32 bg-red-700 rounded-xl mt-1 md:ml-48 mt-2 text-white ' onClick={clearthecart}
 
-                    >clear cart</button>
 
 
 
