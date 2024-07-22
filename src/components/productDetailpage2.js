@@ -253,7 +253,7 @@ const productDetailpage2 = () => {
             <div className="global-container w-full flex flex-col md:flex-row mt-5">
                 <div className="left w-full md:w-[30%] h-full">
                     <div className="container p-4 w-full md:w-full">
-                        <img src={mainImage} alt="Product" className="mb-4"></img>
+                        <img loading="lazy" src={mainImage} alt="Product" className="mb-4"></img>
                         {/* <h2 className="text-4xl font-bold mb-4">Product Images</h2> */}
                         <div className=" px-6">
                             <Slider {...settings}>

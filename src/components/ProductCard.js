@@ -68,7 +68,7 @@ const ProductCard = ({ brand, category, displayImage, price, rating, name, id, d
                 </div>
                 <button onClick={onClickHandler} className="mt-1 ml-1">
                     <div className="w-56 h-auto bg-transparent rounded-lg p-2 ml-2  cursor-pointer transform transition duration-300  text-ellipsis overflow-hidden max-h-[504px]">
-                        <img className="w-full md:w-32 h-auto p-2 object-cover hover:scale-110 mx-auto mb-4" src={displayImage} alt="Product Image" />
+                        <img loading="lazy" className="w-full md:w-32 h-auto p-2 object-cover hover:scale-110 mx-auto mb-4" src={displayImage} alt="Product Image" />
                         <div className="text-left m-2 p-6 md:p-8 font mb-4">
 
                             <h4 className="text-xs hover:text-red-600 md:text-xs font-semibold text-blue-800 overflow-hidden" style={{ maxHeight: '2rem', textOverflow: 'ellipsis' }}>{name}</h4>

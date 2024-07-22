@@ -80,7 +80,7 @@ const BuynowCheckoutPage = () => {
             console.log(getData);
             navigate("/buynowpayment", {
                 state: {
-                    displayImage, name, totalPrice, ratings, sellerTag, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline,buyNowTotalPriceAfterQty
+                    displayImage, name, totalPrice, ratings, sellerTag, pincode, firstname, lastname, houseNo, colony, landmark, city, state, mobile, landline, buyNowTotalPriceAfterQty
                 }
             })
             console.log({
@@ -198,10 +198,11 @@ const BuynowCheckoutPage = () => {
                         {/* Mobile No. and Landline No. */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <div className="col-span-2 sm:col-span-1">
-                                <input type="tel" name="mobile" id="mobile" placeholder="Mobile No." minLength={10} maxLength={10} value={getData.mobile} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />
+                                <input type="tel" name="mobile" id="mobile" placeholder="Mobile No." minLength={10} maxLength={10} value={getData.mobile} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4"
+                                    pattern="[0-9]{3}[0-9]{3}[0-9]{4}" />
                             </div>
                             <div className="col-span-2 sm:col-span-1">
-                                <input type="tel" name="landline" id="landline" placeholder="Landline No." value={getData.landline} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" />
+                                <input type="tel" name="landline" id="landline" placeholder="Landline No." value={getData.landline} onChange={onChangeHandler} className="mt-1 p-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md m-4" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" />
                             </div>
                         </div>
                         {/* Submit Button */}

@@ -154,7 +154,7 @@ const Home = () => {
 
 
             <div className="bg-white my-1 ">
-                <NavLink to="/acpage"><img src="https://www.reliancedigital.in/medias/Good-Friday-Sale-Banner-D-1-.jpg?context=bWFzdGVyfGltYWdlc3wxNzY0MjB8aW1hZ2UvanBlZ3xpbWFnZXMvaDE5L2hiMC8xMDEyNDkzNDE1MjIyMi5qcGd8ZjBlM2JiYTVhYzlmZDlkOWM2NTVhZGM5YzliOTZjZWNjMGQ5ZTlhZTMwODQ2MmI5YzNkY2Q2NjE5OWMyYzFhOA"></img></NavLink>
+                <NavLink to="/acpage"><img alt="offer-banner" src="https://www.reliancedigital.in/medias/Good-Friday-Sale-Banner-D-1-.jpg?context=bWFzdGVyfGltYWdlc3wxNzY0MjB8aW1hZ2UvanBlZ3xpbWFnZXMvaDE5L2hiMC8xMDEyNDkzNDE1MjIyMi5qcGd8ZjBlM2JiYTVhYzlmZDlkOWM2NTVhZGM5YzliOTZjZWNjMGQ5ZTlhZTMwODQ2MmI5YzNkY2Q2NjE5OWMyYzFhOA"></img></NavLink>
             </div>
             <div className="bg-white my-1 rounded">
                 <div style={{ width: '95%', margin: '0 auto' }}>
@@ -268,7 +268,7 @@ const Home = () => {
             <>
 
                 <Mobile />
-                <NavLink to="/mobilepage"> <img src="https://www.reliancedigital.in/medias/Samsung-Galaxy-A55-A35-5G-Carousel-Banner-19-03-2024-D.jpg?context=bWFzdGVyfGltYWdlc3wxMDgyMTR8aW1hZ2UvanBlZ3xpbWFnZXMvaGRhL2gzZC8xMDEyMjIwNDA4NjMwMi5qcGd8ZTA1NjgyYjljZDAxNjQxODM3OTgxNGU4ZjBjYjM2NmVhNzkxODRmNGZmN2FmYTA4ZGJiYjc1NmExNjlhYzI1OQ"></img></NavLink>
+                <NavLink to="/mobilepage"> <img alt='banner' className='w-100vw' src="https://www.reliancedigital.in/medias/Samsung-Galaxy-A55-A35-5G-Carousel-Banner-19-03-2024-D.jpg?context=bWFzdGVyfGltYWdlc3wxMDgyMTR8aW1hZ2UvanBlZ3xpbWFnZXMvaGRhL2gzZC8xMDEyMjIwNDA4NjMwMi5qcGd8ZTA1NjgyYjljZDAxNjQxODM3OTgxNGU4ZjBjYjM2NmVhNzkxODRmNGZmN2FmYTA4ZGJiYjc1NmExNjlhYzI1OQ"></img></NavLink>
                 <Ac />
                 <Audio />
                 <div>
