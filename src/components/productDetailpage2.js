@@ -253,14 +253,14 @@ const productDetailpage2 = () => {
             <div className="global-container w-full flex flex-col md:flex-row mt-5">
                 <div className="left w-full md:w-[30%] h-full">
                     <div className="container p-4 w-full md:w-full">
-                        <img loading="lazy" src={mainImage} alt="Product" className="mb-4"></img>
+                        <img loading="lazy" src={mainImage} alt="Product" className="mb-4 w-100%"></img>
                         {/* <h2 className="text-4xl font-bold mb-4">Product Images</h2> */}
                         <div className=" px-6">
                             <Slider {...settings}>
                                 {images && images.length > 0 ? (
                                     images.map((image, index) => (
 
-                                        <img onClick={() => setMainImage(image)} key={index} src={image} alt={`Product Image ${index}`} className="w-full rounded-md" />
+                                        <img loading="eager" onClick={() => setMainImage(image)} key={index} src={image} alt={`Product Image ${index}`} className="w-full rounded-md" />
 
 
                                     ))
