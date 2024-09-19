@@ -8,14 +8,17 @@ import { NavLink } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import kitchenStore from "../../Store/KitchenApplainceStore";
+import { observer } from "mobx-react-lite";
+import { toJS } from "mobx";
 
-const Kitchenappliances = () => {
-    const [getCategory, setCategory] = useState([]);
-    const [selectedsubCataegory, setSelectedSubCataegory] = useState('kitchenappliances');
-    const { getkitchen, kitchenDataHandler } = useData();
+const Kitchenappliances = observer(() => {
+    // const [getCategory, setCategory] = useState([]);
+    // const [selectedsubCataegory, setSelectedSubCataegory] = useState('kitchenappliances');
+    // const { getkitchen, kitchenDataHandler } = useData();
 
     useEffect(() => {
-        onkitchenappliancesHandeler();
+        kitchenStore.onKAHandeler()
     }, [])
 
     //slides to show based on screen size ------------------------------------------------------
@@ -46,22 +49,7 @@ const Kitchenappliances = () => {
 
 
 
-    const onkitchenappliancesHandeler = async () => {
-        try {
-            const response = await axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/electronics/products?filter={"subCategory":"${selectedsubCataegory}"}`, {
-                headers: {
-                    projectId: "5m649p45bw1w"
-                }
-            })
-            console.log(response.data.data);
-            setCategory(response.data.data)
-            kitchenDataHandler(response.data.data)
-        } catch (err) {
-            console.log(err);
-        }
 
-
-    }
     const settings = {
         dots: false,
         infinite: true,
@@ -98,7 +86,7 @@ const Kitchenappliances = () => {
             <Slider {...settings}>
                 {/* <div className=' scroll-container lowest-price-today flex overflow-x-auto overflow-y-hidden w-full h-auto'> */}
 
-                {getCategory.map((obj, index) => {
+                {toJS(kitchenStore.kitchenApplainces).map((obj, index) => {
                     return <div key={obj._id}>
                         <ProductCard
                             key={obj._id}
@@ -122,6 +110,6 @@ const Kitchenappliances = () => {
             {/* </div > */}
         </div >
     </div>)
-}
+})
 
 export default Kitchenappliances

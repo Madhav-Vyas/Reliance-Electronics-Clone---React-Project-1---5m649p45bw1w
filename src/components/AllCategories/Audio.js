@@ -1,20 +1,18 @@
-
 import ProductCard from "../ProductCard";
 import React from 'react'
 import { useState, useEffect } from "react";
-import axios from 'axios';
-import { useData } from "../../Providers/AllcategoryData";
 import { NavLink } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-const Audio = () => {
-    const [getCategory, setCategory] = useState([]);
-    const [selectedsubCataegory, setSelectedSubCataegory] = useState('audio');
-    const { audio, audioDatahandler } = useData();
+import audioStore from "../../Store/AudioStore";
+import { observer } from 'mobx-react-lite';
+import { toJS } from 'mobx';
+const Audio = observer(() => {
+
 
     useEffect(() => {
-        onAudioHandeler();
+        audioStore.onAudioHandler()
     }, []);
     //slides to show based on screen size ------------------------------------------------------
     const [slidesToShow, setSlidesToShow] = useState(6);
@@ -42,25 +40,7 @@ const Audio = () => {
 
     //----------------------------------------------
 
-    const onAudioHandeler = async () => {
-        try {
-            const response = await axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/electronics/products?filter={"subCategory":"${selectedsubCataegory}"}`, {
-                headers: {
-                    projectId: "5m649p45bw1w"
-                }
-            })
 
-            setCategory(response.data.data,)
-            audioDatahandler(response.data.data)
-
-
-
-        } catch (err) {
-            console.log(err);
-        }
-
-        console.log(audio);
-    }
     const settings = {
         dots: false,
         infinite: true,
@@ -91,7 +71,7 @@ const Audio = () => {
             />
         );
     }
-    console.log(audio, "data is being set");
+    //console.log(audio, "data is being set");
     return (<div className="bg-white my-1">
         <h2 className="inline-block text-lg font-semibold ml-2 pt-6 pl-4">Audio   </h2> <NavLink to="/audiopage"><button className="px-2 ml-4 py-1 bg-blue-800 text-white rounded hover:bg-blue-600 transition duration-300 ease-in-out  text-sm">View All</button></NavLink>
 
@@ -99,7 +79,7 @@ const Audio = () => {
             <Slider {...settings}>
                 {/* <div className=' scroll-container lowest-price-today flex overflow-x-auto overflow-y-hidden w-full h-auto'> */}
 
-                {getCategory.map((obj, index) => {
+                {toJS(audioStore.audio).map((obj, index) => {
                     return <div key={obj._id}>
                         <ProductCard
                             key={obj._id}
@@ -123,6 +103,6 @@ const Audio = () => {
             {/* </div > */}
         </div >
     </div>)
-}
+})
 
 export default Audio

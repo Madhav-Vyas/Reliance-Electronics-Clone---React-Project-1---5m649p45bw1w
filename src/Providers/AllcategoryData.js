@@ -7,17 +7,19 @@ export const DataProvider = ({ children }) => {
     const [getToken, setToken] = useState(localStorage.getItem('token'));
     const [getName, setName] = useState(localStorage.getItem('name'));
 
-    const [getAc, setAc] = useState([]);
-    const [audio, setAudio] = useState([]);
-    const [gethealth, sethealth] = useState([]);
-    const [getkitchen, setKitchen] = useState([]);
-    const [getLaptop, setLaptop] = useState([]);
-    const [getMobile, setMobile] = useState([]);
-    const [getRefrigerator, setRefrigerator] = useState([]);
-    const [getTablet, setTablet] = useState([]);
-    const [getTelevison, setTelevison] = useState([]);
-    const [getTravel, setTravel] = useState([]);
-    const [getWashingMachine, setWashingMachine] = useState([]);
+    // const [getAc, setAc] = useState([]);
+    // const [audio, setAudio] = useState([]);
+    // const [gethealth, sethealth] = useState([]);
+    // const [getkitchen, setKitchen] = useState([]);
+    // const [getLaptop, setLaptop] = useState([]);
+    // const [getMobile, setMobile] = useState([]);
+    // const [getRefrigerator, setRefrigerator] = useState([]);
+    // const [getTablet, setTablet] = useState([]);
+    // const [getTelevison, setTelevison] = useState([]);
+    // const [getTravel, setTravel] = useState([]);
+    // const [getWashingMachine, setWashingMachine] = useState([]);
+
+
     const [searchTerm, setSearchTerm] = useState("");
 
     const [totalCartItems, setTotalCartItems] = useState(0);
@@ -58,48 +60,48 @@ export const DataProvider = ({ children }) => {
         localStorage.setItem('name', data);
     };
 
-    const audioDatahandler = (data) => {
-        setAudio(data); // Update audio state directly
-    };
+    // const audioDatahandler = (data) => {
+    //     setAudio(data); // Update audio state directly
+    // };
 
-    const acDataHandler = (data) => {
-        setAc(data);
-    };
+    // const acDataHandler = (data) => {
+    //     setAc(data);
+    // };
 
-    const healthDatahandler = (data) => {
-        sethealth(data);
-    };
+    // const healthDatahandler = (data) => {
+    //     sethealth(data);
+    // };
 
-    const kitchenDataHandler = (data) => {
-        setKitchen(data);
-    };
+    // const kitchenDataHandler = (data) => {
+    //     setKitchen(data);
+    // };
 
-    const laptopDatahandler = (data) => {
-        setLaptop(data);
-    };
+    // const laptopDatahandler = (data) => {
+    //     setLaptop(data);
+    // };
 
-    const mobileDataHandler = (data) => {
-        setMobile(data);
-    };
+    // const mobileDataHandler = (data) => {
+    //     setMobile(data);
+    // };
 
-    const refrigeratorDatahandler = (data) => {
-        setRefrigerator(data);
-    };
+    // const refrigeratorDatahandler = (data) => {
+    //     setRefrigerator(data);
+    // };
 
-    const tabletDataHandler = (data) => {
-        setTablet(data);
-    };
+    // const tabletDataHandler = (data) => {
+    //     setTablet(data);
+    // };
 
-    const televisonDatahandler = (data) => {
-        setTelevison(data);
-    };
+    // const televisonDatahandler = (data) => {
+    //     setTelevison(data);
+    // };
 
-    const travelDataHandler = (data) => {
-        setTravel(data);
-    };
-    const washingMachineDatahandler = (data) => {
-        setWashingMachine(data);
-    };
+    // const travelDataHandler = (data) => {
+    //     setTravel(data);
+    // };
+    // const washingMachineDatahandler = (data) => {
+    //     setWashingMachine(data);
+    // };
 
     //when order is placed dirctly witout adding it to cart , then orderHistory is being set using this function
     const orderHistoryHandler = (data) => {
@@ -126,38 +128,38 @@ export const DataProvider = ({ children }) => {
         orderHistory,
         orderHistoryHandler,
 
-        getAc,
-        acDataHandler,
+        // getAc,
+        // acDataHandler,
 
-        audio,
-        audioDatahandler,
+        // audio,
+        // audioDatahandler,
 
-        gethealth,
-        healthDatahandler,
+        // gethealth,
+        // healthDatahandler,
 
-        getkitchen,
-        kitchenDataHandler,
+        // getkitchen,
+        // kitchenDataHandler,
 
-        getLaptop,
-        laptopDatahandler,
+        // getLaptop,
+        // laptopDatahandler,
 
-        getMobile,
-        mobileDataHandler,
+        // getMobile,
+        // mobileDataHandler,
 
-        getRefrigerator,
-        refrigeratorDatahandler,
+        // getRefrigerator,
+        // refrigeratorDatahandler,
 
-        getTablet,
-        tabletDataHandler,
+        // getTablet,
+        // tabletDataHandler,
 
-        getTelevison,
-        televisonDatahandler,
+        // getTelevison,
+        // televisonDatahandler,
 
-        getTravel,
-        travelDataHandler,
+        // getTravel,
+        // travelDataHandler,
 
-        getWashingMachine,
-        washingMachineDatahandler,
+        // getWashingMachine,
+        // washingMachineDatahandler,
 
         searchTerm,
         searchTermHandler,

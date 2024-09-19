@@ -2,11 +2,10 @@ import React from 'react'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
-import { useData } from '../Providers/AllcategoryData';
 import { toast } from 'react-toastify';
 
 const Register = () => {
-    const { onNameHandler } = useData();
+
     //State for getting form data, in form of object , these are passed in value property of input as {getdata.name} etc
     const [getData, setData] = useState({
         name: "",

@@ -1,20 +1,17 @@
 
 import ProductCard from "../ProductCard";
-import React from 'react'
-import { useState, useEffect } from "react";
-import axios from 'axios';
-import { useData } from "../../Providers/AllcategoryData";
+import React, { useState, useEffect } from 'react'
 import { NavLink } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-const WashingMachine = () => {
-    const [getCategory, setCategory] = useState([]);
-    const [selectedsubCataegory, setSelectedSubCataegory] = useState('washingMachine');
-    const { washingMachineDatahandler } = useData();
+import { observer } from 'mobx-react-lite';
+import wmStore from "../../Store/WmStore";
+import { toJS } from "mobx";
+const WashingMachine = observer(() => {
 
     useEffect(() => {
-        onWmHandeler();
+        wmStore.onWmHandeler()
     }, [])
 
     //slides to show based on screen size ------------------------------------------------------
@@ -44,22 +41,7 @@ const WashingMachine = () => {
     //----------------------------------------------
 
 
-    const onWmHandeler = async () => {
-        try {
-            const response = await axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/electronics/products?filter={"subCategory":"${selectedsubCataegory}"}`, {
-                headers: {
-                    projectId: "5m649p45bw1w"
-                }
-            })
-            console.log(response.data.data);
-            setCategory(response.data.data)
-            washingMachineDatahandler(response.data.data);
-        } catch (err) {
-            console.log(err);
-        }
 
-
-    }
     const settings = {
         dots: false,
         infinite: true,
@@ -97,7 +79,7 @@ const WashingMachine = () => {
             <Slider {...settings}>
                 {/* <div className=' scroll-container lowest-price-today flex overflow-x-auto overflow-y-hidden w-full h-auto'> */}
 
-                {getCategory.map((obj, index) => {
+                {toJS(wmStore.wm).map((obj, index) => {
                     return <div key={obj._id}>
                         <ProductCard
                             key={obj._id}
@@ -121,6 +103,6 @@ const WashingMachine = () => {
             {/* </div > */}
         </div >
     </div>)
-}
+})
 
 export default WashingMachine

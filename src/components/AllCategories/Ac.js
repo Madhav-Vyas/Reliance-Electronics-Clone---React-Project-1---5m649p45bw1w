@@ -1,41 +1,16 @@
-
 import ProductCard from "../ProductCard";
 import React from 'react'
 import { useState, useEffect } from "react";
-import axios from 'axios';
-import { useData } from "../../Providers/AllcategoryData";
 import { NavLink } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import acStore from "../../Store/AcStore";
+import { observer } from 'mobx-react-lite';
+const Ac = observer(() => {
 
-const Ac = () => {
-    const { getAc, acDataHandler } = useData();
-    const [getCategory, setCategory] = useState([]);
-    const selectedsubCataegory = 'ac';
-
-    //gets the ACs and setting it in a variable using useState  , after that mapping it using productCard
-    const onAcHandeler = async () => {
-        try {
-            const response = await axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/electronics/products?filter={"subCategory":"${selectedsubCataegory}"}`, {
-                headers: {
-                    projectId: "5m649p45bw1w"
-                }
-            })
-
-            console.log(response.data.data);
-
-            // acDataHandler(response.data.data);
-            setCategory(response.data.data);
-        } catch (err) {
-            console.log(err);
-        }
-
-
-    }
-    //it is on home page so it is called on load of home page 
     useEffect(() => {
-        onAcHandeler();
+        acStore.onAcHandeler()
     }, []);
 
 
@@ -109,7 +84,7 @@ const Ac = () => {
             <Slider {...settings}>
                 {/* <div className=' scroll-container lowest-price-today flex overflow-x-auto overflow-y-hidden w-full h-auto'> */}
 
-                {getCategory.map((obj, index) => {
+                {acStore.ac.map((obj, index) => {
                     return <div key={obj._id}>
                         <ProductCard
                             key={obj._id}
@@ -133,6 +108,6 @@ const Ac = () => {
             {/* </div > */}
         </div >
     </div>)
-}
+})
 
 export default Ac

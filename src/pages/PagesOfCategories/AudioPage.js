@@ -1,37 +1,29 @@
 import React from 'react'
-import { useData } from '../../Providers/AllcategoryData'
+
 import ProductCard from '../../components/ProductCard'
 import { useEffect, useState } from "react";
-import axios from 'axios';
+
 import { Audio } from 'react-loader-spinner'
-const AudioPage = () => {
-    const limit = 10;
+import audioStore from '../../Store/AudioStore';
+import { observer } from 'mobx-react-lite';
+import { toJS } from 'mobx';
+const AudioPage = observer(() => {
+
     const [page, setPage] = useState(1);
-    const [data, setData] = useState([]);
-    const [selectedsubCataegory, setSelectedSubCataegory] = useState('audio');
-    const { audio, audioDatahandler } = useData()
-    const [loading, setLoading] = useState(true);
+
+
+    const [loading, setLoading] = useState(false);
 
 
     // code for infinite scroll...............................................................
 
-    const onAudioHandeler = async () => {
-        try {
-            const response = await axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/electronics/products?limit=10&page=${page}&filter={"subCategory":"${selectedsubCataegory}"}`, {
-                headers: {
-                    projectId: "5m649p45bw1w"
-                }
-            });
-
-            // Update data state with new fetched data
-            setData((prev) => [...prev, ...response.data.data]);
-            setLoading(false);
-        } catch (err) {
-            console.log(err);
-        }
-    }
     useEffect(() => {
-        onAudioHandeler();
+        audioStore.onAudioPageHandler(page)
+        console.log(audioStore.audio);
+    }, []);
+    useEffect(() => {
+        audioStore.onAudioPageHandler(page)
+        console.log(audioStore.audio);
     }, [page]); // Update data whenever page changes
 
     useEffect(() => {
@@ -56,63 +48,16 @@ const AudioPage = () => {
     // code for infinite scroll End...............................................
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    const sortByPriceLtoH = () => {
-        const sorted = [...data].sort((a, b) => {
-            return a.price - b.price;
-        });
-        setData(sorted);
-    }
-
-    const sortByPriceHtoL = () => {
-        const sorted = [...data].sort((a, b) => {
-            return b.price - a.price;
-        });
-        setData(sorted);
-    }
-
-    const sortByRatingHtoL = () => {
-        const sorted = [...data].sort((a, b) => {
-            return b.ratings - a.ratings;
-        });
-        setData(sorted);
-    }
-
     return (
         <>
             <h1 className="inline-block font-semibold text-center text-lg py-9 ">Audio Devices 🔊</h1>
-            <button onClick={sortByRatingHtoL} className="bg-blue-500 text-sm hover:bg-blue-700 ml-3 text-white font-bold py-2 px-4 rounded ">Rating(High to Low)</button>
-            <button onClick={sortByPriceLtoH} className="bg-blue-500 text-sm hover:bg-blue-700 ml-3 text-white font-bold py-2 px-4 rounded ">Price(Low to High)</button>
-            <button onClick={sortByPriceHtoL} className="bg-blue-500 text-sm hover:bg-blue-700 ml-3 text-white font-bold py-2 px-4 rounded ">Price(High to low)</button>
+            <button onClick={audioStore.sortByRatingHtoL} className="bg-blue-500 text-sm hover:bg-blue-700 ml-3 text-white font-bold py-2 px-4 rounded">Rating(High to Low)</button>
+            <button onClick={audioStore.sortByPriceLtoH} className="bg-blue-500 text-sm hover:bg-blue-700 ml-3 text-white font-bold py-2 px-4 rounded">Price(Low to High)</button>
+            <button onClick={audioStore.sortByPriceHtoL} className="bg-blue-500 text-sm hover:bg-blue-700 ml-3 text-white font-bold py-2 px-4 rounded">Price(High to Low)</button>
 
 
             <div className='flex flex-wrap'>
-                {data.map((obj) => {
+                {toJS(audioStore.audioPageData).map((obj) => {
                     return <ProductCard
                         description={obj.description}
                         sellerTag={obj.sellerTag}
@@ -141,6 +86,6 @@ const AudioPage = () => {
             />}
         </>
     )
-}
+})
 
 export default AudioPage

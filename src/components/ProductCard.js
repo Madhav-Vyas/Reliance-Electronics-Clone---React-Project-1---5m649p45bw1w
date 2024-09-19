@@ -5,10 +5,14 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
+import { toJS } from 'mobx';
+
 
 //this component simply recives the data through props and make a card out of it.
 const ProductCard = ({ brand, category, displayImage, price, rating, name, id, description, features, sellerTag, subCategory, videos }) => {
 
+    const normalVideosArray = toJS(videos);  // Convert Proxy array to normal array
+    const normalFeaturesArray = toJS(features);
     //work of getToken is to add data to wishlist if , user is loggedin he can add product to wishlist
     const { getToken } = useData();
     const navigate = useNavigate();
@@ -18,7 +22,7 @@ const ProductCard = ({ brand, category, displayImage, price, rating, name, id, d
     const onClickHandler = () => {
         navigate("/productDetail", {
             state: {
-                brand, category, displayImage, price, rating, name, id, description, features, sellerTag, subCategory, videos
+                brand, category, displayImage, price, rating, name, id, description, features: normalFeaturesArray, sellerTag, subCategory, videos: normalVideosArray
             }
         })
         console.log({

@@ -1,37 +1,22 @@
 import React from 'react'
-import { useData } from '../../Providers/AllcategoryData'
 import ProductCard from '../../components/ProductCard'
 import { useEffect, useState } from "react";
-import axios from 'axios';
 import { ThreeCircles } from 'react-loader-spinner'
+import { observer } from 'mobx-react-lite';
+import wmStore from '../../Store/WmStore';
+import { toJS } from 'mobx';
+const WashingmachinePage = observer(() => {
 
-const WashingmachinePage = () => {
-    const { getWashingMachine, washingMachineDatahandler } = useData();
-    const limit = 10;
     const [page, setPage] = useState(1);
-    const [data, setData] = useState([]);
-    const [selectedsubCataegory, setSelectedSubCataegory] = useState('washingMachine');
+
+
     const [loading, setLoading] = useState(true);
 
     // code for infinite scroll...............................................................
 
-    const onWashingMachineHandeler = async () => {
-        try {
-            const response = await axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/electronics/products?limit=10&page=${page}&filter={"subCategory":"${selectedsubCataegory}"}`, {
-                headers: {
-                    projectId: "5m649p45bw1w"
-                }
-            });
 
-            // Update data state with new fetched data
-            setData((prev) => [...prev, ...response.data.data]);
-            setLoading(false);
-        } catch (err) {
-            console.log(err);
-        }
-    }
     useEffect(() => {
-        onWashingMachineHandeler();
+        wmStore.onWmpageHandler(page)
     }, [page]); // Update data whenever page changes
 
     useEffect(() => {
@@ -41,7 +26,7 @@ const WashingmachinePage = () => {
         }
     }, []);
 
-    console.log(data);
+
     const scroll = () => {
         window.addEventListener('scroll', handleScroll);
     }
@@ -67,34 +52,15 @@ const WashingmachinePage = () => {
 
 
 
-    const sortByPriceLtoH = () => {
-        const sorted = [...data].sort((a, b) => {
-            return a.price - b.price;
-        });
-        setData(sorted);
-    }
 
-    const sortByPriceHtoL = () => {
-        const sorted = [...data].sort((a, b) => {
-            return b.price - a.price;
-        });
-        setData(sorted);
-    }
-
-    const sortByRatingHtoL = () => {
-        const sorted = [...data].sort((a, b) => {
-            return b.ratings - a.ratings;
-        });
-        setData(sorted);
-    }
     return (
         <>
             <h1 className="inline-block font-semibold text-center text-lg py-9 ">Washing Machine 👚👖👗</h1>
-            <button onClick={sortByRatingHtoL} className="bg-blue-500 text-sm hover:bg-blue-700 ml-3 text-white font-bold py-2 px-4 rounded ">Rating(High to Low)</button>
-            <button onClick={sortByPriceLtoH} className="bg-blue-500 text-sm hover:bg-blue-700 ml-3 text-white font-bold py-2 px-4 rounded ">Price(Low to High)</button>
-            <button onClick={sortByPriceHtoL} className="bg-blue-500 text-sm hover:bg-blue-700 ml-3 text-white font-bold py-2 px-4 rounded ">Price(High to low)</button>
+            <button onClick={wmStore.sortByRatingHtoL} className="bg-blue-500 text-sm hover:bg-blue-700 ml-3 text-white font-bold py-2 px-4 rounded ">Rating(High to Low)</button>
+            <button onClick={wmStore.sortByPriceLtoH} className="bg-blue-500 text-sm hover:bg-blue-700 ml-3 text-white font-bold py-2 px-4 rounded ">Price(Low to High)</button>
+            <button onClick={wmStore.sortByRatingHtoL} className="bg-blue-500 text-sm hover:bg-blue-700 ml-3 text-white font-bold py-2 px-4 rounded ">Price(High to low)</button>
             <div className='flex flex-wrap'>
-                {data.map((obj) => {
+                {toJS(wmStore.wmPageData).map((obj) => {
                     return <ProductCard
                         description={obj.description}
                         sellerTag={obj.sellerTag}
@@ -123,6 +89,6 @@ const WashingmachinePage = () => {
             />}
         </>
     )
-}
+})
 
 export default WashingmachinePage

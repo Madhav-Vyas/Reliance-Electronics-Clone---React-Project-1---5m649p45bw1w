@@ -8,13 +8,16 @@ import { NavLink } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { observer } from 'mobx-react-lite';
+import laptopStore from "../../Store/LaptopStore";
+import { toJS } from "mobx";
 
-const Laptop = () => {
+const Laptop = observer(() => {
     const [getCategory, setCategory] = useState([]);
     const [selectedsubCataegory, setSelectedSubCataegory] = useState('laptop');
     const { laptopDatahandler } = useData();
     useEffect(() => {
-        onLaptopHandeler();
+        laptopStore.onLaptopHandeler()
     }, [])
 
     //slides to show based on screen size ------------------------------------------------------
@@ -44,22 +47,7 @@ const Laptop = () => {
     //----------------------------------------------
 
 
-    const onLaptopHandeler = async () => {
-        try {
-            const response = await axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/electronics/products?filter={"subCategory":"${selectedsubCataegory}"}`, {
-                headers: {
-                    projectId: "5m649p45bw1w"
-                }
-            })
-            console.log(response.data.data);
-            setCategory(response.data.data);
-            laptopDatahandler(response.data.data);
-        } catch (err) {
-            console.log(err);
-        }
 
-
-    }
     const settings = {
         dots: false,
         infinite: true,
@@ -96,7 +84,7 @@ const Laptop = () => {
             <Slider {...settings}>
                 {/* <div className=' scroll-container lowest-price-today flex overflow-x-auto overflow-y-hidden w-full h-auto'> */}
 
-                {getCategory.map((obj, index) => {
+                {toJS(laptopStore.laptop).map((obj, index) => {
                     return <div key={obj._id}>
                         <ProductCard
                             key={obj._id}
@@ -120,6 +108,6 @@ const Laptop = () => {
             {/* </div > */}
         </div >
     </div>)
-}
+})
 
 export default Laptop

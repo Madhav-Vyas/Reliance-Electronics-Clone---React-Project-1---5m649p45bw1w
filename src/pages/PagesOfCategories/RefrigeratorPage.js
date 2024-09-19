@@ -4,7 +4,10 @@ import ProductCard from '../../components/ProductCard'
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import { ThreeCircles } from 'react-loader-spinner'
-const RefrigeratorPage = () => {
+import { observer } from 'mobx-react-lite';
+import refStore from '../../Store/RefregeratorStore';
+import { toJS } from 'mobx';
+const RefrigeratorPage = observer(() => {
     const { getRefrigerator, refrigeratorDatahandler } = useData();
     const limit = 10;
     const [page, setPage] = useState(1);
@@ -30,7 +33,7 @@ const RefrigeratorPage = () => {
         }
     }
     useEffect(() => {
-        onRefrigeratorHandeler();
+        refStore.onFridgePageHandler(page)
     }, [page]); // Update data whenever page changes
 
     useEffect(() => {
@@ -54,34 +57,15 @@ const RefrigeratorPage = () => {
 
     // code for infinite scroll End...............................................
 
-    const sortByPriceLtoH = () => {
-        const sorted = [...data].sort((a, b) => {
-            return a.price - b.price;
-        });
-        setData(sorted);
-    }
 
-    const sortByPriceHtoL = () => {
-        const sorted = [...data].sort((a, b) => {
-            return b.price - a.price;
-        });
-        setData(sorted);
-    }
-
-    const sortByRatingHtoL = () => {
-        const sorted = [...data].sort((a, b) => {
-            return b.ratings - a.ratings;
-        });
-        setData(sorted);
-    }
     return (
         <>
             <h1 className="inline-block font-semibold text-center text-lg py-9 ">Refrigerator 🧊❄</h1>
-            <button onClick={sortByRatingHtoL} className="bg-blue-500 text-sm hover:bg-blue-700 ml-3 text-white font-bold py-2 px-4 rounded ">Rating(High to Low)</button>
-            <button onClick={sortByPriceLtoH} className="bg-blue-500 text-sm hover:bg-blue-700 ml-3 text-white font-bold py-2 px-4 rounded ">Price(Low to High)</button>
-            <button onClick={sortByPriceHtoL} className="bg-blue-500 text-sm hover:bg-blue-700 ml-3 text-white font-bold py-2 px-4 rounded ">Price(High to low)</button>
+            <button onClick={refStore.sortByRatingHtoL} className="bg-blue-500 text-sm hover:bg-blue-700 ml-3 text-white font-bold py-2 px-4 rounded ">Rating(High to Low)</button>
+            <button onClick={refStore.sortByPriceLtoH} className="bg-blue-500 text-sm hover:bg-blue-700 ml-3 text-white font-bold py-2 px-4 rounded ">Price(Low to High)</button>
+            <button onClick={refStore.sortByRatingHtoL} className="bg-blue-500 text-sm hover:bg-blue-700 ml-3 text-white font-bold py-2 px-4 rounded ">Price(High to low)</button>
             <div className='flex flex-wrap'>
-                {data.map((obj) => {
+                {toJS(refStore.fridgePageData).map((obj) => {
                     return <ProductCard
                         description={obj.description}
                         sellerTag={obj.sellerTag}
@@ -110,6 +94,6 @@ const RefrigeratorPage = () => {
             />}
         </>
     )
-}
+})
 
 export default RefrigeratorPage
